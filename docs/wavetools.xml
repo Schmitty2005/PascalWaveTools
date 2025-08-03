@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    WaveTools
+  ====================================================================
+-->
+
+<module name="WaveTools">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EWaveToolsExpception">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration type Visibility: default -->
+<element name="TBitDepth">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TBitDepth.BitDepth8">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TBitDepth.BitDepth16">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TBitDepth.BitDepth24">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TBitDepth.BitDepth32">
+<short></short>
+</element>
+
+<!-- enumeration type Visibility: default -->
+<element name="TChannels">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TChannels.Mono">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TChannels.Stereo">
+<short></short>
+</element>
+
+<!-- array type Visibility: default -->
+<element name="TheaderText">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- record type Visibility: default -->
+<element name="TWaveHeader">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.RIFF">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.FileSize">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.WAVE">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.fmt">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.BlockSize">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.TypeFormat">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.NumChannles">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.SampleRate">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.bytesPerSec">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.bytesPerBlock">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.BitsPerSample">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.Data">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveHeader.sizeOfData">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IReadWaveHeader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IReadWaveHeader.ReadWaveHeader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IReadWaveHeader.ReadWaveHeader.aWaveFile">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IReadWaveHeader.ReadWaveHeader.aWaveHeader">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IAddWavHeaderToPCM">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IAddWavHeaderToPCM.AddWaveHeaderToPCM">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IAddWavHeaderToPCM.AddWaveHeaderToPCM.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IAddWavHeaderToPCM.AddWaveHeaderToPCM.channels">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IAddWavHeaderToPCM.AddWaveHeaderToPCM.bitDepth">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IWaveHeaderMono16Bit8000">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveHeaderMono16Bit8000.WaveHeaderMono16bit8000">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveHeaderMono16Bit8000.WaveHeaderMono16bit8000.aPCMData">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IWaveHeaderMono16Bit">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate8000">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate8000.aPCMData">
+<short></short>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate22100">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate22100.aPCMData">
+<short></short>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate44100">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate44100.aPCMData">
+<short></short>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate48000">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveHeaderMono16Bit.SampleRate48000.aPCMData">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TWaveHeaderReader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveHeaderReader.fWaveHeader">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveHeaderReader.fFileName">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveHeaderReader.fMemStream">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TWaveHeaderReader.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TWaveHeaderReader.ReadWaveHeader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveHeaderReader.ReadWaveHeader.aWaveFile">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveHeaderReader.ReadWaveHeader.aWaveHeader">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TWaveHeaderCreator">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveHeaderCreator.fNewStream">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveHeaderCreator.fWaveHeader">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TWaveHeaderCreator.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TWaveHeaderCreator.Destroy">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TWaveHeaderCreator.WaveHeaderMono16bit8000">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveHeaderCreator.WaveHeaderMono16bit8000.aPCMData">
+<short></short>
+</element>
+
+</module> <!-- WaveTools -->
+
+</package>
+</fpdoc-descriptions>
