@@ -14,7 +14,7 @@
 </tr>
 </table>
 <h1>TWaveHeader</h1>
-<p></p>
+<p>A record of 44 bytes that contains all of the wave header information needed to create a wave header</p>
 <h2>Declaration</h2>
 <p>Source position: wavetools.pas line 49</p>
 <table cellpadding="0" cellspacing="0">
@@ -23,42 +23,68 @@
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;RIFF<span class="sym">: </span><a href="../wavetools/theadertext.html">TheaderText</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">REQUIRED "RIFF"</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;FileSize<span class="sym">: </span>uint32<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;WAVE<span class="sym">: </span><a href="../wavetools/theadertext.html">TheaderText</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">REQUIRED 'WAVE'</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;fmt<span class="sym">: </span><a href="../wavetools/theadertext.html">TheaderText</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;BlockSize<span class="sym">: </span>uint32<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;TypeFormat<span class="sym">: </span>uint16<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Type of data in wave file</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;NumChannles<span class="sym">: </span>uint16<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Number of Audio Channels</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;SampleRate<span class="sym">: </span>uint32<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">The sample rate of the wave file data</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;bytesPerSec<span class="sym">: </span>uint32<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;bytesPerBlock<span class="sym">: </span>uint16<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;BitsPerSample<span class="sym">: </span>uint16<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Bit width of audio data.  Usually 16 or 24, sometimes 32</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;Data<span class="sym">: </span><a href="../wavetools/theadertext.html">TheaderText</a><span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt">Required 'DATA'</p></td>
 </tr>
 <tr>
 <td valign="top"><p><tt><span class="code">&nbsp;&nbsp;sizeOfData<span class="sym">: </span>uint32<span class="sym">;</span></span></tt></p></td>
+<td><p>&nbsp;&nbsp;</p></td>
+<td><p class="cmt"></p></td>
 </tr>
 <tr>
 <td><p><tt><span class="code"> <span class="kw">end</span><span class="sym">;</span></span></tt></p></td>

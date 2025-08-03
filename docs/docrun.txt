@@ -1,0 +1,2 @@
+fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml
+
