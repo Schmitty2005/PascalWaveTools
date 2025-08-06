@@ -46,24 +46,6 @@ type
   { Uint16 = 2 Bytes }
   { Uint8 = 1 Byte }
 
-  (*
-    TWaveHeader = packed record
-    RIFF: Array [0 .. 3] of char; // always 'RIFF'
-    FileSize: uint32; // size of overall file -8 bytes
-    WAVE: array [0 .. 3] of char; // always 'WAVE'
-    fmt: array [0 .. 3] of char; // always  'fmt '
-    { #todo -oB : Refactor DataLenght. Too ambigous with SizeOfData }
-    BlockSize: uint32; // usually always 16 , length of data above
-    TypeFormat: uint16; // 1 = pcm
-    NumChannles: uint16; // number of channels
-    SampleRate: uint32; // sample Rate;
-    bytesPerSec: uint32;
-    bytesPerBlock: uint16; // (Sample Rate * BitsPerSample * Channels) / 8
-    BitsPerSample: uint16; // usually 16-bit
-    Data: array [0 .. 3] of char; // 'data'
-    sizeOfData: uint32; // size of the data section
-    end;
-  *)
   // ===========================================
 
   TWaveHeader = packed record
@@ -141,7 +123,7 @@ procedure InitializeWaveHeader(var aHeader: TWaveHeader);
 const
   cRIFF: TheaderText = (82, 73, 70, 70); // ('R', 'I', 'F', 'F');
   cFmt: TheaderText = (102, 109, 116, 32);
-  cData: TheaderText =(100,97,116,97);// (68, 65, 84, 65);
+  cData: TheaderText =(100,97,116,97);
   cWAVE: TheaderText = (87, 65, 86, 69);
 
 begin
@@ -214,7 +196,7 @@ end;
   InitializeWaveHeader(WaveHeader);
   end;
 }
-
+  {Only working method for now}
 procedure TWaveHeaderCreator.WaveHeaderMono16bit8000(aPCMData: TMemoryStream);
 type
   PWaveHeader = ^TWaveHeader;
@@ -243,42 +225,11 @@ begin
 
   tempStream.Write(WaveHeaderPointer^, HeaderSize);
   tempStream.Write(aPCMData.Memory^, aPCMData.Size);
-  // TEMP Line for TESTING ONLY
-  //tempStream.SaveToFile('WaveHeaderTest.wav');
-
   tempStream.Free;
 
 end;
 
-{.$DEFINE DEBUG_INTERNAL}
-{$IFDEF DEBUG_INTERNAL}
-
-var
-  wh: TWaveHeaderCreator;
-  iwh: IWaveHeaderMono16Bit8000;
-  ms: TMemoryStream;
-  wr: IReadWaveHeader;
-  whWorking, whBroken: TWaveHeader;
-  whead: TWaveHeader;
-{$ENDIF}
 begin
-
-{$IFDEF DEBUG_INTERNAL}
-  wr := TWaveHeaderReader.Create;
-  ms := TMemoryStream.Create;
-  ms.LoadFromFile('CWOutput.pcm');
-  wh := TWaveHeaderCreator.Create;
-  iwh := TWaveHeaderCreator.Create;
-  iwh.WaveHeaderMono16bit8000(ms);
-
-  wr.ReadWaveHeader('CWOutput.wav', whWorking);
-  wr := TWaveHeaderReader.Create; { Delphi needs this to reset wr! }
-  wr.ReadWaveHeader('WaveHeaderTest.wav', whBroken);
-  writeln(sizeOf(whead));
-  //readln;
-  wh.Free;
-  ms.Free;
-{$ENDIF}
 
 end.
 
