@@ -1,4 +1,4 @@
-unit WaveTools;
+unit wavetools;
 {$IFDEF FPC}
 {$mode Delphi}
 {$ENDIF}
@@ -31,7 +31,7 @@ unit WaveTools;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, SineGen;
 
 type
   EWaveToolsExpception = class(Exception);
