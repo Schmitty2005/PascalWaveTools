@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    SineGen
+  ====================================================================
+-->
+
+<module name="SineGen">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SineGenInterfaces">
+<short></short>
+</element>
+
+<!-- generic type Visibility: default -->
+<element name="TsineGen.T">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TsineGen">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsineGen.fArray">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsineGen.fSampleRate">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsineGen.fFrequency">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TsineGen.SineGenerator">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsineGen.SineGenerator.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsineGen.SineGenerator.aFrequency">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsineGen.SineGenerator.aLength">
+<short></short>
+</element>
+
+</module> <!-- SineGen -->
+
+
+<!--
+  ====================================================================
+    SineGenInterfaces
+  ====================================================================
+-->
+
+<module name="SineGenInterfaces">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="ICreateSineWave">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="ICreateSineWave.SineGenerator">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ICreateSineWave.SineGenerator.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ICreateSineWave.SineGenerator.aFrequency">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ICreateSineWave.SineGenerator.aLength">
+<short></short>
+</element>
+
+</module> <!-- SineGenInterfaces -->
+
+</package>
+</fpdoc-descriptions>

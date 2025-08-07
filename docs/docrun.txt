@@ -1,2 +1,2 @@
-fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml
+fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../sinegen.pas' --descr=sinegen.xml --input='../sinegeninterfaces.pas' --decr=sinegeninterfaces.xml
 
