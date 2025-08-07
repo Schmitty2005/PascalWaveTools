@@ -31,7 +31,7 @@ unit wavetools;
 interface
 
 uses
-  Classes, SysUtils, SineGen;
+  Classes, SysUtils, SineGen, SineGenInterfaces;
 
 type
   EWaveToolsExpception = class(Exception);
