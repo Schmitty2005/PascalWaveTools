@@ -12,7 +12,7 @@ type
   ICreateSineWave = interface
     ['{8793964F-CB71-4C87-AA44-34B78AADFC21}']
     procedure SineGenerator(aSampleRate: uint16; aFrequency: uint16;
-      aLength: uint64);
+      aMilliSecs: uint64; aAmplitude: integer);
   end;
 
 implementation

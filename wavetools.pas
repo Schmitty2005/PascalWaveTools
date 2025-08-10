@@ -230,6 +230,9 @@ begin
 end;
 
 begin
+  {$IFDEF DEBUG}
 
+
+  {$ENDIF}
 end.
 
