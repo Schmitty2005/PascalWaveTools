@@ -1,12 +1,12 @@
 {$MODE DELPHI}
 program WaveToolsTesting;
-uses  wavetools, SineGenInterfaces, SineGen;// something needs to be done about two units being called
 
+uses
+  SineGenInterfaces, SineGen;
 
 var
-  wti :ICreateSineWave;//ICreateSineWave(8000, 800, 1000, 80);
+  wti: ICreateSineWave;
 begin
-   wti := TsineGen<Int16>.Create;
-   wti.SineGenerator(8000,800, 1000, 50);
+  wti := TsineGen<int8>.Create;
+  wti.SineGenerator(22050, 660, 1000, 90);
 end.
-
