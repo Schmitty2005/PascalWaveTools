@@ -7,16 +7,17 @@
       <Unit>
         <Filename Value="WaveToolsTesting.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="22" Y="5"/>
+        <IsVisibleTab Value="True"/>
+        <CursorPos X="6" Y="15"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="sinegen.pas"/>
         <UnitName Value="SineGen"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
-        <CursorPos X="42" Y="8"/>
+        <TopLine Value="9"/>
+        <CursorPos Y="17"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>
@@ -24,7 +25,8 @@
         <Filename Value="sinegeninterfaces.pas"/>
         <UnitName Value="SineGenInterfaces"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="20" Y="8"/>
+        <TopLine Value="5"/>
+        <CursorPos X="15" Y="26"/>
         <UsageCount Value="11"/>
         <Loaded Value="True"/>
       </Unit>
@@ -33,14 +35,6 @@
       <Define0 Value="DEBUG"/>
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="38" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="39" TopLine="33"/>
-      </Position>
       <Position>
         <Filename Value="sinegen.pas"/>
         <Caret Line="40" TopLine="33"/>
@@ -153,6 +147,14 @@
         <Filename Value="sinegeninterfaces.pas"/>
         <Caret Line="8" Column="20"/>
       </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="13" Column="7"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="15" Column="3"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -161,13 +163,6 @@
   </ProjectSession>
   <Debugging>
     <BreakPoints>
-      <Item>
-        <Kind Value="bpkSource"/>
-        <WatchScope Value="wpsLocal"/>
-        <WatchKind Value="wpkWrite"/>
-        <Source Value="sinegen.pas"/>
-        <Line Value="17"/>
-      </Item>
       <Item>
         <Kind Value="bpkSource"/>
         <WatchScope Value="wpsLocal"/>

@@ -15,6 +15,12 @@ type
       aMilliSecs: uint64; aAmplitude: integer);
   end;
 
+  ICreateSquareWave = interface
+    ['{91C7A876-B01E-4B03-9619-10103D5FC8A3}']
+    procedure SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
+  aMilliSecs: uint64; aAmplitude: integer);
+  end;
+
 implementation
 
 end.
