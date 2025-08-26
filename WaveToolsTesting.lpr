@@ -2,7 +2,7 @@
 program WaveToolsTesting;
 
 uses
-  SineGenInterfaces, SineGen;
+  SineGenInterfaces, SineGen, wavCalcs;
 
 var
   wti: ICreateSineWave;

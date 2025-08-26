@@ -27,6 +27,7 @@
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
+              <SyntaxMode Value="Delphi"/>
               <IncludeAssertionCode Value="True"/>
             </SyntaxOptions>
           </Parsing>
@@ -91,6 +92,11 @@
       <Unit>
         <Filename Value="WaveToolsTesting.lpr"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wavcalcs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="wavCalcs"/>
       </Unit>
     </Units>
   </ProjectOptions>
