@@ -11,6 +11,8 @@ uses
 type
   TwavePCM = array of int16;
 
+  TWaveStyle = (wsSine, wsTri, wsSqr, wsSaw);
+
   TwaveGenStyle = function(var aPCM: TwavePCM; const aHertz: integer;
     const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
     const aStartPhaseAngle: integer): uint32;
@@ -30,7 +32,6 @@ uses Math;
 n = sample number
 p = period in samples
 n %p = triangle wave
-
 *)
 
 
