@@ -14,13 +14,12 @@ type
   TWaveStyle = (wsSine, wsTri, wsSqr, wsSaw);
 
   TwaveGenStyle = function(var aPCM: TwavePCM; const aHertz: integer;
-    const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
-    const aStartPhaseAngle: integer): uint32;
+    const aAmp: int16; const aSampleRate: integer;
+    const aMilliSecLength: uint32; const aStartPhaseAngle: integer): uint32;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
   const aStartPhaseAngle: integer): uint32;
-
 
 implementation
 
@@ -28,14 +27,16 @@ implementation
 uses Math;
 {$ENDIF}
 
+{$IFDEF DCC}
+Uses system.Math;
+{$ENDIF}
 (*
-n = sample number
-p = period in samples
-n %p = triangle wave
+  n = sample number
+  p = period in samples
+  n %p = triangle wave
 *)
 
-
-function triangleWave(var aPCM: TWavePCM; const aHertz: integer;
+function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
   const aStartPhaseAngle: integer): uint32;
 var
@@ -47,7 +48,7 @@ begin
   startRad := DegToRad(aStartPhaseAngle);
   numSamples := trunc(aMilliSecLength / 1000 * aSampleRate);
   Count := 0;
-  setLength(aPcm, numSamples);
+  setLength(aPCM, numSamples);
   while Count < High(aPCM) do
   begin
     sample := Count mod aHertz;

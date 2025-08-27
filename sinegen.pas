@@ -1,6 +1,7 @@
 unit SineGen;
-
+{$IFDEF FPC}
 {$mode Delphi}
+{$ENDIF}
 {$DEFINE DEBUG}
 
 interface
@@ -16,20 +17,19 @@ type
   private
     fArray: Tarray<T>;
   public
-    procedure SineGenerator(aSampleRate: uint16; aFrequency: uint16;
-      aMilliSecs: uint64; aAmplitude: integer);
+    procedure SineGenerator(const aSampleRate: uint16; const aFrequency: uint16;
+      const aMilliSecs:  uint64;  aAmplitude: integer);
     procedure SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
       aMilliSecs: uint64; aAmplitude: integer);
   end;
 
-
 implementation
 
 uses Math;
-  { TsineGen }
+{ TsineGen }
 
-procedure TsineGen<T>.SineGenerator(aSampleRate: uint16; aFrequency: uint16;
-  aMilliSecs: uint64; aAmplitude: integer);
+procedure TsineGen<T>.SineGenerator(const aSampleRate: uint16; const aFrequency: uint16;
+ const aMilliSecs: uint64;  aAmplitude: integer);
 var
   memStream: TmemoryStream;
   angle, preCalc, numSamples: double;
@@ -37,24 +37,25 @@ var
 begin
   { #todo -oB : Needs type checking with Exception.  Only works with signed types for now. }
   Count := 0;
-  aAmplitude := Trunc(aAmplitude * High(T) / 100);
+  aAmplitude := Trunc(aAmplitude * High(T) / 100.0);
   numSamples := (aSampleRate * aMilliSecs / 1000);
   preCalc := (aFrequency * PI * 2 / aSampleRate);
   setLength(fArray, Trunc(numSamples));
   while Count < numSamples do
   begin
-    angle := sin(preCalc * Count);// sin(aFrequency * Pi * 2 * Count / aSampleRate);
-    fArray[Count] := trunc(angle * aAmplitude);
+    angle := sin(preCalc * Count);
+    // sin(aFrequency * Pi * 2 * Count / aSampleRate);
+    fArray[Count] := Trunc(angle * aAmplitude);
     Inc(Count);
   end;
-  {$IFDEF DEBUG}
-  memStream := TMemoryStream.Create;
+{$IFDEF DEBUG}
+  memStream := TmemoryStream.Create;
   memStream.Write(fArray[0], length(fArray) * sizeOf(T));
   memStream.SaveToFile('sinegentest8bit.pcm');
-  {$ENDIF}
+{$ENDIF}
 end;
 
-procedure TSineGen<T>.SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
+procedure TsineGen<T>.SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
   aMilliSecs: uint64; aAmplitude: integer);
 var
   memStream: TmemoryStream;
@@ -71,14 +72,14 @@ begin
   begin
     angle := sign(sin(preCalc * Count));
     // sin(aFrequency * Pi * 2 * Count / aSampleRate);
-    fArray[Count] := trunc(angle * aAmplitude);
+    fArray[Count] := Trunc(angle * aAmplitude);
     Inc(Count);
   end;
-  {$IFDEF DEBUG}
-  memStream := TMemoryStream.Create;
+{$IFDEF DEBUG}
+  memStream := TmemoryStream.Create;
   memStream.Write(fArray[0], length(fArray) * sizeOf(T));
   memStream.SaveToFile('squaregentest8bit.pcm');
-  {$ENDIF}
+{$ENDIF}
 end;
 
 end.

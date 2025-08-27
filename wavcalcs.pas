@@ -3,11 +3,12 @@
 {$ENDIF}
 
 unit wavCalcs;
+
+
+interface
 {$IFDEF DCC}
 uses system.math;
 {$ENDIF}
-
-interface
 
 ///<summary>  A quick inline function to calculate the number of samples that
 ///would create one cycle at a specifice frequency in hertz;
