@@ -7,36 +7,49 @@
       <Unit>
         <Filename Value="WaveToolsTesting.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="44" Y="15"/>
-        <UsageCount Value="27"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="sinegen.pas"/>
-        <UnitName Value="SineGen"/>
-        <EditorIndex Value="3"/>
-        <TopLine Value="9"/>
-        <CursorPos Y="17"/>
-        <UsageCount Value="13"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="sinegeninterfaces.pas"/>
-        <UnitName Value="SineGenInterfaces"/>
-        <EditorIndex Value="2"/>
-        <CursorPos X="15" Y="26"/>
-        <UsageCount Value="13"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="5"/>
+        <CursorPos X="12" Y="25"/>
+        <UsageCount Value="29"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="wavcalcs.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="wavCalcs"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <CursorPos X="33" Y="6"/>
-        <UsageCount Value="24"/>
+        <UsageCount Value="26"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="sinegen.pas"/>
+        <UnitName Value="SineGen"/>
+        <EditorIndex Value="4"/>
+        <TopLine Value="9"/>
+        <CursorPos Y="17"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="sinegeninterfaces.pas"/>
+        <UnitName Value="SineGenInterfaces"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="3"/>
+        <CursorPos X="15" Y="26"/>
+        <UsageCount Value="14"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="wavegen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="waveGen"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="41"/>
+        <CursorPos Y="55"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit>
     </Units>
     <OtherDefines Count="1">
@@ -44,124 +57,124 @@
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="41" TopLine="33"/>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="16" Column="71"/>
       </Position>
       <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="42" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="44" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="45" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="46" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="42" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="44" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="45" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="46" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="42" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="44" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="45" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="46" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="42" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="44" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="45" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="46" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="42" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="44" TopLine="33"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="45" TopLine="33"/>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="30" Column="24" TopLine="15"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="10" Column="30"/>
+        <Caret Line="10" Column="20"/>
       </Position>
       <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="13" Column="38" TopLine="2"/>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="28" Column="5" TopLine="18"/>
       </Position>
       <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="14" Column="15" TopLine="5"/>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="30" Column="15" TopLine="18"/>
       </Position>
       <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="8" Column="43" TopLine="4"/>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="26" Column="9" TopLine="18"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="9" Column="4"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="36" Column="14" TopLine="20"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="31" Column="22" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="42" Column="26" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="43" Column="16" TopLine="25"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="5" Column="37"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegen.pas"/>
-        <Caret Line="8" Column="24" TopLine="4"/>
-      </Position>
-      <Position>
-        <Filename Value="sinegeninterfaces.pas"/>
-        <Caret Line="8" Column="20"/>
-      </Position>
-      <Position>
-        <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="13" Column="7"/>
+        <Caret Line="16" Column="3"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
         <Caret Line="15" Column="3"/>
       </Position>
       <Position>
-        <Filename Value="wavcalcs.pas"/>
-        <Caret Line="6" Column="31"/>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="11" Column="14"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="5" Column="11"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="24" Column="31" TopLine="4"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="5" Column="21"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="41" TopLine="22"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="27" Column="27" TopLine="24"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="14" Column="32" TopLine="7"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="52" Column="65" TopLine="36"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="54" Column="46" TopLine="40"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="55" Column="16" TopLine="40"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="22" Column="36"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="55" TopLine="40"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="58" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="50" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="53" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="54" TopLine="41"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="22" Column="38"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -195,6 +208,14 @@
         <Source Value="sinegen.pas"/>
         <InitialEnabled Value="False"/>
         <Line Value="46"/>
+      </Item>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="wavegen.pas"/>
+        <InitialEnabled Value="False"/>
+        <Line Value="55"/>
       </Item>
     </BreakPoints>
   </Debugging>

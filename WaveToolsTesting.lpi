@@ -98,6 +98,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="wavCalcs"/>
       </Unit>
+      <Unit>
+        <Filename Value="wavegen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="waveGen"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
