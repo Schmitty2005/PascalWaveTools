@@ -10,10 +10,10 @@ uses
 
 type
 
-  ICreateSineWave = interface
+  ICreateSineWave<T> = interface
     ['{8793964F-CB71-4C87-AA44-34B78AADFC21}']
     procedure SineGenerator(const aSampleRate: uint16; const aFrequency: uint16;
-      const aMilliSecs: uint64;  aAmplitude: integer);
+      const aMilliSecs: uint64;  aAmplitude: T);
   end;
 
   ICreateSquareWave = interface

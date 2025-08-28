@@ -13,14 +13,14 @@ type
   ESineGenException = class(Exception);
 
   { TsineGen }
-  TsineGen<T> = class(TInterfacedObject, ICreateSineWave, ICreateSquareWave)
+  TsineGen<T> = class(TInterfacedObject, ICreateSineWave<T>, ICreateSquareWave)
   private
     fArray: Tarray<T>;
   public
     procedure SineGenerator(const aSampleRate: uint16; const aFrequency: uint16;
-      const aMilliSecs:  uint64;  aAmplitude: integer);
+      const aMilliSecs:  uint64;  aAmplitude: T);
     procedure SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
-      aMilliSecs: uint64; aAmplitude: integer);
+      aMilliSecs: uint64; aAmplitude: Integer);
   end;
 
 implementation
@@ -29,7 +29,7 @@ uses Math;
 { TsineGen }
 
 procedure TsineGen<T>.SineGenerator(const aSampleRate: uint16; const aFrequency: uint16;
- const aMilliSecs: uint64;  aAmplitude: integer);
+ const aMilliSecs: uint64;  aAmplitude: T);
 var
   memStream: TmemoryStream;
   angle, preCalc, numSamples: double;
@@ -52,11 +52,12 @@ begin
   memStream := TmemoryStream.Create;
   memStream.Write(fArray[0], length(fArray) * sizeOf(T));
   memStream.SaveToFile('sinegentest8bit.pcm');
+  memStream.free;
 {$ENDIF}
 end;
 
 procedure TsineGen<T>.SquareGenerator(aSampleRate: uint16; aFrequency: uint16;
-  aMilliSecs: uint64; aAmplitude: integer);
+  aMilliSecs: uint64; aAmplitude: Integer);
 var
   memStream: TmemoryStream;
   angle, preCalc, numSamples: double;
@@ -79,6 +80,7 @@ begin
   memStream := TmemoryStream.Create;
   memStream.Write(fArray[0], length(fArray) * sizeOf(T));
   memStream.SaveToFile('squaregentest8bit.pcm');
+  memStream.free;
 {$ENDIF}
 end;
 

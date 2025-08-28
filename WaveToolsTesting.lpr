@@ -10,15 +10,15 @@ uses
   waveGen;
 
 var
-  wti: ICreateSineWave;
+  wti: ICreateSineWave<Int16>;
   wtx: ICreateSquareWave;
   sPCM: TwavePCM;
   ms: TBytesStream;
 begin
-  {HeapTrace is showing something is not getting free'd in interface!}
-  wti := TsineGen<int8>.Create;
+
+  wti := TsineGen<int16>.Create;
   wti.SineGenerator(22050, 660, 1000, 90);
-  {Also check for HeapTrace issues}
+
   wtx := TsineGen<int16>.Create;
   wtx.SquareGenerator(22050, 660, 1000, 90);
 
