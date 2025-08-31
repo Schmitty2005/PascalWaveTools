@@ -15,10 +15,16 @@ var
   sPCM: TwavePCM;
   ms: TBytesStream;
   ft : TwaveGenStyleExt;
+  lt : TwaveGenStyle;
   wsp  : TWaveStyleSpecs;
 begin
   ft := @triangleWave;
+  lt := @triangleWave;
 
+  wsp.WaveStyle:=wsSine;
+  wsp.FreqHertz:=800;
+  wsp.LengthMilliSec:= 500;
+  writeln(lt(wsp));
   wti := TsineGen<int16>.Create;
   wti.SineGenerator(22050, 660, 1000, 90);
 
@@ -26,7 +32,7 @@ begin
   wtx.SquareGenerator(22050, 662, 1000, 90);
 
   {Test Triangle / Sawtooth WaveGen function}
-  writeln(triangleWave(sPCM, 804, 27000, 44100, 1000, 45));
+  writeln(triangleWave(sPCM, 804, 1000, 27000, 44100, 90));
   ms := TBytesStream.Create(Tbytes(sPCM));
   ms.SaveToFile('triangle.pcm');
   ms.Free;

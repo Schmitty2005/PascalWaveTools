@@ -7,9 +7,11 @@ unit waveGen;
 interface
 
 uses
-  {Math,} wavCalcs;
+  SysUtils, {Math,} wavCalcs;
 
 type
+  EWaveGenError = class(Exception);
+
   TwavePCM = array of int16;
 
   TWaveStyle = (wsSine, wsTri, wsSqr, wsSaw);
@@ -27,19 +29,19 @@ type
   TwaveGenStyle = function(aWaveSpec: TWaveStyleSpecs): uint32;
 
   TwaveGenStyleExt = function(var aPCM: TwavePCM; const aHertz: integer;
-    const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
-    const aStartPhaseAngle: integer): uint32;
+    const aMilliSecLength: uint32; const aAmp: int16;
+    const aSampleRate: integer = 44100; const aStartPhaseAngle: integer = 90): uint32;
 
 function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
+  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
 function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
 
-function sawWave(var aPCM: TwavePCM; const aHertz: integer; const aAmp: int16;
-  const aSampleRate: integer; const aMilliSecLength: uint32;
+function sawWave(var aPCM: TwavePCM; const aHertz: integer;
+  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
 function sawWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
@@ -59,6 +61,20 @@ Uses system.Math;
   n %p = triangle wave
 *)
 
+function checkWaveStyleSpec(aWaveSpec: TWaveStyleSpecs): boolean;
+begin
+  Result := False;
+  if (aWaveSpec.FreqHertz = 0) then
+  begin
+    raise EWaveGenError.Create('Sample Rate cannot be zero!');
+    result := True;
+  end;
+  if (aWaveSpec.LengthMilliSec = 0) then
+  begin
+    raise EWaveGenError.Create('Length of Wave  cannot be zero!');
+    result := True;
+  end;
+end;
 
 { #todo -oB : Amplitude needs to change to 0 to 100 percent like other functions!  Currently uses Max of Int16 values.
  }
@@ -67,11 +83,11 @@ function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
 begin
   { #todo -oB -cFeature : Use a case statement to select proper TWaveGenFunction and generate based on TWaveStyleSpecs.WaveType
  }
-  result :=0;
+  Result := 0;
 end;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
+  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
   const aStartPhaseAngle: integer = 90): uint32;
 var
   phase, phaseStep, tau: double;
@@ -99,14 +115,15 @@ end;
 
 function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32;
 begin
+  checkWaveStyleSpec(aWaveSpec);
   Result := trianglewave(aWaveSpec.aPCM, aWaveSpec.FreqHertz,
     aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec,
     aWaveSpec.StartPhaseDeg);
 end;
 
-function sawWave(var aPCM: TwavePCM; const aHertz: integer; const aAmp: int16;
-  const aSampleRate: integer; const aMilliSecLength: uint32;
-  const aStartPhaseAngle: integer): uint32;
+function sawWave(var aPCM: TwavePCM; const aHertz: integer;
+  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
+  const aStartPhaseAngle: integer = 90): uint32;
 begin
   { #todo -oB : Needs Completion! }
   Result := 0;
@@ -114,6 +131,7 @@ end;
 
 function sawWave(aWaveSpec: TWaveStyleSpecs): uint32;
 begin
+  checkWaveStyleSpec(aWaveSpec);
   Result := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz, aWaveSpec.Amplitude,
     aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec, aWaveSpec.StartPhaseDeg);
 end;
