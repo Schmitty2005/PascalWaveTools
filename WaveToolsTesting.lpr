@@ -12,7 +12,7 @@ uses
 var
   wti: ICreateSineWave<Int16>;
   wtx: ICreateSquareWave;
-  sPCM: TwavePCM;
+  sPCM, sawPCM: TwavePCM;
   ms: TBytesStream;
   ft : TwaveGenStyleExt;
   lt : TwaveGenStyle;
@@ -33,7 +33,11 @@ begin
 
   {Test Triangle / Sawtooth WaveGen function}
   writeln(triangleWave(sPCM, 804, 1000, 27000, 44100, 90));
+  writeln('Saw Wave Length : ', sawWave(sawPCM, 440, 500, 27000));
   ms := TBytesStream.Create(Tbytes(sPCM));
   ms.SaveToFile('triangle.pcm');
+  //Create a test saw wave
+  ms := TBytesStream.Create(Tbytes(sawPCM));
+  ms.SaveToFile('SawWave.pcm');
   ms.Free;
 end.

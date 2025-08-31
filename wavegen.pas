@@ -2,12 +2,18 @@ unit waveGen;
 {$IFDEF FPC}
 {$mode Delphi}
 {$ENDIF}
+
 { #todo -oB : Use DEFINES to possibly set sample rate and amplitude defaults
  }
 interface
 
+
+
 uses
   SysUtils, {Math,} wavCalcs;
+
+const
+  DEFAULTSAMPERATE = 44100;
 
 type
   EWaveGenError = class(Exception);
@@ -30,18 +36,21 @@ type
 
   TwaveGenStyleExt = function(var aPCM: TwavePCM; const aHertz: integer;
     const aMilliSecLength: uint32; const aAmp: int16;
-    const aSampleRate: integer = 44100; const aStartPhaseAngle: integer = 90): uint32;
+    const aSampleRate: integer = DEFAULTSAMPERATE;
+    const aStartPhaseAngle: integer = 90): uint32;
 
 function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
+  const aMilliSecLength: uint32; const aAmp: int16;
+  const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
 function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
 
 function sawWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
+  const aMilliSecLength: uint32; const aAmp: int16;
+  const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
 function sawWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
@@ -67,12 +76,12 @@ begin
   if (aWaveSpec.FreqHertz = 0) then
   begin
     raise EWaveGenError.Create('Sample Rate cannot be zero!');
-    result := True;
+    Result := True;
   end;
   if (aWaveSpec.LengthMilliSec = 0) then
   begin
     raise EWaveGenError.Create('Length of Wave  cannot be zero!');
-    result := True;
+    Result := True;
   end;
 end;
 
@@ -87,7 +96,8 @@ begin
 end;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
+  const aMilliSecLength: uint32; const aAmp: int16;
+  const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32;
 var
   phase, phaseStep, tau: double;
@@ -122,11 +132,30 @@ begin
 end;
 
 function sawWave(var aPCM: TwavePCM; const aHertz: integer;
-  const aMilliSecLength: uint32; const aAmp: int16; const aSampleRate: integer = 44100;
+  const aMilliSecLength: uint32; const aAmp: int16;
+  const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32;
+var
+  phase, phaseStep, tau, precalc: double;
+  numSamples: uint32;
+  Count: uint32;
 begin
-  { #todo -oB : Needs Completion! }
-  Result := 0;
+  tau := 2 * PI;
+  precalc := aHertz * tau / aSampleRate;
+  phase := DegToRad(aStartPhaseAngle);
+  numSamples := trunc(aMilliSecLength / 1000 * aSampleRate);
+  PhaseStep := 2 * PI * aHertz / aSampleRate;
+  Count := 0;
+  setLength(aPCM, numSamples);
+  while Count < High(aPCM) do
+  begin
+    Phase := Phase + precalc;
+    if Phase >= 2 * pi then
+      Phase := Phase - (2 * pi);
+    aPCM[Count] := Trunc((Phase / (2 * pi) * 2 - 1) * aAmp);
+    Inc(Count);
+  end;
+  Result := Count;
 end;
 
 function sawWave(aWaveSpec: TWaveStyleSpecs): uint32;
