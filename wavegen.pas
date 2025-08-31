@@ -13,9 +13,23 @@ type
 
   TWaveStyle = (wsSine, wsTri, wsSqr, wsSaw);
 
-  TwaveGenStyle = function(var aPCM: TwavePCM; const aHertz: integer;
+  TWaveStyleSpecs = record
+    WaveStyle: TWaveStyle;
+    aPCM: TwavePCM;
+    FreqHertz: integer;
+    Amplitude: int16;
+    SampleRate: integer;
+    LengthMilliSec: uint32;
+    StartPhaseDeg: integer;
+  end;
+
+  TwaveGenStyle = function (aWaveSpec : TWaveStyleSpecs) : uInt32;
+
+  TwaveGenStyleExt = function(var aPCM: TwavePCM; const aHertz: integer;
     const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
     const aStartPhaseAngle: integer): uint32;
+
+
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
@@ -35,6 +49,11 @@ Uses system.Math;
   p = period in samples
   n %p = triangle wave
 *)
+
+
+{ #todo -oB : Amplitude needs to change to 0 to 100 percent like other functions!  Currently uses Max of Int16 values.
+ }
+
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;

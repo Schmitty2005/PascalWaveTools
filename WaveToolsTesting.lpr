@@ -14,8 +14,9 @@ var
   wtx: ICreateSquareWave;
   sPCM: TwavePCM;
   ms: TBytesStream;
+  ft : TwaveGenStyleExt;
 begin
-
+  ft := @triangleWave;
   wti := TsineGen<int16>.Create;
   wti.SineGenerator(22050, 660, 1000, 90);
 
