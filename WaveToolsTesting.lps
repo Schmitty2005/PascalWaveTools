@@ -7,7 +7,7 @@
       <Unit>
         <Filename Value="WaveToolsTesting.lpr"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="24" Y="17"/>
+        <CursorPos X="3" Y="21"/>
         <UsageCount Value="30"/>
         <Loaded Value="True"/>
       </Unit>
@@ -27,8 +27,8 @@
         <UnitName Value="waveGen"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="92"/>
-        <CursorPos X="14" Y="103"/>
+        <TopLine Value="44"/>
+        <CursorPos X="3" Y="68"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit>
@@ -55,10 +55,6 @@
       <Define0 Value="DEBUG"/>
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="27" Column="27" TopLine="24"/>
-      </Position>
       <Position>
         <Filename Value="wavegen.pas"/>
         <Caret Line="14" Column="32" TopLine="7"/>
@@ -175,6 +171,10 @@
         <Filename Value="wavegen.pas"/>
         <Caret Line="43" Column="64" TopLine="22"/>
       </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="32" TopLine="17"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -214,7 +214,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="wavegen.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="86"/>
+        <Line Value="94"/>
       </Item>
     </BreakPoints>
   </Debugging>

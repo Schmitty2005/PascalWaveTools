@@ -2,7 +2,8 @@ unit waveGen;
 {$IFDEF FPC}
 {$mode Delphi}
 {$ENDIF}
-
+{ #todo -oB : Use DEFINES to possibly set sample rate and amplitude defaults
+ }
 interface
 
 uses
@@ -29,6 +30,7 @@ type
     const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
     const aStartPhaseAngle: integer): uint32;
 
+function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
@@ -60,6 +62,13 @@ Uses system.Math;
 
 { #todo -oB : Amplitude needs to change to 0 to 100 percent like other functions!  Currently uses Max of Int16 values.
  }
+
+function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
+begin
+  { #todo -oB -cFeature : Use a case statement to select proper TWaveGenFunction and generate based on TWaveStyleSpecs.WaveType
+ }
+  result :=0;
+end;
 
 function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
   const aAmp: int16; const aSampleRate: integer; const aMilliSecLength: uint32;
@@ -100,14 +109,13 @@ function sawWave(var aPCM: TwavePCM; const aHertz: integer; const aAmp: int16;
   const aStartPhaseAngle: integer): uint32;
 begin
   { #todo -oB : Needs Completion! }
-  result := 0;
+  Result := 0;
 end;
 
 function sawWave(aWaveSpec: TWaveStyleSpecs): uint32;
 begin
-  Result := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz,
-    aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec,
-    aWaveSpec.StartPhaseDeg);
+  Result := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz, aWaveSpec.Amplitude,
+    aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec, aWaveSpec.StartPhaseDeg);
 end;
 
 end.
