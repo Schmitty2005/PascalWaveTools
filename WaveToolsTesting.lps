@@ -8,7 +8,7 @@
         <Filename Value="WaveToolsTesting.lpr"/>
         <IsPartOfProject Value="True"/>
         <TopLine Value="32"/>
-        <CursorPos Y="49"/>
+        <CursorPos Y="50"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -17,7 +17,7 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="wavCalcs"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="6"/>
+        <TopLine Value="14"/>
         <CursorPos X="33" Y="6"/>
         <UsageCount Value="31"/>
         <Loaded Value="True"/>
@@ -29,7 +29,7 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <TopLine Value="159"/>
-        <CursorPos X="47" Y="176"/>
+        <CursorPos X="34" Y="174"/>
         <UsageCount Value="27"/>
         <Loaded Value="True"/>
       </Unit>
@@ -56,22 +56,6 @@
       <Define0 Value="DEBUG"/>
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="161" TopLine="144"/>
-      </Position>
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="155" TopLine="144"/>
-      </Position>
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="157" TopLine="144"/>
-      </Position>
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="158" TopLine="144"/>
-      </Position>
       <Position>
         <Filename Value="wavegen.pas"/>
         <Caret Line="160" TopLine="144"/>
@@ -174,7 +158,23 @@
       </Position>
       <Position>
         <Filename Value="wavegen.pas"/>
-        <Caret Line="176" Column="80" TopLine="157"/>
+        <Caret Line="176" Column="47" TopLine="159"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="49" TopLine="32"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="177" Column="19" TopLine="159"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="56" Column="22" TopLine="51"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="49" TopLine="32"/>
       </Position>
     </JumpHistory>
     <RunParams>

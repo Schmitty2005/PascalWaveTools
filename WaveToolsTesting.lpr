@@ -10,21 +10,21 @@ uses
   waveGen;
 
 var
-  wti: ICreateSineWave<Int16>;
+  wti: ICreateSineWave<int16>;
   wtx: ICreateSquareWave;
   sPCM, sawPCM: TwavePCM;
   ms: TBytesStream;
-  ft : TwaveGenStyleExt;
-  lt : TwaveGenStyle;
-  wsp  : TWaveStyleSpecs;
+  ft: TwaveGenStyleExt;
+  lt: TwaveGenStyle;
+  wsp: TWaveStyleSpecs;
 begin
   ft := @triangleWave;
   lt := @triangleWave;
 
-  wsp.WaveStyle:=wsSine;
-  wsp.FreqHertz:=803;
-  wsp.LengthMilliSec:= 500;
-  wsp.Amplitude:= 27000;
+  wsp.WaveStyle := wsSine;
+  wsp.FreqHertz := 803;
+  wsp.LengthMilliSec := 500;
+  wsp.Amplitude := 27000;
   writeln(lt(wsp));
   wti := TsineGen<int16>.Create;
   wti.SineGenerator(22050, 660, 1000, 90);
@@ -34,7 +34,7 @@ begin
 
   wsp.aPCM := sawPCM;
   wsp.SampleRate := 44100;
-   wsp.StartPhaseDeg:= 0;
+  wsp.StartPhaseDeg := 0;
 
   {Test Triangle / Sawtooth WaveGen function}
   writeln(triangleWave(sPCM, 804, 1000, 27000, 44100, 90));
@@ -46,8 +46,8 @@ begin
   ms.SaveToFile('SawWave.pcm');
 
   sawWave(wsp);
-  ms := TBytesStream.Create(Tbytes(sawWave(wsp)));
-  ms.SaveToFile('SawWave803.pcm')  ;
+  ms := TBytesStream.Create(Tbytes(wsp.aPCM));
+  ms.SaveToFile('SawWave803.pcm');
 
   ms.Free;
 end.

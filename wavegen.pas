@@ -53,7 +53,7 @@ function sawWave(var aPCM: TwavePCM; const aHertz: integer;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
-function sawWave(aWaveSpec: TWaveStyleSpecs): TwavePCM; overload;
+function sawWave(var aWaveSpec: TWaveStyleSpecs): uInt32; overload;
 
 implementation
 
@@ -164,17 +164,17 @@ begin
   Result := Count;
 end;
 
-function sawWave(aWaveSpec: TWaveStyleSpecs): TwavePCM;
+function sawWave(var aWaveSpec: TWaveStyleSpecs): uInt32;
   { #note 4 -oB : Record Dynamic array would not seem to be passed properly ! Had to switch to function result of TWavePCM to get results }
 var
   temp: TwavePCM;
   Count: uint32;
 begin
   checkWaveStyleSpec(aWaveSpec);
-  Count := sawWave(temp, aWaveSpec.FreqHertz, aWaveSpec.LengthMilliSec,
+  Count := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz, aWaveSpec.LengthMilliSec,
     aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.StartPhaseDeg);
   if Count = 0 then raise EWaveGenError.create('Saw Wave Creation Failed! Zero Length!');
-  Result := temp;
+  Result := Count;
 end;
 
 end.
