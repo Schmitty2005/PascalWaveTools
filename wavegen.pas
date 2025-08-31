@@ -53,7 +53,7 @@ function sawWave(var aPCM: TwavePCM; const aHertz: integer;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
-function sawWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
+function sawWave(aWaveSpec: TWaveStyleSpecs): TwavePCM; overload;
 
 implementation
 
@@ -81,6 +81,11 @@ begin
   if (aWaveSpec.LengthMilliSec = 0) then
   begin
     raise EWaveGenError.Create('Length of Wave  cannot be zero!');
+    Result := True;
+  end;
+  if (aWaveSpec.Amplitude = 0) then
+  begin
+    raise EWaveGenError.Create('Amplitude cannot be zero!');
     Result := True;
   end;
 end;
@@ -136,15 +141,16 @@ function sawWave(var aPCM: TwavePCM; const aHertz: integer;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32;
 var
-  phase, phaseStep, tau, precalc: double;
+  phase, tau, precalc: double;
   numSamples: uint32;
   Count: uint32;
 begin
+
   tau := 2 * PI;
   precalc := aHertz * tau / aSampleRate;
   phase := DegToRad(aStartPhaseAngle);
   numSamples := trunc(aMilliSecLength / 1000 * aSampleRate);
-  PhaseStep := 2 * PI * aHertz / aSampleRate;
+  //PhaseStep := 2 * PI * aHertz / aSampleRate;
   Count := 0;
   setLength(aPCM, numSamples);
   while Count < High(aPCM) do
@@ -158,11 +164,17 @@ begin
   Result := Count;
 end;
 
-function sawWave(aWaveSpec: TWaveStyleSpecs): uint32;
+function sawWave(aWaveSpec: TWaveStyleSpecs): TwavePCM;
+  { #note 4 -oB : Record Dynamic array would not seem to be passed properly ! Had to switch to function result of TWavePCM to get results }
+var
+  temp: TwavePCM;
+  Count: uint32;
 begin
   checkWaveStyleSpec(aWaveSpec);
-  Result := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz, aWaveSpec.Amplitude,
-    aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec, aWaveSpec.StartPhaseDeg);
+  Count := sawWave(temp, aWaveSpec.FreqHertz, aWaveSpec.LengthMilliSec,
+    aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.StartPhaseDeg);
+  if Count = 0 then raise EWaveGenError.create('Saw Wave Creation Failed! Zero Length!');
+  Result := temp;
 end;
 
 end.
