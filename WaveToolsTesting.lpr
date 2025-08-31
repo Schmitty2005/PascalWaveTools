@@ -20,10 +20,10 @@ begin
   wti.SineGenerator(22050, 660, 1000, 90);
 
   wtx := TsineGen<int16>.Create;
-  wtx.SquareGenerator(22050, 660, 1000, 90);
+  wtx.SquareGenerator(22050, 662, 1000, 90);
 
   {Test Triangle / Sawtooth WaveGen function}
-  writeln(triangleWave(sPCM, 800, 10, 44100, 1000, 0));
+  writeln(triangleWave(sPCM, 804, 27000, 44100, 1000, 45));
   ms := TBytesStream.Create(Tbytes(sPCM));
   ms.SaveToFile('triangle.pcm');
   ms.Free;
