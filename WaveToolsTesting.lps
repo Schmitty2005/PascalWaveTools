@@ -27,8 +27,8 @@
         <UnitName Value="waveGen"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="15"/>
-        <CursorPos X="62" Y="26"/>
+        <TopLine Value="92"/>
+        <CursorPos X="14" Y="103"/>
         <UsageCount Value="23"/>
         <Loaded Value="True"/>
       </Unit>
@@ -38,7 +38,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="14"/>
         <CursorPos X="48" Y="21"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -47,7 +47,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="5"/>
         <CursorPos X="47" Y="16"/>
-        <UsageCount Value="14"/>
+        <UsageCount Value="15"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
@@ -55,22 +55,6 @@
       <Define0 Value="DEBUG"/>
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="5" Column="11"/>
-      </Position>
-      <Position>
-        <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="24" Column="31" TopLine="4"/>
-      </Position>
-      <Position>
-        <Filename Value="WaveToolsTesting.lpr"/>
-        <Caret Line="5" Column="21"/>
-      </Position>
-      <Position>
-        <Filename Value="wavegen.pas"/>
-        <Caret Line="41" TopLine="22"/>
-      </Position>
       <Position>
         <Filename Value="wavegen.pas"/>
         <Caret Line="27" Column="27" TopLine="24"/>
@@ -175,6 +159,22 @@
         <Filename Value="wavegen.pas"/>
         <Caret Line="28" Column="19" TopLine="8"/>
       </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="37" Column="59" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="43" Column="28" TopLine="28"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="103" Column="16" TopLine="91"/>
+      </Position>
+      <Position>
+        <Filename Value="wavegen.pas"/>
+        <Caret Line="43" Column="64" TopLine="22"/>
+      </Position>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
@@ -214,7 +214,7 @@
         <WatchKind Value="wpkWrite"/>
         <Source Value="wavegen.pas"/>
         <InitialEnabled Value="False"/>
-        <Line Value="82"/>
+        <Line Value="86"/>
       </Item>
     </BreakPoints>
   </Debugging>
