@@ -103,6 +103,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="waveGen"/>
       </Unit>
+      <Unit>
+        <Filename Value="mtwaveprocess.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MTWaveProcess"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

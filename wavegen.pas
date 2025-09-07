@@ -165,9 +165,7 @@ begin
 end;
 
 function sawWave(var aWaveSpec: TWaveStyleSpecs): uInt32;
-  { #note 4 -oB : Record Dynamic array would not seem to be passed properly ! Had to switch to function result of TWavePCM to get results }
 var
-  temp: TwavePCM;
   Count: uint32;
 begin
   checkWaveStyleSpec(aWaveSpec);

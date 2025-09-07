@@ -1,13 +1,13 @@
 {$MODE DELPHI}
 program WaveToolsTesting;
 
-uses
+uses cthreads,  {Needs to be first in uses!}
   Classes,
   SysUtils,
   SineGenInterfaces,
   SineGen,
   wavCalcs,
-  waveGen;
+  waveGen, MTWaveProcess;
 
 var
   wti: ICreateSineWave<int16>;
@@ -26,8 +26,8 @@ begin
   wsp.LengthMilliSec := 500;
   wsp.Amplitude := 27000;
   writeln(lt(wsp));
-  wti := TsineGen<int16>.Create;
-  wti.SineGenerator(22050, 660, 1000, 90);
+  //wti := TsineGen<int16>.Create;
+  //wti.SineGenerator(22050, 660, 1000, 90);
 
   wtx := TsineGen<int16>.Create;
   wtx.SquareGenerator(22050, 662, 1000, 90);
