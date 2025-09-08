@@ -34,21 +34,21 @@ type
 
   TwaveGenStyle = function(aWaveSpec: TWaveStyleSpecs): uint32;
 
-  TwaveGenStyleExt = function(var aPCM: TwavePCM; const aHertz: integer;
+  TwaveGenStyleExt = function(var aPCM: TwavePCM; const aHertz: double;
     const aMilliSecLength: uint32; const aAmp: int16;
     const aSampleRate: integer = DEFAULTSAMPERATE;
     const aStartPhaseAngle: integer = 90): uint32;
 
 function WaveGen(aWaveStyleSpec: TWaveStyleSpecs): integer;
 
-function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
+function triangleWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
 function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
 
-function sawWave(var aPCM: TwavePCM; const aHertz: integer;
+function sawWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
@@ -100,7 +100,7 @@ begin
   Result := 0;
 end;
 
-function triangleWave(var aPCM: TwavePCM; const aHertz: integer;
+function triangleWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32;
@@ -136,7 +136,7 @@ begin
     aWaveSpec.StartPhaseDeg);
 end;
 
-function sawWave(var aPCM: TwavePCM; const aHertz: integer;
+function sawWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32;

@@ -30,7 +30,7 @@ type
   TpcmArray = array of Int16;
 
 procedure singen(out aPcm: TpcmArray; const sampleRate: Integer;
-  const FreqHz: Integer; const msLength: Integer; const Ampli: Integer);
+  const FreqHz: Double; const msLength: Integer; const Ampli: Integer);
 
 implementation
 
@@ -38,7 +38,7 @@ implementation
 /// A simple routine to create a sine wave PCM
 /// </summary>
 procedure singen(out aPcm: TpcmArray; const sampleRate: Integer;
-  const FreqHz: Integer; const msLength: Integer; const Ampli: Integer);
+  const FreqHz: Double; const msLength: Integer; const Ampli: Integer);
 const
   tau = 2 * PI;
 var
