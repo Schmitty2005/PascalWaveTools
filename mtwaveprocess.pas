@@ -16,11 +16,18 @@ type
 
   TmtWaveProc = class(TThread)
     procedure Execute; override;
-    constructor Create(aPCM: TwavePCM; startPos, Endpos: uint64;
+    constructor Create(aPCM: TwavePCM; const startPos, Endpos: uint64;
       dspFunction: TwaveGenStyleExt); overload;
   end;
 
+  procedure mtDspProcess ( aPCM: TwavePCM; const CPUCores : Byte = 3);
+
 implementation
+
+procedure mtDspProcess(aPCM: TwavePCM; const CPUCores: Byte);
+begin
+  {Use the TmtWaveProc class to process PCM data}
+end;
 
 { TmtWaveProc }
 
@@ -30,7 +37,7 @@ begin
   sleep(10);
 end;
 
-constructor TmtWaveProc.Create(aPCM: TwavePCM; startPos, Endpos: uint64;
+constructor TmtWaveProc.Create(aPCM: TwavePCM; const startPos, Endpos: uint64;
   dspFunction: TwaveGenStyleExt);
 begin
 
