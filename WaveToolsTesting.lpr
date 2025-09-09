@@ -50,4 +50,6 @@ begin
   ms.SaveToFile('SawWave803.pcm');
 
   ms.Free;
+
+  mtDspProcess(wsp.aPCM, ft);
 end.
