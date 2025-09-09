@@ -51,5 +51,5 @@ begin
 
   ms.Free;
 
-  mtDspProcess(wsp.aPCM, ft);
+  mtDspProcess(wsp.aPCM, ft, wsp);
 end.

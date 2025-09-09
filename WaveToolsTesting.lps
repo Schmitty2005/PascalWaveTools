@@ -9,7 +9,7 @@
         <IsPartOfProject Value="True"/>
         <TopLine Value="34"/>
         <CursorPos Y="54"/>
-        <UsageCount Value="42"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -17,9 +17,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="wavCalcs"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="6"/>
         <CursorPos X="33" Y="6"/>
-        <UsageCount Value="39"/>
+        <UsageCount Value="62"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -27,9 +26,9 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="waveGen"/>
         <EditorIndex Value="3"/>
-        <TopLine Value="28"/>
-        <CursorPos X="19" Y="37"/>
-        <UsageCount Value="35"/>
+        <TopLine Value="19"/>
+        <CursorPos Y="21"/>
+        <UsageCount Value="58"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -38,9 +37,9 @@
         <UnitName Value="MTWaveProcess"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="40"/>
-        <CursorPos X="35" Y="53"/>
-        <UsageCount Value="28"/>
+        <TopLine Value="49"/>
+        <CursorPos Y="63"/>
+        <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -49,16 +48,16 @@
         <EditorIndex Value="5"/>
         <TopLine Value="14"/>
         <CursorPos X="48" Y="21"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="sinegeninterfaces.pas"/>
         <UnitName Value="SineGenInterfaces"/>
         <EditorIndex Value="2"/>
-        <TopLine Value="5"/>
+        <TopLine Value="4"/>
         <CursorPos X="47" Y="16"/>
-        <UsageCount Value="21"/>
+        <UsageCount Value="33"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
@@ -67,20 +66,12 @@
     </OtherDefines>
     <JumpHistory HistoryIndex="29">
       <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="56" TopLine="40"/>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
       </Position>
       <Position>
         <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" Column="18" TopLine="40"/>
+        <Caret Line="35" Column="28" TopLine="30"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
@@ -88,67 +79,7 @@
       </Position>
       <Position>
         <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="50" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="54" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="56" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="54" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="56" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="54" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="56" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="52" Column="38" TopLine="40"/>
+        <Caret Line="63" Column="14" TopLine="46"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
@@ -156,23 +87,7 @@
       </Position>
       <Position>
         <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="52" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="53" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="55" TopLine="40"/>
-      </Position>
-      <Position>
-        <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="52" Column="32" TopLine="40"/>
+        <Caret Line="62" Column="11" TopLine="46"/>
       </Position>
       <Position>
         <Filename Value="WaveToolsTesting.lpr"/>
@@ -180,11 +95,95 @@
       </Position>
       <Position>
         <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="51" TopLine="40"/>
+        <Caret Line="64" Column="18" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
       </Position>
       <Position>
         <Filename Value="mtwaveprocess.pas"/>
-        <Caret Line="52" TopLine="40"/>
+        <Caret Line="63" TopLine="46"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="64" Column="53" TopLine="39"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="64" Column="5" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="110" Column="36" TopLine="94"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="27" Column="11" TopLine="20"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="29" Column="23" TopLine="16"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="63" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="63" TopLine="53"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="63" TopLine="39"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="33"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="40" Column="65" TopLine="37"/>
+      </Position>
+      <Position>
+        <Filename Value="mtwaveprocess.pas"/>
+        <Caret Line="65" TopLine="55"/>
+      </Position>
+      <Position>
+        <Filename Value="WaveToolsTesting.lpr"/>
+        <Caret Line="54" TopLine="34"/>
       </Position>
     </JumpHistory>
     <RunParams>
@@ -239,7 +238,7 @@
         <WatchScope Value="wpsLocal"/>
         <WatchKind Value="wpkWrite"/>
         <Source Value="mtwaveprocess.pas"/>
-        <Line Value="51"/>
+        <Line Value="63"/>
       </Item>
     </BreakPoints>
   </Debugging>
