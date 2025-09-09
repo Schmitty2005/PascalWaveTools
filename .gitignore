@@ -1,0 +1,5 @@
+*.lps
+*.pcm
+/backup
+/lib
+
