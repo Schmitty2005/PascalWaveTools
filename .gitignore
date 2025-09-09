@@ -2,4 +2,5 @@
 *.pcm
 /backup
 /lib
+*.wav
 
