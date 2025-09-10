@@ -60,7 +60,7 @@ begin
   //setup threads using start and end positions;
   SetLength(threadPool, (CPUCores));
 
-  arPos := 0; //reuse variable
+    arPos := 0; //reuse variable
   //sleep(200);  {Needed to prevent crash  ?   Why ? }
   while (arPos <= High(threadPool)) do
   begin

@@ -7,7 +7,7 @@ uses cthreads,  {Needs to be first in uses!}
   SineGenInterfaces,
   SineGen,
   wavCalcs,
-  waveGen, MTWaveProcess;
+  waveGen, MTWaveProcess, mtInterfaces;
 
 var
   wti: ICreateSineWave<int16>;
