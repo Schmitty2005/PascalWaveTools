@@ -7,7 +7,7 @@ uses cthreads,  {Needs to be first in uses!}
   SineGenInterfaces,
   SineGen,
   wavCalcs,
-  waveGen, MTWaveProcess, mtInterfaces;
+  waveGen, MTWaveProcess, mtInterfaces, mtWaveGen;
 
 var
   wti: ICreateSineWave<int16>;
@@ -51,5 +51,5 @@ begin
 
   ms.Free;
 
-  mtDspProcess(wsp.aPCM, ft, wsp);
+  //mtDspProcess(wsp.aPCM, ft, wsp);
 end.

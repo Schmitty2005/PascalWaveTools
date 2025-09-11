@@ -123,6 +123,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="mtInterfaces"/>
       </Unit>
+      <Unit>
+        <Filename Value="mtwavegen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="mtWaveGen"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
