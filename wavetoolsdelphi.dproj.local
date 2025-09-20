@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2025/08/27 15:08:54.000.186,C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\wavetoolsdelphi.dproj=C:\Users\brian\OneDrive\Documents\Embarcadero\Studio\Projects\Project20.dproj</Transaction>
+    <Transaction>2025/08/27 15:10:09.000.438,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\wavcalcs.pas</Transaction>
+    <Transaction>2025/08/27 15:10:32.000.864,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\sinegen.pas</Transaction>
+    <Transaction>2025/08/27 15:10:32.000.969,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\sinewavegen.pas</Transaction>
+    <Transaction>2025/08/27 15:10:32.000.917,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\sinegeninterfaces.pas</Transaction>
+    <Transaction>2025/08/27 15:10:33.000.133,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\wavetools.pas</Transaction>
+    <Transaction>2025/08/27 15:10:33.000.040,=C:\Users\brian\OneDrive\Documents\GitHub\PascalWaveTools\wavegen.pas</Transaction>
+  </Transactions>
+</BorlandProject>
