@@ -12,25 +12,40 @@ var
 
 procedure waveHeaderText(aWaveHeader: TWaveHeader);
 
+var
+  whr: IReadWaveHeader;
+
 begin
+  whr := TWaveHeaderReader.Create;
+  whr.ReadWaveHeader(fn, aWaveHeader);
+  writeln;
+  writeln('====Wave Header Info ====');
+  writeln;
   writeln('Filename : ', fn);
-  writeln(' Size : ', aWaveHeader.FileSize);
+  writeln('Size : ', aWaveHeader.FileSize);
   writeln('Sample Rate : ', aWaveHeader.SampleRate);
-  writeln(' Number of Channels : ', aWaveHeader.NumChannles);
+  writeln('Number of Channels : ', aWaveHeader.NumChannles);
   writeln('Size of data : ', aWaveHeader.sizeOfData);
+  writeln('Block Size : ', aWaveHeader.BlockSize);
+  writeln('Bytes Per Sec : ', aWaveHeader.bytesPerSec);
+  writeln('Bytes Per Block ', aWaveHeader.bytesPerBlock);
+
+  writeln;
 end;
 
 begin
   fn := ParamStr(1);
   if fn = '' then
   begin
+    writeln('====Wave Header Info ====');
     writeln('No filename given on command line! ');
     writeln('    Usage : waveinfo <filename>');
     exit;
   end;
-
+  writeln('====Wave Header Info ====');
+  writeln('Wave Header info for file : ', fn);
   try
-
+    waveHeaderText(wh);
     { TODO -oUser -cConsole Main : Insert code here }
   except
     on E: Exception do
