@@ -29,6 +29,8 @@ begin
   writeln('Block Size : ', aWaveHeader.BlockSize);
   writeln('Bytes Per Sec : ', aWaveHeader.bytesPerSec);
   writeln('Bytes Per Block ', aWaveHeader.bytesPerBlock);
+  writeln ('Type Format (1=PCM)  : ', aWaveHeader.TypeFormat);
+  writeln('Bits Per Sample : ', aWaveHeader.BitsPerSample);
 
   writeln;
 end;
