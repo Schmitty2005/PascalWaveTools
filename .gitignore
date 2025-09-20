@@ -2,3 +2,6 @@
 /Win32
 wavetoolsdelphi.res
 wavetoolsdelphi.dproj.local
+wavetoolsdelphi.identcache
+*.local
+*.identcache

@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{39C20CC0-C4DF-457F-BAE7-F4AEC48B39D5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="wavetoolsdelphi.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="waveinfo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="wavetoolsdelphi">
+        <MSBuild Projects="wavetoolsdelphi.dproj"/>
+    </Target>
+    <Target Name="wavetoolsdelphi:Clean">
+        <MSBuild Projects="wavetoolsdelphi.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="wavetoolsdelphi:Make">
+        <MSBuild Projects="wavetoolsdelphi.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="waveinfo">
+        <MSBuild Projects="waveinfo.dproj"/>
+    </Target>
+    <Target Name="waveinfo:Clean">
+        <MSBuild Projects="waveinfo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="waveinfo:Make">
+        <MSBuild Projects="waveinfo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="wavetoolsdelphi;waveinfo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="wavetoolsdelphi:Clean;waveinfo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="wavetoolsdelphi:Make;waveinfo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

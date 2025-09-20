@@ -6,10 +6,10 @@ program wavetoolsdelphi;
 uses
   System.SysUtils,
   wavcalcs in 'wavcalcs.pas',
-  // sinegen in 'sinegen.pas',
-  // sinegeninterfaces in 'sinegeninterfaces.pas',
-  // sinewavegen in 'sinewavegen.pas',
-  wavegen in 'wavegen.pas'; // ,
+  wavegen in 'wavegen.pas',
+  wavetools in 'wavetools.pas';
+
+// ,
   // wavetools in 'wavetools.pas';
 
 begin
