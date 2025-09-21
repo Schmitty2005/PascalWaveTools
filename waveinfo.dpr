@@ -2,10 +2,15 @@ program waveinfo;
 
 {$APPTYPE CONSOLE}
 {$R *.res}
-
+{$IFDEF DCC}
 uses
   System.SysUtils, wavetools;
-
+  {$ENDIF}
+  {$IFDEF FPC}
+  {$MODE DELPHI}
+uses
+   classes, Sysutils, wavetools;
+  {$ENDIF}
 var
   wh: TWaveHeader;
   fn: String;
