@@ -6,3 +6,8 @@
 
 /__history
 /Win32
+*.local
+*.identcache
+*.local
+*.identcache
+*.res
