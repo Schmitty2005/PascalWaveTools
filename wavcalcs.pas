@@ -19,6 +19,11 @@ uses system.math;
 ///</param>
 function calOneCycle(const Hertz: integer; const SampleRate: integer): integer; inline;
 
+///<summary>  Convert a desired dB value to a decimal factor.  Example : +3dB =~ 1.41
+///</summary>
+///<param name="dB">Standard dB level (ex. 1.5 for 1.5dB)
+///</param>
+function dBtoDec (dB : double): double ; inline;
 implementation
 
 {$IFDEF FPC}
@@ -28,6 +33,11 @@ uses Math;
 function calOneCycle(const hertz: integer; const sampleRate: integer): integer; inline;
 begin
   Result := trunc(sampleRate / hertz);
+end;
+
+function dBtoDec (dB : double): double ; inline;
+begin
+  Result := Power(10, (db/20));
 end;
 
 begin
