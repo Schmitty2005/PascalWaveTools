@@ -37,16 +37,16 @@ function calOneCycle(const Hertz: integer; const SampleRate: integer): integer; 
 ///</summary>
 ///<param name="dB">Standard dB level (ex. 1.5 for 1.5dB)
 ///</param>
-function dBtoDec(dB: double): double; inline;
+function dBtoDec(const dB: double): double; inline;
 
 {======Pan Laws=====}
 {ConstPowPan and sqrLaw pan provide same results.  Testing needed to find out
   which method is quicker to calculate}
-function linearPan(pan: double): Tpan;
+function linearPan(const pan: double): Tpan;
 
-function constPowPan(pan: double): Tpan;
+function constPowPan(const pan: double): Tpan;
 
-function sqrLawPan(pan: double): Tpan;
+function sqrLawPan(const pan: double): Tpan;
 
 
 implementation
@@ -60,12 +60,12 @@ begin
   Result := trunc(sampleRate / hertz);
 end;
 
-function dBtoDec(dB: double): double; inline;
+function dBtoDec(const dB: double): double; inline;
 begin
   Result := Power(10, (db / 20));
 end;
 
-function linearPan(pan: double): Tpan;
+function linearPan(const pan: double): Tpan;
 begin
   if (pan > 1.0) or (pan < -1.0) then
     raise EwavCalcError.Create('Pan value must be between 1.0 and -1.0');
@@ -73,7 +73,7 @@ begin
   Result.right := pan;
 end;
 
-function constPowPan(pan: double): Tpan;
+function constPowPan(const pan: double): Tpan;
 const
   precalc = (pi / 2);
 begin
@@ -83,7 +83,7 @@ begin
   Result.right := sin(pan * precalc);
 end;
 
-function sqrLawPan(pan: double): Tpan;
+function sqrLawPan(const pan: double): Tpan;
 begin
   if (pan > 1.0) or (pan < -1.0) then
     raise EwavCalcError.Create('Pan value must be between 1.0 and -1.0');
