@@ -48,6 +48,11 @@ function constPowPan(const pan: double): Tpan;
 
 function sqrLawPan(const pan: double): Tpan;
 
+function FindMaxValue<T>(arr: array of T): T; overload;
+
+function FindMaxValue<T>(arr: array of T; const si: uInt64;
+  const ei: uInt64): T; overload;
+
 
 implementation
 
@@ -90,6 +95,41 @@ begin
   Result.Left := Sqrt(1 - pan);
   Result.Right := Sqrt(pan);
 end;
+
+function FindMaxValue<T>(arr: array of T): T; overload;
+var
+  MaxValue: T;
+  x: uInt64;
+begin
+  x := low(arr);
+  MaxValue := 0;
+  while x <= high(arr) do
+  begin
+    if abs(arr[x]) > MaxValue then
+      MaxValue := arr[x];
+    Inc(x);
+  end;
+  Result := MaxValue;
+end;
+
+function FindMaxValue<T>(arr: array of T; const si: uInt64;
+  const ei: uInt64): T; overload;
+var
+  MaxValue: T;
+  x: uInt64;
+begin
+  x := si;
+  MaxValue := 0;
+  writeln(si);
+  writeln(ei);
+  repeat
+    if arr[x] > MaxValue then
+      MaxValue := arr[x];
+    Inc(x);
+  until x > ei;
+  Result := MaxValue;
+end;
+
 
 begin
 
