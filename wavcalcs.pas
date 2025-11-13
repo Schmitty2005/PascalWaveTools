@@ -120,10 +120,8 @@ var
 begin
   x := si;
   MaxValue := 0;
-  writeln(si);
-  writeln(ei);
   repeat
-    if arr[x] > MaxValue then
+    if abs(arr[x]) > MaxValue then
       MaxValue := arr[x];
     Inc(x);
   until x > ei;
