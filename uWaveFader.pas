@@ -2,13 +2,13 @@
 {$mode delphi}
 {$ENDIF}
 program uWaveFade;
-  {Implementation}
+  {Interface}
 
   {$IFDEF FPC}
-uses classes;
+uses classes, Math;
   {$ENDIF}
   {$IFDEF DCC}
-Uses System.Classes;
+Uses System.Classes, System.Math;
   {$ENDIF}
 
 type
@@ -34,7 +34,32 @@ type
     procedure FadeWave(pcm: array of int16; const millisecDur: uint64);
   end;
 
-  {Interface}
+  {Implementation}
+
+{ #todo -oB -cTesting : Procedure needs testing! }
+{ #todo 1 -oB -cfeature : Break out into FadeIn FadeOut procedures as well as
+        interface procedures for uInt16 and uInt8 types}
+  procedure fadeInOut<T>(var pcm: array of T; lengthms: uint64;
+    channels: uint8 = 1; sampleRate: uint32 = 48000);
+  var
+    durationSamples: uint64;
+    sampleNum: uint64;
+    weight: double;
+  begin
+    { #todo -oB : Add check to ensure fade samples do not exceed pcm samples !
+ }
+    durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
+    sampleNum := 0;
+    repeat
+      //  float weight = 0.5 * (1 - cos(M_PI * s / (numFadeSamples - 1)));
+      weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
+      pcm[sampleNum] := pcm[sampleNum] * weight;                          //fade in
+      pcm[high(pcm) - sampleNum] := pcm[high(pcm) - sampleNum] * weight;  //fade out
+      Inc(sampleNum);
+    until sampleNum > durationSamples;
+  end;
+
+
   constructor TWaveFader.Create(const SampleRate: uint32;
   const FadeType: TfadeType; const NumChannels: Tchannels);
   begin
