@@ -53,8 +53,8 @@ type
     repeat
       //  float weight = 0.5 * (1 - cos(M_PI * s / (numFadeSamples - 1)));
       weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
-      pcm[sampleNum] := pcm[sampleNum] * weight;                          //fade in
-      pcm[high(pcm) - sampleNum] := pcm[high(pcm) - sampleNum] * weight;  //fade out
+      pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);                          //fade in
+      pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight)   ;  //fade out
       Inc(sampleNum);
     until sampleNum > durationSamples;
   end;
@@ -106,7 +106,7 @@ type
 
 var
   d: TwaveFader;
-  pcm: array [0..44100] of int16;
+  pcm: array [0..44100] of uint16;
   x: integer;
 begin
   x := 0;
@@ -115,5 +115,8 @@ begin
     pcm[x] := 27000;
     Inc(x);
   end;
+
+  fadeInOut<uInt16>(pcm, 10, 1);
+
 
 end.
