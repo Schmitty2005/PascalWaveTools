@@ -2,6 +2,7 @@
 {$mode delphi}
 {$ENDIF}
 program uWaveFade;
+
   {Interface}
 
   {$IFDEF FPC}
@@ -19,8 +20,8 @@ type
 
   TWaveFader = class(TinterfacedObject, IWaveFader)
   public
-  type
-    Tchannels = (cMono, cStereo);
+    type
+    Tchannels = (cMono = 1, cStereo);
     TFadeType = (ftIn, ftOut, ftBoth);
   private
     fSampleRate: uint32;
@@ -36,7 +37,52 @@ type
 
   {Implementation}
 
-{ #todo -oB -cTesting : Procedure needs testing! }
+  procedure fadeIn<T>(var pcm: array of T; lengthms: uint64; channels: uint8 = 1;
+    sampleRate: uint32 = 48000);
+  var
+    durationSamples: uint64;
+    sampleNum: uint64;
+    weight: double;
+  begin
+    durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
+    sampleNum := 0;
+    //if durationSamples > high(pcm) then durationSamples:= trunc(High(pcm)/2);//In AND Out fade
+    if durationSamples > high(pcm) then
+      durationSamples := trunc(High(pcm));//In OR Out fade
+    repeat
+      //  float weight = 0.5 * (1 - cos(M_PI * s / (numFadeSamples - 1)));
+      weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
+      pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);
+      //fade in
+      //pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight)   ;  //fade out
+      Inc(sampleNum);
+    until sampleNum > durationSamples;
+  end;
+
+
+  procedure fadeOut<T>(var pcm: array of T; lengthms: uint64;
+    channels: uint8 = 1; sampleRate: uint32 = 48000);
+  var
+    durationSamples: uint64;
+    sampleNum: uint64;
+    weight: double;
+  begin
+    durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
+    sampleNum := 0;
+    //if durationSamples > high(pcm) then durationSamples:= trunc(High(pcm)/2);//In AND Out fade
+    if durationSamples > high(pcm) then
+      durationSamples := trunc(High(pcm));//In OR Out fade
+    repeat
+      //  float weight = 0.5 * (1 - cos(M_PI * s / (numFadeSamples - 1)));
+      weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
+      //pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);                          //fade in
+      pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight);
+      //fade out
+      Inc(sampleNum);
+    until sampleNum > durationSamples;
+  end;
+
+  { #todo -oB -cTesting : Procedure needs testing! }
 { #todo 1 -oB -cfeature : Break out into FadeIn FadeOut procedures as well as
         interface procedures for uInt16 and uInt8 types}
   procedure fadeInOut<T>(var pcm: array of T; lengthms: uint64;
@@ -46,15 +92,18 @@ type
     sampleNum: uint64;
     weight: double;
   begin
-    { #todo -oB : Add check to ensure fade samples do not exceed pcm samples !
- }
     durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
     sampleNum := 0;
+    if durationSamples > high(pcm) then
+      durationSamples := trunc(High(pcm) / 2);//In AND Out fade
+    //if durationSamples > high(pcm) then durationSamples:= trunc(High(pcm));//In OR Out fade
     repeat
       //  float weight = 0.5 * (1 - cos(M_PI * s / (numFadeSamples - 1)));
       weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
-      pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);                          //fade in
-      pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight)   ;  //fade out
+      pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);
+      //fade in
+      pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight);
+      //fade out
       Inc(sampleNum);
     until sampleNum > durationSamples;
   end;
@@ -87,19 +136,11 @@ type
     ramp := 0;
     case fFadeType of
       ftIn:
-      begin
-        repeat
-          ramp := Count / max;
-          pcm[Count] := trunc(pcm[Count] * ramp);
-          Inc(Count);
-        until Count > max;
-      end;
+        fadeIn<Int16>(pcm, max, Ord(fChannels), fSampleRate);
       ftOut:
-      begin
-      end;
+        fadeOut<Int16>(pcm, max, Ord(fChannels), fSampleRate);
       ftBoth:
-      begin
-      end;
+        fadeInOut<Int16>(pcm, max, Ord(fChannels), fSampleRate);
     end;
 
   end;
@@ -117,6 +158,5 @@ begin
   end;
 
   fadeInOut<uInt16>(pcm, 10, 1);
-
 
 end.
