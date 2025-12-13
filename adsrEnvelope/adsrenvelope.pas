@@ -4,8 +4,9 @@
 {$ENDIF}
 {$IFDEF UNIX}
 
-{$ENDIF}program adsrenvelope;
-  {$mode delphi}
+{$ENDIF}
+program adsrenvelope;
+{$mode delphi}
 
   {$TYPEDADDRESS ON}
 
@@ -41,7 +42,7 @@ type
   procedure TadsrEnvelope.dsp(pcm: array of int16; const Data: pointer);
   var
     envSettings: TadsrSettings;
-    pcmLength, counter : Uint64;
+    pcmLength, counter: uint64;
   begin
     pcmLength := Length(pcm);
     envSettings := (TadsrSettings(Data^));
