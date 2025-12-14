@@ -62,7 +62,7 @@ var
   ramp: single;
 {$IFDEF DCC}
   (* Delphi cannot have global functions / procedures with generics ...so they will go here... WTF... *)
-{$INCLUDE DelphiFadeProcs.inc}
+{$INCLUDE 'DelphiFadeProcs.inc'}
 {$ENDIF}
 begin
 
