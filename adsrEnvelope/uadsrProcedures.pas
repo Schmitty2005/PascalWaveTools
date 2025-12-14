@@ -26,13 +26,6 @@ const
 var
   env: TadsrSettings;
   sr: uint64;
-  // sustainVolume: double;
-  // x, c: uint64;
-  //sustainSampleStart: uint64;
-  //sustainSampleEnd: uint64;
-
-
-  {==============================================================================}
 
 procedure ApplyADSR(var Buffer: array of int16; SampleRate: integer;
   AttackTime, DecayTime, SustainLevel, ReleaseTime: single);
@@ -87,135 +80,19 @@ begin
   end;
 end;
 
-{==============================================================================}
-
-
-
-(*
-procedure fadeIn(var pcm: array of int16; lengthms: uint64;
-  channels: uint8 = 1; sampleRate: uint32 = 48000);
-var
-  durationSamples: uint64;
-  sampleNum: uint64;
-  weight: double;
-begin
-  durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
-  sampleNum := 0;
-  if durationSamples > high(pcm) then
-    durationSamples := trunc(High(pcm));
-  repeat
-    weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
-    pcm[sampleNum] := Trunc(pcm[sampleNum] * weight);
-    Inc(sampleNum);
-  until sampleNum > durationSamples;
-end;
-
-procedure fadeOut(var pcm: array of int16; lengthms: uint64;
-  channels: uint8 = 1; sampleRate: uint32 = 48000);
-var
-  durationSamples: uint64;
-  sampleNum: uint64;
-  weight: double;
-begin
-  durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
-  sampleNum := 0;
-  if durationSamples > high(pcm) then
-    durationSamples := trunc(High(pcm));
-  repeat
-    weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
-    pcm[high(pcm) - sampleNum] := Trunc(pcm[high(pcm) - sampleNum] * weight);
-    Inc(sampleNum);
-  until sampleNum > durationSamples;
-  //sustainVolume := weight;
-end;
-
-procedure decayFade(var pcm: array of int16; lengthms: uint64;
-  channels: uint8 = 1; sampleRate: uint32 = 48000);
-var
-  durationSamples: uint64;
-  sampleNum: uint64;
-  weight: double;
-  endDecay: uint64;
-begin
-  durationSamples := round(lengthMs / 1000 * samplerate) * Channels;
-  sampleNum := 0;//trunc(env.attack / 1000 * sr) + 1;
-  endDecay := trunc((env.Attack + env.decay) / 1000 * sr);
-  if durationSamples > high(pcm) then
-    durationSamples := trunc(High(pcm));
-  repeat
-    { #todo -oB : high(pcm) needs to be replaced with proper end of fade! }
-    weight := (0.5 * (1 - cos((Pi * sampleNum / (durationSamples - 1)))));
-    pcm[endDecay - sampleNum] := Trunc(pcm[endDecay - sampleNum] * weight);
-    Inc(sampleNum);
-  until weight <= sustainVolume;
-  sustainVolume := weight;
-end;
-*)
-
 procedure setSampleRate(aSampleRate: uint64);
 begin
   sr := aSampleRate;
 end;
-(*
-procedure attackEnvelope(var aPCM: array of int16; aAttack: uint64);
-begin
-  fadeIn(aPCM, aAttack, 1, sr);
-end;
 
-procedure decayEnvelope(var aPCM: array of int16; aDecayLength: uint64;
-  aSustainLevel: double);
-{ #todo -oB : Needs some thinking about how to accomplish this with decay and rate of decay! }
-var
-  decayWeight: double;
-  Count, currentSample: uint64;
-begin
-  Count := 0;
-  currentSample := trunc((env.attack + 1) / 1000 * sr);
-  sustainVolume := aSustainLevel;
-  decayweight := 1;
-  while decayWeight > sustainVolume do
-  begin
-    decayweight := decayWeight - (Count * (1 / decayWeight));
-    aPCM[currentSample + Count] := trunc(aPCM[CurrentSample + Count] * decayWeight);
-    Inc(Count);
-  end;
-  // decayFade(aPCM, env.decay, 1, sr); //decayFade is a failed attempt!
-  //decayEnvelope(aPCM, sustainVolume);
-  //Current values are temp for testing only!
-  // sustainVolume := 0.5;            //temp
-  //sustainSampleStart := 11025 * 2;// temp
-  sustainSampleStart := trunc(((env.attack + env.decay) / 1000) * sr) + 1;
-end;
-
-procedure sustainEnvelope(var aPCM: array of int16);// aSustain: uint64);
-{ #todo -oB : May not need aSustain ! }
-{var
-  susSampleStart: uint64;}
-begin
-
-  //maintain sustain volume to end of array!
-  for x := sustainSampleStart to High(aPCM) do
-    aPCM[x] := trunc(aPCM[x] * sustainVolume);
-end;
-
-procedure releaseEnvelope(var aPCM: array of int16; aRelease: uint64);
-begin
-  fadeOut(aPCM, aRelease, 1, sr);
-end;
-*)
 
 procedure adsrEnvelope(var aPCM: array of int16; aAdsrSettings: TadsrSettings);
 
-  function MsToSec(var aMs: uint32): single; inline; //overload;
+  function MsToSec(var aMs: uint32): single; inline;
   begin
     Result := aMs / 1000;
   end;
-  {
-   function MsToSec(var aMs: double): double;inline; overload;
-  begin
-    result := aMs / 1000;
-  end;
-   }
+
 var
   at, dc, st, rl: double;
 begin
