@@ -1,16 +1,18 @@
 {$IFDEF FPC}
-{$mode delphi}
+{$MODE delphi}
 {$ENDIF}
-program uWaveFader;
+unit uWaveFader;
 
-  {Interface}
+Interface
 
-  {$IFDEF FPC}
+{$IFDEF FPC}
+
 uses classes, Math;
-  {$ENDIF}
-  {$IFDEF DCC}
-Uses System.Classes, System.Math;
-  {$ENDIF}
+{$ENDIF}
+{$IFDEF DCC}
+
+Uses System.classes, System.Math;
+{$ENDIF}
 
 type
   IWaveFader = interface
@@ -19,75 +21,86 @@ type
   end;
 
   TWaveFader = class(TinterfacedObject, IWaveFader)
-  public
-    type
+  public type
     Tchannels = (cMono = 1, cStereo);
     TFadeType = (ftIn, ftOut, ftBoth);
   private
     fSampleRate: uint32;
     fmsDuration: uint64;
-    fFadeType: TfadeType;
+    fFadeType: TFadeType;
     fChannels: Tchannels;
   public
-    constructor Create(const SampleRate: uint32; const FadeType: TfadeType;
+    constructor Create(const SampleRate: uint32; const FadeType: TFadeType;
       const NumChannels: Tchannels);
 
     procedure FadeWave(pcm: array of int16; const millisecDur: uint64);
   end;
 
-  {Implementation}
+Implementation
 
 (*
-Generic functions / procedures are not allowed in global functions when using the Delphi Compiler. 
-They are allowed in FPC ! :)
+  Generic functions / procedures are not allowed in global functions when using the Delphi Compiler.
+  They are allowed in FPC ! :)
 *)
 {$IFDEF FPC}
-  {$INCLUDE fadeprocs.inc}
+{$INCLUDE fadeprocs.inc}
 {$ENDIF}
 
+constructor TWaveFader.Create(const SampleRate: uint32;
+  const FadeType: TFadeType; const NumChannels: Tchannels);
+begin
+  fSampleRate := SampleRate;
+  fFadeType := FadeType;
+  fChannels := NumChannels;
+end;
 
-  constructor TWaveFader.Create(const SampleRate: uint32;
-  const FadeType: TfadeType; const NumChannels: Tchannels);
-  begin
-    fSampleRate := SampleRate;
-    fFadeType := FadeType;
-    fChannels := NumChannels;
-  end;
-
-  procedure TWaveFader.FadeWave(pcm: array of int16; const millisecDur: uint64);
-  var
-    mul: uint64;
-    Count: uint64;
-    max: uint64;
-    ramp: single;
-  begin
-  {$IFDEF DCC}
-  (*  Delphi cannot have global functions / procedures with generics ...so they will go here... WTF...*)
-  {$INCLUDE fadeprocs.inc}
-  {$ENDIF}
-    case fChannels of
-      cMono:
-        mul := 1;
-      cStereo:
-        mul := 2;
-    end;
-    fmsDuration := millisecDur;
-    max := Trunc(((fmsDuration / 1000) * fSampleRate) * mul);
-    Count := 0;
-    ramp := 0;
-    case fFadeType of
-      ftIn:
-        fadeIn<Int16>(pcm, max, Ord(fChannels), fSampleRate);
-      ftOut:
-        fadeOut<Int16>(pcm, max, Ord(fChannels), fSampleRate);
-      ftBoth:
-        fadeInOut<Int16>(pcm, max, Ord(fChannels), fSampleRate);
-    end;
-  end;
-
+procedure TWaveFader.FadeWave(pcm: array of int16; const millisecDur: uint64);
 var
-  d: TwaveFader;
-  pcm: array [0..44100] of uint16;
+  mul: uint64;
+  Count: uint64;
+  max: uint64;
+  ramp: single;
+{$IFDEF DCC}
+  (* Delphi cannot have global functions / procedures with generics ...so they will go here... WTF... *)
+{$INCLUDE DelphiFadeProcs.inc}
+{$ENDIF}
+begin
+
+  case fChannels of
+    cMono:
+      mul := 1;
+    cStereo:
+      mul := 2;
+  end;
+  fmsDuration := millisecDur;
+  max := Trunc(((fmsDuration / 1000) * fSampleRate) * mul);
+  Count := 0;
+  ramp := 0;
+{$IFDEF FPC}
+  case fFadeType of
+    ftIn:
+      fadeIn<int16>(pcm, max, Ord(fChannels), fSampleRate);
+    ftOut:
+      fadeOut<int16>(pcm, max, Ord(fChannels), fSampleRate);
+    ftBoth:
+      fadeInOut<int16>(pcm, max, Ord(fChannels), fSampleRate);
+  end;
+{$ENDIF}
+{$IFDEF DCC}
+  case fFadeType of
+    ftIn:
+      fadeIn(pcm, max, Ord(fChannels), fSampleRate);
+    ftOut:
+      fadeOut(pcm, max, Ord(fChannels), fSampleRate);
+    ftBoth:
+      fadeInOut(pcm, max, Ord(fChannels), fSampleRate);
+  end;
+{$ENDIF}
+end;
+(*
+var
+  d: TWaveFader;
+  pcm: array [0 .. 44100] of uint16;
   x: integer;
 begin
   x := 0;
@@ -97,6 +110,6 @@ begin
     Inc(x);
   end;
 
-  fadeInOut<uInt16>(pcm, 10, 1);
-
+  fadeInOut<uint16>(pcm, 10, 1);
+ *)
 end.
