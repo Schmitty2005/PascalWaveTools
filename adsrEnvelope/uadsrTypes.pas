@@ -9,7 +9,7 @@ interface
 ///</Summary>
 ///<param name="attack"> length in milli-seconds of attack envelope</param>
 ///<param name="decay"> length in mill-seconds of decay envelope</param>
-///<param name="sustain">level of sustain amplitude ( 0.0 to 1.00 )</param>
+///<param name="sustain">level of sustain amplitude in percentage( 0.0 to 1.00 )</param>
 ///<param name="release">length in milli-seconds of release envelope</param>
 type
   TadsrSettings = record

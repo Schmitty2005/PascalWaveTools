@@ -26,7 +26,7 @@ begin
 
   with es do
   begin
-    attack := 250;
+    attack := 20;
     decay := 75;
     sustainLevel := 0.50;
     Release := 250;
@@ -38,6 +38,17 @@ begin
      write ('[',x,']', ' = ', ba[x], ', ');
   {$ENDIF}
   ms.writebuffer(ba[0], length(ba) * sizeOf(int16));
-  ms.SaveToFile('arrayout.pcm'); //view in audacity !
+  ms.SaveToFile('adsrShape.pcm'); //view in audacity !
+  ms.Free;
+  for x := 0 to cSRandLength do
+  begin
+    ba[x] :=  trunc((sin(2 * 3.141697 * (800 / 44100) * x))* 27000);
+  end;
+
+  adsrEnvelope(ba, es);
+
+  ms := TMemoryStream.Create;
+  ms.writebuffer(ba[0], length(ba) * sizeOf(int16));
+  ms.SaveToFile('adsrWave.pcm'); //view in audacity !
   ms.Free;
 end.
