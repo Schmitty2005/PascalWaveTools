@@ -8,4 +8,4 @@ fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml
 makeskel --package=PascalWaveTools --input='../adsrEnvelope/uadsrTypes.pas' --descr='uadsrTypes.xml'  --input='../adsrEnvelope/uadsrProcedures.pas' --descr='uadsrProcedures.xml'ls --output='adsrEnvelope.xml'
 
 
-fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml --input='../adsrEnvelope/uadsrTypes.pas' --input='../adsrEnvelope/uadsrProcedures.pas' --descr='uadsrProcedures.xml'
+fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml --input='../adsrEnvelope/uadsrTypes.pas' --input='../adsrEnvelope/uadsrProcedures.pas' --descr='adsrEnvelope.xml'
