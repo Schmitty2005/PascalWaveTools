@@ -1,2 +1,6 @@
 fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml
 
+
+makeskel --package=PascalWaveTools --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml
+
+fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml
