@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    uWaveFader
+  ====================================================================
+-->
+
+<module name="uWaveFader">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="Math">
+<short></short>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IWaveFader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IWaveFader.FadeWave">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveFader.FadeWave.pcm">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IWaveFader.FadeWave.millisecDur">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TWaveFader">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration type Visibility: public -->
+<element name="TWaveFader.Tchannels">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveFader.Tchannels.cMono">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveFader.Tchannels.cStereo">
+<short></short>
+</element>
+
+<!-- enumeration type Visibility: public -->
+<element name="TWaveFader.TFadeType">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveFader.TFadeType.ftIn">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveFader.TFadeType.ftOut">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveFader.TFadeType.ftBoth">
+<short></short>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveFader.fSampleRate">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveFader.fmsDuration">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveFader.fFadeType">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TWaveFader.fChannels">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TWaveFader.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveFader.Create.SampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveFader.Create.FadeType">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveFader.Create.NumChannels">
+<short></short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TWaveFader.FadeWave">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveFader.FadeWave.pcm">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TWaveFader.FadeWave.millisecDur">
+<short></short>
+</element>
+
+</module> <!-- uWaveFader -->
+
+</package>
+</fpdoc-descriptions>

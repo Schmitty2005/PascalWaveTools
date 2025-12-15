@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    uadsrTypes
+  ====================================================================
+-->
+
+<module name="uadsrTypes">
+<short></short>
+<descr>
+</descr>
+
+<!-- record type Visibility: default -->
+<element name="TadsrSettings">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TadsrSettings.attack">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TadsrSettings.decay">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TadsrSettings.sustainLevel">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TadsrSettings.Release">
+<short></short>
+</element>
+
+</module> <!-- uadsrTypes -->
+
+
+<!--
+  ====================================================================
+    uadsrProcedures
+  ====================================================================
+-->
+
+<module name="uadsrProcedures">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="uadsrTypes">
+<short></short>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="adsrEnvelope">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="adsrEnvelope.aPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="adsrEnvelope.aAdsrSettings">
+<short></short>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="setSampleRate">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="setSampleRate.aSampleRate">
+<short></short>
+</element>
+
+</module> <!-- uadsrProcedures -->
+
+</package>
+</fpdoc-descriptions>

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    waveGen
+  ====================================================================
+-->
+
+<module name="waveGen">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="wavCalcs">
+<short></short>
+</element>
+
+<!-- constant Visibility: default -->
+<element name="DEFAULTSAMPERATE">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EWaveGenError">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- array type Visibility: default -->
+<element name="TwavePCM">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration type Visibility: default -->
+<element name="TWaveStyle">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveStyle.wsSine">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveStyle.wsTri">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveStyle.wsSqr">
+<short></short>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TWaveStyle.wsSaw">
+<short></short>
+</element>
+
+<!-- record type Visibility: default -->
+<element name="TWaveStyleSpecs">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.WaveStyle">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.aPCM">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.FreqHertz">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.Amplitude">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.SampleRate">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.LengthMilliSec">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="TWaveStyleSpecs.StartPhaseDeg">
+<short></short>
+</element>
+
+<!-- function type Visibility: default -->
+<element name="TwaveGenStyle">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TwaveGenStyle.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyle.aWaveSpec">
+<short></short>
+</element>
+
+<!-- function type Visibility: default -->
+<element name="TwaveGenStyleExt">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="TwaveGenStyleExt.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aHertz">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aMilliSecLength">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aAmp">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TwaveGenStyleExt.aStartPhaseAngle">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="WaveGen">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="WaveGen.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="WaveGen.aWaveStyleSpec">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="triangleWave">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="triangleWave.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aHertz">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aMilliSecLength">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aAmp">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aStartPhaseAngle">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="triangleWave.aWaveSpec">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="sawWave">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="sawWave.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aHertz">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aMilliSecLength">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aAmp">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aStartPhaseAngle">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sawWave.aWaveSpec">
+<short></short>
+</element>
+
+</module> <!-- waveGen -->
+
+</package>
+</fpdoc-descriptions>
