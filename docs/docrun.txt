@@ -9,3 +9,9 @@ makeskel --package=PascalWaveTools --input='../adsrEnvelope/uadsrTypes.pas' --de
 
 
 fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml --input='../adsrEnvelope/uadsrTypes.pas' --input='../adsrEnvelope/uadsrProcedures.pas' --descr='adsrEnvelope.xml'
+
+
+makeskel --package=PascalWaveTools --input='../wavecalcs.pas' --descr=wavecalcs.xml --output='wavecalcs.xml'
+
+fpdoc --package=PascalWaveTools --input='../wavetools.pas' --descr=wavetools.xml --input='../fader/uWaveFader.pas' --descr=uWaveFader.xml --input='../adsrEnvelope/uadsrTypes.pas' --input='../adsrEnvelope/uadsrProcedures.pas' --descr='adsrEnvelope.xml' --input='../wavecalcs.pas' --descr='wavecalcs.xml'
+
