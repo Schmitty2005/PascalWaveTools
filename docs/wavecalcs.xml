@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    waveCalcs
+  ====================================================================
+-->
+
+<module name="waveCalcs">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="sysutils">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EwavCalcError">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- record type Visibility: default -->
+<element name="Tpan">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="Tpan.left">
+<short></short>
+</element>
+
+<!-- variable Visibility: public -->
+<element name="Tpan.right">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="calOneCycle">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="calOneCycle.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="calOneCycle.Hertz">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="calOneCycle.SampleRate">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="dBtoDec">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="dBtoDec.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="dBtoDec.dB">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="linearPan">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="linearPan.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="linearPan.pan">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="constPowPan">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="constPowPan.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="constPowPan.pan">
+<short></short>
+</element>
+
+<!-- function Visibility: default -->
+<element name="sqrLawPan">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="sqrLawPan.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="sqrLawPan.pan">
+<short></short>
+</element>
+
+<!-- generic type Visibility: default -->
+<element name="FindMaxValue.T">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- function Visibility: default -->
+<element name="FindMaxValue">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- function result Visibility: default -->
+<element name="FindMaxValue.Result">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="FindMaxValue.arr">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="FindMaxValue.si">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="FindMaxValue.ei">
+<short></short>
+</element>
+
+</module> <!-- waveCalcs -->
+
+</package>
+</fpdoc-descriptions>
