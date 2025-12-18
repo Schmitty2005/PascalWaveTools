@@ -25,13 +25,23 @@ type
   end;
 
 ///<summary>  A quick inline function to calculate the number of samples that
-///would create one cycle at a specifice frequency in hertz;
+///would create one cycle at a specific frequency in hertz in integer;
 ///</summary>
 ///<param name="Hertz">The item to remove
 ///</param>
 ///<param name = "SampleRate"> The sample rate of the PCM / Wave data
 ///</param>
-function calOneCycle(const Hertz: integer; const SampleRate: integer): integer; inline;
+function calOneCycle(const Hertz: integer; const SampleRate: integer): integer; inline; overload;
+
+
+///<summary>  A quick inline function to calculate the number of samples that
+///would create one cycle at a specific frequency in hertz in double float;
+///</summary>
+///<param name="Hertz">The item to remove
+///</param>
+///<param name = "SampleRate"> The sample rate of the PCM / Wave data
+///</param>
+function calOneCycle(const Hertz: double; const SampleRate: integer): double ; inline; overload;
 
 ///<summary>  Convert a desired dB value to a decimal factor.  Example : +3dB =~ 1.41
 ///</summary>
@@ -60,9 +70,14 @@ implementation
 uses Math;
 {$ENDIF}
 
-function calOneCycle(const hertz: integer; const sampleRate: integer): integer; inline;
+function calOneCycle(const hertz: integer; const sampleRate: integer): integer; inline; overload;
 begin
   Result := trunc(sampleRate / hertz);
+end;
+
+function calOneCycle(const hertz: double; const sampleRate: integer): double; inline; overload;
+begin
+  Result :=(sampleRate / hertz);
 end;
 
 function dBtoDec(const dB: double): double; inline;
