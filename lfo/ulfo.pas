@@ -10,14 +10,16 @@ type
   //likely will not be used. Use interfaces instead
   }
 
-  TlfoProcedure = procedure(aPcm: array of int16; aFreq: double;
-    aSampleRate: uInt64 = 48000);
+  TlfoProcedure = procedure(var aPcm: array of int16; aFreq: double;
+    aSampleRate: uInt64 = 44100);
   
   TlfoSettings = record
     FreqHz: double;
     Amplitude: Uint32;
   end;
+
   TlfoWave = array of int16;
+  
   IlfoOutput = interface
     function lfoWave(aFreqHz: double): TlfoWave;
   end;
@@ -33,15 +35,15 @@ type
   public
     constructor Create(aSampleRate: uInt64);// virtual;//abstract;
     function lfoWave(aFreqHz: double): TlfoPCM;virtual;abstract;
-    property Freq: double read fFrequency write fFrequency;
+    property Freq: double read fFrequency;// write fFrequency;
     property lfoPCM: TlfoPCM read fPCM;
   end;
 
-  TlfoWaveProc = class(TlfoBase)
+  TlfoWaveProcGen = class(TlfoBase)
   private
-    fLfoProc: TlfoWaveProc;
+    fLfoProc: TlfoProcedure;
   public
-    constructor Create(aSampleRate: uInt64; aLfoWaveProc: TlfoWaveProc);
+    constructor Create(aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
   end;
 
 implementation
@@ -62,7 +64,7 @@ begin
   }
 end;
 
-constructor TlfoWaveProc.Create(aSampleRate: uInt64; aLfoWaveProc: TlfoWaveProc);
+constructor TlfoWaveProcGen.Create(aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
 begin
   fLfoProc := aLfoWaveProc;
 end;
