@@ -7,8 +7,10 @@ type
 
   PdspProcedure = ^TdspProcedure;
 
-  TdspProcedure = procedure(var aPcm: array of int16;
-    const beginIndex, endIndex: uint64; const aDspData: Pointer);
+  TdspProcedure = procedure(
+    var aPcm: array of int16;
+    const beginIndex, endIndex: uint64;
+    const aDspData: Pointer);
 
   IdspProcess = interface
     procedure process(aPcm: array of int16; const aData: Pointer = nil);

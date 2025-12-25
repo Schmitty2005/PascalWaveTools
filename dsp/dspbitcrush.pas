@@ -6,9 +6,6 @@ interface
 
 type
 
-  PbitCrushTo = ^TbitCrushTo;
-  TbitCrushTo = 2..14;
-
   PbitCrushParam = ^TbitCrushParam;
 
   TbitCrushParam = record
