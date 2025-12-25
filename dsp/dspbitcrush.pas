@@ -17,14 +17,13 @@ type
 
   { Tbitcrusher }
 
-  Tbitcrusher = class (TdspBase)
-    private
-      pp : PbitCrushParam;
-      bp : TbitCrushParam;
-    public
+  Tbitcrusher = class(TdspBase)
+  private
+    fpp: PbitCrushParam;
+    fbp: TbitCrushParam;
+  public
     constructor Create(aSampleRate: uint32; aData: pointer = nil); override;
-    procedure process(aPcm: array of int16; const aData: Pointer = nil);
-      override;
+    procedure process(aPcm: array of int16; const aData: Pointer = nil); override;
   end;
 
 procedure bitCrush(var aPcm: array of int16; const beginIndex, endIndex: uint64;
@@ -51,14 +50,18 @@ end;
 
 { Tbitcrusher }
 
-constructor Tbitcrusher.Create(aSampleRate: uint32; aData: pointer);
+constructor Tbitcrusher.Create(aSampleRate: uint32; aData: Pointer);
 begin
   inherited Create(aSampleRate, aData);
+  fpp := aData;
+  fbp := fpp^;
 end;
 
 procedure Tbitcrusher.process(aPcm: array of int16; const aData: Pointer);
+var
+  pbp: PbitCrushParam absolute aData;
 begin
-
+  bitCrush(aPCM, low(aPCM), high(aPCM), fpp);
 end;
 
 end.
