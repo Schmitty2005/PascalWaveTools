@@ -9,8 +9,9 @@ type
   TlfoWaveTypes = (lfoSine, lfoTriangle, lfoSquare, lfoSaw);
   //likely will not be used. Use interfaces instead
   }
+  TlfoWave = array of int16;
 
-  TlfoProcedure = procedure(var aPcm: array of int16; aFreq: double;
+  TlfoProcedure = procedure(var aPcm: TlfoWave; aFreq: double;
     aSampleRate: uInt64 = 44100);
   
   TlfoSettings = record
@@ -18,7 +19,7 @@ type
     Amplitude: Uint32;
   end;
 
-  TlfoWave = array of int16;
+  //TlfoWave = array of int16;
   
   IlfoOutput = interface
     function lfoWave(aFreqHz: double): TlfoWave;
@@ -39,11 +40,14 @@ type
     property lfoPCM: TlfoPCM read fPCM;
   end;
 
+  { TlfoWaveProcGen }
+
   TlfoWaveProcGen = class(TlfoBase)
   private
     fLfoProc: TlfoProcedure;
   public
-    constructor Create(aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
+    constructor Create(aFreq : double; aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
+    function lfoWave(aFreqHz: double): TlfoPCM;override;
   end;
 
 implementation
@@ -64,9 +68,16 @@ begin
   }
 end;
 
-constructor TlfoWaveProcGen.Create(aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
+constructor TlfoWaveProcGen.Create(aFreq: Double; aSampleRate: uInt64; aLfoWaveProc: TlfoProcedure);
 begin
   fLfoProc := aLfoWaveProc;
+  fSampleRate:= aSampleRate;
+  fFrequency := aFreq;
+end;
+
+function TlfoWaveProcGen.lfoWave(aFreqHz: double): TlfoPCM;
+begin
+   fLfoProc(fPCM, fFrequency, fSampleRate);
 end;
 
 
