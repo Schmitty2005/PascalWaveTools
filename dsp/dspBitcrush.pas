@@ -1,60 +1,79 @@
 {$mode delphi}
 
-Unit dspBitCrush;
+unit dspBitCrush;
 
-Interface
-
-Type 
-{Move these to dspTypes.pas later}
+interface
+(*
+type
+  {Move these to dspTypes.pas later}
   PdspProcesure = ^TdspProcedure;
 
-  TdspProcedure = Procedure (
-                             Var aPcm : Array Of int16;
-                             beginIndex,
-                             endIndex : uInt64;
-                             aDspData: Pointer);
-
+  TdspProcedure = procedure(var aPcm: array of int16;
+    beginIndex, endIndex: uInt64;
+    aDspData: Pointer);
+  {========================================================}
   PbitCrushTo = ^TbitCrushTo;
   TbitCrushTo = 2..14;
 
   PbitCrushParam = ^TbitCrushParam;
 
-  TbitCrushParam = Record
-    sourceDepth : byte;
-    desiredDepth : byte;
-  End;
+  TbitCrushParam = record
+    sourceDepth: byte;
+    crushDepth: byte;
+  end;
+*)
+procedure bitCrush(var aPcm: array of int16;
+  beginIndex, endIndex: uInt64;
+  aDspData: Pointer);
 
-Procedure bitCrush(
-                   Var aPcm : Array Of int16;
-                   beginIndex,
-                   endIndex : uInt64;
-                   aDspData: Pointer);
+procedure bitCrush2(var aPcm: array of int16;
+ beginIndex, endIndex: uInt64;
+  aDspData: Pointer);
 
-Implementation
+implementation
 
-Procedure bitCrush(
-                   Var aPcm : Array Of int16;
-                   beginIndex,
-                   endIndex : uInt64;
-                   aDspData: Pointer);
+uses dspTypes;
 
-Var 
-  p : PbitcrushTo absolute aDspData;
-  x : uInt64;
-Begin
+procedure bitCrush(var aPcm: array of int16;
+  beginIndex, endIndex: uInt64;
+  aDspData: Pointer);
+
+var
+  p: PbitcrushTo absolute aDspData;
+  x: uInt64;
+begin
   p^ := 16 - p^;
-  For x:= beginIndex To endIndex Do
-    Begin
-      aPCM[x] := apcm[x] shr p^;
-      aPCM[x] := apcm[x] shl p^;
-      writeln(aPcm[x]);
-    End;
-End;
+  for x := beginIndex to endIndex do
+  begin
+    aPCM[x] := apcm[x] shr p^;
+    aPCM[x] := apcm[x] shl p^;
+    writeln(aPcm[x]);
+  end;
+end;
+
+procedure bitCrush2(var aPcm: array of int16;
+ beginIndex, endIndex: uInt64;
+  aDspData: Pointer);
+var
+  p: PbitcrushParam absolute aDspData;
+  x: uInt64;
+begin
+  p^.CrushDepth := p^.sourceDepth - p^.CrushDepth;
+  writeln(p^.CrushDepth);
+  for x := beginIndex to endIndex do
+  begin
+    aPCM[x] := apcm[x] shr p^.CrushDepth;
+    aPCM[x] := apcm[x] shl p^.CrushDepth;
+    writeln(aPcm[x]);
+  end;
+end;
+
+
 
 
 {
 var
-  ar : array of int16;	
+  ar : array of int16;  
   bc : TbitCrushTo;
 begin
   setlength(ar, 5);
@@ -64,4 +83,4 @@ begin
 
   bitcrush(ar, 0, 5, @bc);
   }
-End.
+end.
