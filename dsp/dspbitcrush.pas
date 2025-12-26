@@ -40,12 +40,13 @@ var
   z: uint64;
 begin
   p^.crushDepth := p^.sourceDepth - p^.crushDepth;
+{$R-}
   for z := beginIndex to endIndex do
   begin
-    assert(z > endIndex, 'WTF! HOW! ');
     aPcm[z] := aPcm[z] shr p^.crushDepth;
     aPcm[z] := aPcm[z] shl p^.crushDepth;
   end;
+{$R+}
 end;
 
 { Tbitcrusher }
