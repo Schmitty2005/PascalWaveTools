@@ -1,4 +1,6 @@
-{$MODE DELPHI}
+{$IFDEF FPC}
+  {$MODE DELPHI}
+{$ENDIF}
 unit dspTypes;
 
 interface
