@@ -1,5 +1,6 @@
-{$mode delphi}
-
+{$IFDEF FPC}
+{$MODE delphi}
+{$ENDIF}
 unit dspbitcrush;
 
 interface
@@ -23,43 +24,46 @@ type
     fbp: TbitCrushParam;
   public
     constructor Create(aSampleRate: uint32; aData: pointer = nil); override;
-    procedure process(aPcm: array of int16; const aData: Pointer = nil); override;
+    procedure process(var aPcm: array of int16;
+      const aData: pointer = nil); override;
   end;
 
 procedure bitCrush(var aPcm: array of int16; const beginIndex, endIndex: uint64;
-  const aDspData: Pointer);
+  const aDspData: pointer);
 
 implementation
 
-
 procedure bitCrush(var aPcm: array of int16; const beginIndex, endIndex: uint64;
-  const aDspData: Pointer);
+  const aDspData: pointer);
 var
-  p: PbitcrushParam absolute aDspData;
-  x: uint64;
+  p: PbitCrushParam absolute aDspData;
+  z: uint64;
+  crush : byte;
 begin
-  p^.CrushDepth := p^.sourceDepth - p^.CrushDepth;
-  for x := beginIndex to endIndex do
+  crush := p^.sourceDepth - p^.crushDepth;
+{$R-}
+  for z := beginIndex to endIndex do
   begin
-    aPCM[x] := apcm[x] shr p^.CrushDepth;
-    aPCM[x] := apcm[x] shl p^.CrushDepth;
+    aPcm[z] := aPcm[z] shr crush;//p^.crushDepth;
+    aPcm[z] := aPcm[z] shl crush;//p^.crushDepth;
   end;
+{$R+}
 end;
 
 { Tbitcrusher }
 
-constructor Tbitcrusher.Create(aSampleRate: uint32; aData: Pointer);
+constructor Tbitcrusher.Create(aSampleRate: uint32; aData: pointer);
 begin
   inherited Create(aSampleRate, aData);
   fpp := aData;
   fbp := fpp^;
 end;
 
-procedure Tbitcrusher.process(aPcm: array of int16; const aData: Pointer);
+procedure Tbitcrusher.process(var aPcm: array of int16; const aData: pointer);
 var
   pbp: PbitCrushParam absolute aData;
 begin
-  bitCrush(aPCM, low(aPCM), high(aPCM), fpp);
+  bitCrush(aPcm, low(aPcm), high(aPcm), fpp);
 end;
 
 end.
