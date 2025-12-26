@@ -28,6 +28,11 @@
         <Filename Value="adsrTest.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="uadsrclasses.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="uadsrClasses"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
