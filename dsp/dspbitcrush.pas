@@ -39,12 +39,10 @@ var
   x: uint64;
 begin
   p^.CrushDepth := p^.sourceDepth - p^.CrushDepth;
-  writeln(p^.CrushDepth);
   for x := beginIndex to endIndex do
   begin
     aPCM[x] := apcm[x] shr p^.CrushDepth;
     aPCM[x] := apcm[x] shl p^.CrushDepth;
-    writeln(aPcm[x]);
   end;
 end;
 
