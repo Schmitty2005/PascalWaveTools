@@ -24,7 +24,7 @@ type
     fbp: TbitCrushParam;
   public
     constructor Create(aSampleRate: uint32; aData: pointer = nil); override;
-    procedure process(aPcm: array of int16;
+    procedure process(var aPcm: array of int16;
       const aData: pointer = nil); override;
   end;
 
@@ -38,13 +38,14 @@ procedure bitCrush(var aPcm: array of int16; const beginIndex, endIndex: uint64;
 var
   p: PbitCrushParam absolute aDspData;
   z: uint64;
+  crush : byte;
 begin
-  p^.crushDepth := p^.sourceDepth - p^.crushDepth;
+  crush := p^.sourceDepth - p^.crushDepth;
 {$R-}
   for z := beginIndex to endIndex do
   begin
-    aPcm[z] := aPcm[z] shr p^.crushDepth;
-    aPcm[z] := aPcm[z] shl p^.crushDepth;
+    aPcm[z] := aPcm[z] shr crush;//p^.crushDepth;
+    aPcm[z] := aPcm[z] shl crush;//p^.crushDepth;
   end;
 {$R+}
 end;
@@ -58,7 +59,7 @@ begin
   fbp := fpp^;
 end;
 
-procedure Tbitcrusher.process(aPcm: array of int16; const aData: pointer);
+procedure Tbitcrusher.process(var aPcm: array of int16; const aData: pointer);
 var
   pbp: PbitCrushParam absolute aData;
 begin

@@ -14,16 +14,17 @@ var
   x, s: integer;
   bc: TbitCrushParam;
   ms: TmemoryStream;
+  cbc: Tbitcrusher;
 
 begin
   try
     { TODO -oUser -cConsole Main : Insert code here }
     bc.sourceDepth := 16;
-    bc.crushDepth := 2;
+    bc.crushDepth := 3;
 
     setlength(ar, cSr);
 
-    for x := 0 to high(ar) do
+    for x := low(ar) to high(ar) do
       ar[x] := trunc(sin(x * 2 * PI * 800 / cSr) * 27000);
 
     s := high(ar) * sizeOf(int16);
@@ -39,11 +40,25 @@ begin
     ms.SaveToFile('bcoutput.pcm');
     ms.Free;
 
+    // Test Class output as well
+    for x := low(ar) to high(ar) do
+      ar[x] := trunc(sin(x * 2 * PI * 800 / cSr) * 27000);
+
+    cbc := Tbitcrusher.create(44100, @bc);
+    cbc.process(ar, @bc);
+    cbc.free;
+
+    ms := TmemoryStream.create;
+    ms.write(ar[0], s);
+    ms.SaveToFile('bcClassOutput.pcm');
+    ms.Free;
+
+
   except
     on E: Exception do
       Writeln(E.ClassName, ': ', E.Message);
   end;
-  writeln('Press Enter..');
+  Writeln('Press Enter..');
   readln;
 
 end.

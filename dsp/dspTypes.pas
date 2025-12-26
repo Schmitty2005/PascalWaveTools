@@ -15,7 +15,7 @@ type
     const aDspData: Pointer);
 
   IdspProcess = interface
-    procedure process(aPcm: array of int16; const aData: Pointer = nil);
+    procedure process(var aPcm: array of int16; const aData: Pointer = nil);
   end;
 
   TdspBase = class abstract (TinterfacedObject, IdspProcess)
@@ -24,7 +24,7 @@ type
     fData: Pointer;
   public
     constructor Create(aSampleRate: uint32; aData: pointer = nil); virtual;
-    procedure process(aPcm: array of int16; const aData: Pointer = nil);
+    procedure process(var aPcm: array of int16; const aData: Pointer = nil);
       virtual; abstract;
   end;
 
