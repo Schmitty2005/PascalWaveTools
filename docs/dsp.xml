@@ -1,309 +1,191 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <fpdoc-descriptions>
-<package name="PascalWaveTools">
-
-<!--
+  <package name="PascalWaveTools">
+    <!--
   ====================================================================
     dspTypes
   ====================================================================
 -->
-
-<module name="dspTypes">
-<short></short>
-<descr>
-</descr>
-
-<!-- pointer type Visibility: default -->
-<element name="PdspProcedure">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- procedure type Visibility: default -->
-<element name="TdspProcedure">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspProcedure.aPcm">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspProcedure.beginIndex">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspProcedure.endIndex">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspProcedure.aDspData">
-<short></short>
-</element>
-
-<!-- interface Visibility: default -->
-<element name="IdspProcess">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- procedure Visibility: default -->
-<element name="IdspProcess.process">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="IdspProcess.process.aPcm">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="IdspProcess.process.aData">
-<short></short>
-</element>
-
-<!-- class Visibility: default -->
-<element name="TdspBase">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- variable Visibility: private -->
-<element name="TdspBase.fSampleRate">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- variable Visibility: private -->
-<element name="TdspBase.fData">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- constructor Visibility: public -->
-<element name="TdspBase.Create">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspBase.Create.aSampleRate">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspBase.Create.aData">
-<short></short>
-</element>
-
-<!-- procedure Visibility: public -->
-<element name="TdspBase.process">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspBase.process.aPcm">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="TdspBase.process.aData">
-<short></short>
-</element>
-
-</module> <!-- dspTypes -->
-
-
-<!--
+    <module name="dspTypes">
+      <element name="PdspProcedure">
+        <short>A pointer to TdspProcedure</short>
+      </element>
+      <element name="TdspProcedure">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <element name="TdspProcedure.aPcm">
+        <short/>
+      </element>
+      <element name="TdspProcedure.beginIndex">
+        <short/>
+      </element>
+      <element name="TdspProcedure.endIndex">
+        <short/>
+      </element>
+      <element name="TdspProcedure.aDspData">
+        <short/>
+      </element>
+      <element name="IdspProcess">
+        <short>Interface that does the processing.</short>
+      </element>
+      <element name="IdspProcess.process">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <element name="IdspProcess.process.aPcm">
+        <short>An array of Int16 with PCM data to be processed</short>
+      </element>
+      <element name="IdspProcess.process.aData">
+        <short>A pointer to data to be used to process the audio</short>
+        <descr>This can point to a value, record type, class, or anything custom that can be used as input parameters for the dsp being created.</descr>
+      </element>
+      <element name="TdspBase">
+        <short>An abstract class to use as a base for custom DSP classes.</short>
+      </element>
+      <element name="TdspBase.fSampleRate">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <element name="TdspBase.fData">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <element name="TdspBase.Create">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <element name="TdspBase.Create.aSampleRate">
+        <short/>
+      </element>
+      <element name="TdspBase.Create.aData">
+        <short/>
+      </element>
+      <element name="TdspBase.process">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <element name="TdspBase.process.aPcm">
+        <short/>
+      </element>
+      <element name="TdspBase.process.aData">
+        <short/>
+      </element>
+      <short>Custom Types for dsp procedures and classes</short>
+    </module>
+    <!-- dspTypes -->
+    <!--
   ====================================================================
     dspbitcrush
   ====================================================================
 -->
-
-<module name="dspbitcrush">
-<short></short>
-<descr>
-</descr>
-
-<!-- uses unit Visibility: default -->
-<element name="dspTypes">
-<short></short>
-</element>
-
-<!-- pointer type Visibility: default -->
-<element name="PbitCrushParam">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- record type Visibility: default -->
-<element name="TbitCrushParam">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- variable Visibility: public -->
-<element name="TbitCrushParam.sourceDepth">
-<short></short>
-</element>
-
-<!-- variable Visibility: public -->
-<element name="TbitCrushParam.crushDepth">
-<short></short>
-</element>
-
-<!-- class Visibility: default -->
-<element name="Tbitcrusher">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- variable Visibility: private -->
-<element name="Tbitcrusher.fpp">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- variable Visibility: private -->
-<element name="Tbitcrusher.fbp">
-<short></short>
-<descr>
-</descr>
-<seealso>
-</seealso>
-</element>
-
-<!-- constructor Visibility: public -->
-<element name="Tbitcrusher.Create">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="Tbitcrusher.Create.aSampleRate">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="Tbitcrusher.Create.aData">
-<short></short>
-</element>
-
-<!-- procedure Visibility: public -->
-<element name="Tbitcrusher.process">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="Tbitcrusher.process.aPcm">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="Tbitcrusher.process.aData">
-<short></short>
-</element>
-
-<!-- procedure Visibility: default -->
-<element name="bitCrush">
-<short></short>
-<descr>
-</descr>
-<errors>
-</errors>
-<seealso>
-</seealso>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="bitCrush.aPcm">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="bitCrush.beginIndex">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="bitCrush.endIndex">
-<short></short>
-</element>
-
-<!-- argument Visibility: default -->
-<element name="bitCrush.aDspData">
-<short></short>
-</element>
-
-</module> <!-- dspbitcrush -->
-
-</package>
+    <module name="dspbitcrush">
+      <short/>
+      <descr/>
+      <!-- uses unit Visibility: default -->
+      <element name="dspTypes">
+        <short/>
+      </element>
+      <!-- pointer type Visibility: default -->
+      <element name="PbitCrushParam">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- record type Visibility: default -->
+      <element name="TbitCrushParam">
+        <short>Settings for bitcrushing.</short>
+        <descr>Two values are needed.
+1.  crushDepth  - what you want the PCM to be crushed to in bits (ex 12, 14, 8  bits)
+2.  sourceDepth - The current Depth of the PCM in bits (ex. 16 for wave PCM)</descr>
+      </element>
+      <!-- variable Visibility: public -->
+      <element name="TbitCrushParam.sourceDepth">
+        <short>The current Depth of the PCM in bits (ex. 16 for wave PCM)</short>
+      </element>
+      <!-- variable Visibility: public -->
+      <element name="TbitCrushParam.crushDepth">
+        <short>What you want the PCM to be crushed to in bits (ex 12, 14, 8  bits)</short>
+      </element>
+      <!-- class Visibility: default -->
+      <element name="Tbitcrusher">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- variable Visibility: private -->
+      <element name="Tbitcrusher.fpp">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- variable Visibility: private -->
+      <element name="Tbitcrusher.fbp">
+        <short/>
+        <descr/>
+        <seealso/>
+      </element>
+      <!-- constructor Visibility: public -->
+      <element name="Tbitcrusher.Create">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="Tbitcrusher.Create.aSampleRate">
+        <short/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="Tbitcrusher.Create.aData">
+        <short/>
+      </element>
+      <!-- procedure Visibility: public -->
+      <element name="Tbitcrusher.process">
+        <short/>
+        <descr/>
+        <errors/>
+        <seealso/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="Tbitcrusher.process.aPcm">
+        <short/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="Tbitcrusher.process.aData">
+        <short/>
+      </element>
+      <!-- procedure Visibility: default -->
+      <element name="bitCrush">
+        <short>A bitcrushing procedure</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="bitCrush.aPcm">
+        <short/>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="bitCrush.beginIndex">
+        <short>Starting index for processing</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="bitCrush.endIndex">
+        <short>End Index for processing</short>
+      </element>
+      <!-- argument Visibility: default -->
+      <element name="bitCrush.aDspData">
+        <short/>
+      </element>
+    </module>
+    <!-- dspbitcrush -->
+  </package>
 </fpdoc-descriptions>
