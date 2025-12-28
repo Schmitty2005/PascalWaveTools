@@ -20,12 +20,14 @@ InputRate: Source sample rate in Hz (e.g., 44100)
 OutputRate: Target sample rate in Hz (e.g., 48000)
 Channels: Number of audio channels (1=mono, 2=stereo, etc.)
 }
-procedure ConvertSampleRate(const InputData: TInt16Array;
+//procedure ConvertSampleRate(const InputData: TInt16Array;
+  //var OutputData: TInt16Array; InputRate, OutputRate: integer; Channels: integer = 1);
+procedure ConvertSampleRate(const InputData: array of int16;
   var OutputData: TInt16Array; InputRate, OutputRate: integer; Channels: integer = 1);
 
 implementation
 
-procedure ConvertSampleRate(const InputData: TInt16Array;
+procedure ConvertSampleRate(const InputData: array of int16;
   var OutputData: TInt16Array; InputRate, OutputRate: integer; Channels: integer = 1);
 var
   i, ch: integer;

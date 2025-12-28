@@ -3,12 +3,15 @@ program samplerateconvert;
 
 uses
   Classes,
-  SampleRateConverter;
+  SampleRateConverter, samplerateclasses;
 
 var
   ms: TMemoryStream;
   ar: array of int16;
   oa: array of int16;
+  co : TInt16Array;
+
+  rc : TsampleRateConverter;
 begin
   ar:= nil;
   oa:= nil;
@@ -25,4 +28,16 @@ begin
   ms.Write(oa[0], Length(oa) * 2);
   ms.SaveToFile('converted.pcm');
   ms.Free;
+
+  rc := TsampleRateConverter.Create(44100, 1, 22050);
+  co := nil;
+  rc.rateConvert(ar, co);
+  rc.free;
+
+  ms := TMemoryStream.Create;
+  ms.Write(co[0], Length(co));
+  ms.SaveToFile('clout.pcm');
+  ms.free;
+
+
 end.
