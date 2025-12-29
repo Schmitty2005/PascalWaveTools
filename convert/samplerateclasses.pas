@@ -14,7 +14,7 @@ type
 
   IsampleRateConvert = interface
     ['{851284F9-BCBA-4ED8-A480-1FC44CF68A4A}']
-    procedure rateConvert(aInputPCM: array of int16; var aOutputPCM: TInt16Array);
+    procedure rateConvert(const aInputPCM: array of int16; var aOutputPCM: TInt16Array);
   end;
 
   { TsampleRateConverter }
@@ -25,9 +25,9 @@ type
     fOutputSr: uint32;
     fChannels: byte;
   public
-    constructor Create(aInputSampleRate: uint32; aInputChannels: byte;
-      aOutputSampleRate: uint32);
-    procedure rateConvert(aInputPCM: array of int16; var aOutputPCM: TInt16Array);
+    constructor Create(const aInputSampleRate: uint32; const aInputChannels: byte;
+      const aOutputSampleRate: uint32);
+    procedure rateConvert(const aInputPCM: array of int16; var aOutputPCM: TInt16Array);
   end;
 
 
@@ -36,15 +36,15 @@ implementation
 
 { TsampleRateConverter }
 
-constructor TsampleRateConverter.Create(aInputSampleRate: uint32;
-  aInputChannels: byte; aOutputSampleRate: uint32);
+constructor TsampleRateConverter.Create(const aInputSampleRate: uint32;
+  const aInputChannels: byte; const aOutputSampleRate: uint32);
 begin
   finputSr := aInputSampleRate;
   fChannels := aInputChannels;
   fOutputSr := aOutputSampleRate;
 end;
 
-procedure TsampleRateConverter.rateConvert(aInputPCM: array of int16;
+procedure TsampleRateConverter.rateConvert(const aInputPCM: array of int16;
   var aOutputPCM: Tint16Array);
 begin
   ConvertSampleRate(aInputPCM, aOutputPCM, finputSr, fOutputSr, fChannels);
