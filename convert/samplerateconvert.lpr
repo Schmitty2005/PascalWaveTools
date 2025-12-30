@@ -3,41 +3,52 @@ program samplerateconvert;
 
 uses
   Classes,
-  SampleRateConverter, samplerateclasses;
+  SampleRateConverter,
+  samplerateclasses;
 
 var
   ms: TMemoryStream;
   ar: array of int16;
   oa: array of int16;
-  co : TInt16Array;
+  co: TInt16Array;
+  ia: array of int16;
 
-  rc : TsampleRateConverter;
+  rc: TsampleRateConverter;
+  ic: IsampleRateConvert;
 begin
-  ar:= nil;
-  oa:= nil;
+  ar := nil;
+  oa := nil;
   ms := TMemoryStream.Create;
   ms.LoadFromFile('ks.pcm');
 
   setlength(ar, ms.Size);
-  ms.ReadBuffer(ar[0], ms.Size );
+  ms.ReadBuffer(ar[0], ms.Size);
   ms.Free;
 
-  ConvertSampleRate(ar, oa, 44100, 8000, 1);
+  ConvertSampleRate(ar, oa, 44100, 22050, 1);
 
   ms := TMemoryStream.Create;
-  ms.Write(oa[0], Length(oa) * 2);
-  ms.SaveToFile('converted.pcm');
+  ms.Write(oa[0], Length(oa));
+  ms.SaveToFile('converted22050.pcm');
   ms.Free;
 
-  rc := TsampleRateConverter.Create(44100, 1, 22050);
+  rc := TsampleRateConverter.Create(44100, 1, 8000);
   co := nil;
   rc.rateConvert(ar, co);
-  rc.free;
+  rc.Free;
 
   ms := TMemoryStream.Create;
   ms.Write(co[0], Length(co));
-  ms.SaveToFile('clout.pcm');
-  ms.free;
+  ms.SaveToFile('clout8000.pcm');
+  ms.Free;
 
+  ia := nil;
+  ic := TsampleRateConverter.Create(44100, 1, 8000);
+  ic.rateConvert(ar, ia);
+
+  ms := TMemoryStream.Create;
+  ms.Write(ia[0], Length(ia));
+  ms.SaveToFile('ifout8000.pcm');
+  ms.Free;
 
 end.
