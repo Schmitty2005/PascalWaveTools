@@ -11,3 +11,7 @@
 *.local
 *.identcache
 *.res
+/convert/Win32
+/dsp/__history
+/dsp/Win32
+*.~1~
