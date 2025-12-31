@@ -1,7 +1,8 @@
 unit samplerateclasses;
- {$IFDEF FPC}
+{$IFDEF FPC}
 {$mode Delphi}
 {$ENDIF}
+
 interface
 
   { #todo -oB : Change Tint16Array to global wavetools type later
