@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="PascalWaveTools">
+
+<!--
+  ====================================================================
+    SampleRateConverter
+  ====================================================================
+-->
+
+<module name="SampleRateConverter">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- array type Visibility: default -->
+<element name="TInt16Array">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="ConvertSampleRate">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ConvertSampleRate.InputData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ConvertSampleRate.OutputData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ConvertSampleRate.InputRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ConvertSampleRate.OutputRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="ConvertSampleRate.Channels">
+<short></short>
+</element>
+
+</module> <!-- SampleRateConverter -->
+
+
+<!--
+  ====================================================================
+    samplerateclasses
+  ====================================================================
+-->
+
+<module name="samplerateclasses">
+<short></short>
+<descr>
+</descr>
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SampleRateConverter">
+<short></short>
+</element>
+
+<!-- array type Visibility: default -->
+<element name="TpcmArray">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- interface Visibility: default -->
+<element name="IsampleRateConvert">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- procedure Visibility: default -->
+<element name="IsampleRateConvert.rateConvert">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IsampleRateConvert.rateConvert.aInputPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="IsampleRateConvert.rateConvert.aOutputPCM">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TsampleRateConverter">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsampleRateConverter.finputSr">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsampleRateConverter.fOutputSr">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- variable Visibility: private -->
+<element name="TsampleRateConverter.fChannels">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TsampleRateConverter.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsampleRateConverter.Create.aInputSampleRate">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsampleRateConverter.Create.aInputChannels">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsampleRateConverter.Create.aOutputSampleRate">
+<short></short>
+</element>
+
+<!-- procedure Visibility: public -->
+<element name="TsampleRateConverter.rateConvert">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsampleRateConverter.rateConvert.aInputPCM">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TsampleRateConverter.rateConvert.aOutputPCM">
+<short></short>
+</element>
+
+</module> <!-- samplerateclasses -->
+
+</package>
+</fpdoc-descriptions>
