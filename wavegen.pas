@@ -10,7 +10,7 @@ interface
 
 
 uses
-  SysUtils, {Math,} wavCalcs;
+  SysUtils, {Math,} waveCalcs;
 
 const
   DEFAULTSAMPERATE = 44100;

@@ -19,6 +19,8 @@ procedure dspSaturate(var aPCM: array of int16; const aLength: uint64;
 }
 implementation
 
+uses Math;
+
 procedure dspDMSaturate(const location: Pint16; const aLength: uint64;
   const aDspData: Pointer = nil);
 var
