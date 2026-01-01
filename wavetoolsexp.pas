@@ -18,9 +18,13 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
+    Button5: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
   private
     fWave: TpcmArray;
   public
@@ -59,7 +63,7 @@ begin
   tw.WaveStyle := wsTri;
   sawWave(tw);
 
-    fWave := tw.aPCM;
+  fWave := tw.aPCM;
 
   ms := TMemoryStream.Create;
   ms.Write(fWave[0], length(fWave) * 2);
@@ -71,6 +75,32 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  dspDMAPhaseReverse.dspDMAPhaseReverse(@fWave[0], length(fWave));
+
+  ms := TMemoryStream.Create;
+  ms.Write(fWave[0], length(fWave) * 2);
+  ms.SaveToFile('PhaseReversedSample.pcm');
+  ms.Free;
+
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+var
+  bc: TbitCrushParam;
+begin
+  bc.crushDepth := 4;
+  bc.sourceDepth := 16;
+  dspbitcrush.bitCrush(fWave, 0, length(fWave), @bc);
+
+  ms := TMemoryStream.Create;
+  ms.Write(fWave[0], length(fWave) * 2);
+  ms.SaveToFile('BitCrushedSample.pcm');
+  ms.Free;
+
 end;
 
 end.
