@@ -46,7 +46,7 @@ function triangleWave(var aPCM: TwavePCM; const aHertz: double;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
-function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32; overload;
+function triangleWave(var aWaveSpec: TWaveStyleSpecs): uint32; overload;
 
 function sawWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
@@ -128,11 +128,11 @@ begin
   Result := Count;
 end;
 
-function triangleWave(aWaveSpec: TWaveStyleSpecs): uint32;
+function triangleWave(var aWaveSpec: TWaveStyleSpecs): uint32;
 begin
   checkWaveStyleSpec(aWaveSpec);
   Result := trianglewave(aWaveSpec.aPCM, aWaveSpec.FreqHertz,
-    aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.LengthMilliSec,
+    aWaveSpec.LengthMilliSec, aWaveSpec.Amplitude, aWaveSpec.SampleRate,
     aWaveSpec.StartPhaseDeg);
 end;
 

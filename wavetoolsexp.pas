@@ -57,17 +57,18 @@ var
 begin
   tw.Amplitude := 27000;
   tw.aPCM := fWave;
-  tw.FreqHertz := 18000;
+  tw.FreqHertz := 8000;
   tw.SampleRate := 44100;
   tw.LengthMilliSec := 1000;
   tw.WaveStyle := wsTri;
-  sawWave(tw);
+  //sawWave(tw);
+  triangleWave(tw);
 
   fWave := tw.aPCM;
 
   ms := TMemoryStream.Create;
   ms.Write(fWave[0], length(fWave) * 2);
-  ms.SaveToFile('UnFilteredSample.pcm');
+  ms.SaveToFile('GeneratedSample.pcm');
   ms.Free;
   // Copy
 end;
