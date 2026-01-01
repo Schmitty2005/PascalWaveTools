@@ -9,17 +9,16 @@ type
 
   PdspProcedure = ^TdspProcedure;
 
-  TdspProcedure = procedure(
-    var aPcm: array of int16;
-    const beginIndex, endIndex: uint64;
-    const aDspData: Pointer);
+  TdspProcedure = procedure(var aPcm: array of int16;
+    const beginIndex, endIndex: uint64; const aDspData: Pointer);
 
   IdspProcess = interface
+    ['{66EB5D6B-8528-43B2-8E3B-799C402703C3}']
     procedure process(var aPcm: array of int16; const aData: Pointer = nil);
   end;
 
   TdspBase = class abstract (TinterfacedObject, IdspProcess)
-  private
+  protected
     fSampleRate: uint32;
     fData: Pointer;
   public

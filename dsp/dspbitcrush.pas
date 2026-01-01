@@ -44,8 +44,8 @@ begin
 {$R-}
   for z := beginIndex to endIndex do
   begin
-    aPcm[z] := aPcm[z] shr crush;//p^.crushDepth;
-    aPcm[z] := aPcm[z] shl crush;//p^.crushDepth;
+    aPcm[z] := aPcm[z] shr crush;
+    aPcm[z] := aPcm[z] shl crush;
   end;
 {$R+}
 end;
