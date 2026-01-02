@@ -40,6 +40,21 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
       </Unit>
+      <Unit>
+        <Filename Value="pinknoise.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PinkNoise"/>
+      </Unit>
+      <Unit>
+        <Filename Value="noise/whitenoise.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="whiteNoise"/>
+      </Unit>
+      <Unit>
+        <Filename Value="noise/pinknoisegen.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PinkNoiseGen"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -49,7 +64,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="adsrEnvelope;convert;dsp;fader;lfo"/>
+      <OtherUnitFiles Value="adsrEnvelope;convert;dsp;fader;lfo;noise"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <CodeGeneration>

@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, uadsrTypes,
   dspbitcrush, dspDMAFilter, dspDMAPhaseReverse, dspDMAsaturate, dspDMATypes,
   dspTypes, SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen;
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen;
 
 type
 
@@ -20,11 +20,15 @@ type
     Button3: TButton;
     Button4: TButton;
     Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
   private
     fWave: TpcmArray;
   public
@@ -62,9 +66,10 @@ begin
   tw.LengthMilliSec := 1000;
   tw.WaveStyle := wsTri;
   //sawWave(tw);
-  triangleWave(tw);
+  //triangleWave(tw);
+  triangleWave(fWave, 1800, 1000, 27000, 441000);
 
-  fWave := tw.aPCM;
+  //fWave := tw.aPCM;
 
   ms := TMemoryStream.Create;
   ms.Write(fWave[0], length(fWave) * 2);
@@ -100,6 +105,33 @@ begin
   ms := TMemoryStream.Create;
   ms.Write(fWave[0], length(fWave) * 2);
   ms.SaveToFile('BitCrushedSample.pcm');
+  ms.Free;
+
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+var
+  pn: Tnoise;//array of double;
+  ms: TMemoryStream;
+begin
+  //GeneratePinkNoise(44100, 1000, pn);
+  PinkNoiseGen.PinkNoise(pn, 1000 * 60 * 5);
+  ms := TMemoryStream.Create;
+  ms.Write(pn[0], length(pn) * 2);// is a double 2 or 4 bytes  ?
+  ms.SaveToFile('PinkNoise.pcm');//this will be a float 32 format maybe ?
+  ms.Free;
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+var
+  wn: TNoise;
+begin
+  whiteNoise.whiteNoise(wn, 1000);
+  fWave := wn;
+
+  ms := TMemoryStream.Create;
+  ms.Write(wn[0], length(wn) * 2);// is a double 2 or 4 bytes  ?
+  ms.SaveToFile('WhiteNoise.pcm');//this will be a float 32 format maybe ?
   ms.Free;
 
 end;

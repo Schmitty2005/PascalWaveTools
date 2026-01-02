@@ -22,8 +22,8 @@ begin
   for x := 0 to aLength do
   begin
     s := (location + x)^ / 32767;
-    ns := (location + x + 1)^ / 32767;
-    s := (s + ns) / 2;
+    ns := (location + x - 1)^ / 32767;
+    s := (s + ns);// / 2;
     (location +x)^ := trunc(s * 32767);
   end;
 end;

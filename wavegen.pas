@@ -53,7 +53,7 @@ function sawWave(var aPCM: TwavePCM; const aHertz: double;
   const aSampleRate: integer = DEFAULTSAMPERATE;
   const aStartPhaseAngle: integer = 90): uint32; overload;
 
-function sawWave(var aWaveSpec: TWaveStyleSpecs): uInt32; overload;
+function sawWave(var aWaveSpec: TWaveStyleSpecs): uint32; overload;
 
 implementation
 
@@ -112,7 +112,7 @@ begin
   tau := 2 * PI;
   phase := DegToRad(aStartPhaseAngle);
   numSamples := trunc(aMilliSecLength / 1000 * aSampleRate);
-  PhaseStep := 2 * PI * aHertz / aSampleRate;
+  PhaseStep := 2 * PI * (aHertz * 10) / aSampleRate;
   Count := 0;
   setLength(aPCM, numSamples);
   while Count < High(aPCM) do
@@ -136,6 +136,55 @@ begin
     aWaveSpec.StartPhaseDeg);
 end;
 
+{NEW SawWave Function written by Claude AI}
+function sawWave(var aPCM: TwavePCM; const aHertz: double;
+  const aMilliSecLength: uint32; const aAmp: int16;
+  const aSampleRate: integer = DEFAULTSAMPERATE;
+  const aStartPhaseAngle: integer = 90): uint32;
+var
+  totalSamples: uint32;
+  i: uint32;
+  t: double;
+  phase: double;
+  sampleValue: double;
+  phaseOffset: double;
+begin
+  // Calculate total number of samples needed
+  totalSamples := (aMilliSecLength * aSampleRate) div 1000;
+
+  // Set the length of the PCM array
+  SetLength(aPCM, totalSamples);
+
+  // Convert start phase angle from degrees to radians
+  phaseOffset := (aStartPhaseAngle * Pi) / 180.0;
+
+  // Generate sawtooth wave samples
+  for i := 0 to totalSamples - 1 do
+  begin
+    // Calculate time in seconds
+    t := i / aSampleRate;
+
+    // Calculate phase (0 to 2*Pi range per cycle)
+    phase := (2.0 * Pi * aHertz * t) + phaseOffset;
+
+    // Normalize phase to 0..2*Pi range
+    phase := fmod(phase, 2.0 * Pi);
+    if phase < 0 then
+      phase := phase + 2.0 * Pi;
+
+    // Generate sawtooth: linear ramp from -1 to +1
+    // Sawtooth formula: 2 * (phase / (2*Pi)) - 1
+    sampleValue := 2.0 * (phase / (2.0 * Pi)) - 1.0;
+
+    // Scale by amplitude and store
+    aPCM[i] := Round(sampleValue * aAmp);
+  end;
+
+  Result := totalSamples;
+end;
+
+(*
+//OLD SawWave function
 function sawWave(var aPCM: TwavePCM; const aHertz: double;
   const aMilliSecLength: uint32; const aAmp: int16;
   const aSampleRate: integer = DEFAULTSAMPERATE;
@@ -163,15 +212,17 @@ begin
   end;
   Result := Count;
 end;
+*)
 
-function sawWave(var aWaveSpec: TWaveStyleSpecs): uInt32;
+
+function sawWave(var aWaveSpec: TWaveStyleSpecs): uint32;
 var
   Count: uint32;
 begin
   checkWaveStyleSpec(aWaveSpec);
   Count := sawWave(aWaveSpec.aPCM, aWaveSpec.FreqHertz, aWaveSpec.LengthMilliSec,
     aWaveSpec.Amplitude, aWaveSpec.SampleRate, aWaveSpec.StartPhaseDeg);
-  if Count = 0 then raise EWaveGenError.create('Saw Wave Creation Failed! Zero Length!');
+  if Count = 0 then raise EWaveGenError.Create('Saw Wave Creation Failed! Zero Length!');
   Result := Count;
 end;
 
