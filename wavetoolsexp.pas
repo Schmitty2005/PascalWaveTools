@@ -5,6 +5,7 @@ unit wavetoolsexp;
 interface
 
 uses
+  {$IFDEF LINUX} cthreads, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, uadsrTypes,
   dspbitcrush, dspDMAFilter, dspDMAPhaseReverse, dspDMAsaturate, dspDMATypes,
   dspTypes, SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,

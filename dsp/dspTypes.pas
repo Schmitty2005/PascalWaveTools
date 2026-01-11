@@ -12,6 +12,9 @@ type
   TdspProcedure = procedure(var aPcm: array of int16;
     const beginIndex, endIndex: uint64; const aDspData: Pointer);
 
+  TdspProcedureDM = procedure (const location: Pint16; const aLength: uint64;
+  const aDspData: Pointer = nil);
+
   IdspProcess = interface
     ['{66EB5D6B-8528-43B2-8E3B-799C402703C3}']
     procedure process(var aPcm: array of int16; const aData: Pointer = nil);
