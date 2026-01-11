@@ -55,6 +55,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="PinkNoiseGen"/>
       </Unit>
+      <Unit>
+        <Filename Value="dsp/dspmultithread.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="dspMultiThread"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
