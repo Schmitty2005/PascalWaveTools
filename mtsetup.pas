@@ -28,6 +28,10 @@ type
 ///</summary>
 function calcBlockRanges(const numSamples: uint64; const numCores: byte): Tblocks;
 
+///<summary> Same as calcBlockRanges function, but used for pointers and outputs TblocksP (array of TrangeP) the size of the numCores (number of CPU cores)
+///  This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
+/// is evenly divided into a number of blocks based on the number of CPU cores/threads that are requested
+///</summary>
 function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
   const numCores: byte): TblocksP;
 
