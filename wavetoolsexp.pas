@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, uadsrTypes,
   dspbitcrush, dspDMAFilter, dspDMAPhaseReverse, dspDMAsaturate, dspDMATypes,
   dspTypes, SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen, whiteNoise, PinkNoiseGen;
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, dspMultiThread, mtSetup;
 
 type
 
@@ -23,6 +23,8 @@ type
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -30,6 +32,8 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
   private
     fWave: TpcmArray;
   public
@@ -135,6 +139,55 @@ begin
   ms.SaveToFile('WhiteNoise.pcm');//this will be a float 32 format maybe ?
   ms.Free;
 
+end;
+
+procedure TForm1.Button8Click(Sender: TObject);
+var
+  arr : array of int16;
+  ts : TdspRunner;
+  sm : int16;
+  x : uInt64;
+  bc : TbitCrushParam;
+
+  ms : TmemoryStream;
+begin
+
+  SetLength(arr, 44100000);
+
+  // create sine wave for testing!
+  for x := 0 to high(arr) do
+  begin
+    arr[x] := trunc(sin (2 * PI * 800 / 44100 * x) * 27000);
+  end;
+
+  bc.crushDepth:=4; bc.sourceDepth:=16;
+
+  ts := TdspRunner.Create(@dspBitCrush.bitcrush, arr, 3, @bc);
+
+  ts.Start;
+  {
+  if not ts.CheckTerminated then
+   sleep(10); //thread was created from extern error ?  WTF ?
+   }
+   //ts.;
+
+  ms:= TMemoryStream.create;
+
+  ms.Write(arr[0], Length(arr) * 2 ) ;
+  ms.SaveToFile('MTtest.pcm');
+
+  ms.free;
+
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+var
+  pb : TblocksP;
+  ar : array of Int16;
+
+begin
+  setLength(ar, 44100);
+  pb := calcBlockRangesP(@ar, length(ar), 3);
 end;
 
 end.
