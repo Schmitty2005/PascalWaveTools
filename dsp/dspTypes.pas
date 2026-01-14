@@ -12,6 +12,8 @@ type
   TdspProcedure = procedure(var aPcm: array of int16;
     const beginIndex, endIndex: uint64; const aDspData: Pointer);
 
+  PdspProcedureDM = ^TdspProcedureDM;
+
   TdspProcedureDM = procedure (const location: Pint16; const aLength: uint64;
   const aDspData: Pointer = nil);
 

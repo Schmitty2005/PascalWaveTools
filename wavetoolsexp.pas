@@ -9,7 +9,7 @@ uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, uadsrTypes,
   dspbitcrush, dspDMAFilter, dspDMAPhaseReverse, dspDMAsaturate, dspDMATypes,
   dspTypes, SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, dspMultiThread, mtSetup;
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, dspMt, mtSetup;// dspDMAsaturate;
 
 type
 
@@ -162,8 +162,9 @@ begin
 
   bc.crushDepth:=4; bc.sourceDepth:=16;
 
-  ts := TdspRunner.Create(@dspBitCrush.bitcrush, arr, 3, @bc);
+ // ts := TdspRunner.Create(@dspDMSaturate, arr, 3, @bc);  //old dspMutlliThreadUnit
 
+ ts := TdspRunner.Create(@arr[0], Length(arr), @dspDMSaturate, 3, @bc) ;
   ts.Start;
   {
   if not ts.CheckTerminated then

@@ -60,6 +60,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="dspMultiThread"/>
       </Unit>
+      <Unit>
+        <Filename Value="dspmt.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

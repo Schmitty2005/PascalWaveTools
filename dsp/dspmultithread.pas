@@ -1,5 +1,9 @@
 unit dspMultiThread;
-
+//
+//
+//  DO NOT USE
+//  OLD Failed UNIT
+//
 {$mode ObjFPC}{$H+}
 
 interface
@@ -19,21 +23,27 @@ type
 
   TdspThread = class(Tthread)
   protected
-    fPproc: PdspProcedure;
-    fTproc: TdspProcedure;
+    fPproc: PdspProcedureDM;
+    fTproc: TdspProcedureDM;
+    //fPproc: PdspProcedure;
+    //fTproc: TdspProcedure;
     fPData: pointer;
     fBeginIndex: uint64;
     fEndIndex: uint64;
+    fBeginPointer: Pointer;
+    fEndPointer: Pointer;
     fPCMarray: array of int16;//probably remove later
     fPintArray: ^int16;
     fArrLength: uint64;
-    fPCM : array of int16;
+    fPCM: array of int16;
     procedure Execute; override;
     //procedure noiseArray(var apcm: array of int16; aLengthms: uint64);
     //procedure noiseDMA(aMemLoc: Pointer; aLengthms: uint64);
   public
-    constructor Create(var apcm: array of int16; dspProc: TdspProcedure;
+    constructor Create(var apcm: array of int16; dspProc: TdspProcedureDM;
       beginIndex: uint64; endIndex: uint64; aData: pointer = nil);
+    constructor Create(const initialPoint: pointer; dspProc: TdspProcedureDM;
+      beginPoint: Pointer; endPoint: Pointer; aData: Pointer = nil);
   end;
 
 
@@ -47,17 +57,17 @@ type
     fArrPointer: Pint16;
     fArrLength: uint64;
     fdspData: Pointer;
-    fdspProc: TdspProcedure;
+    fdspProc: TdspProcedureDM;
     fNumCores: byte;
     //fThreadArr: array of TdspThread;
     fRange: Trange;
-    fBlocks: Tblocks;
+    fBlocks: TblocksP;
     fArrInt16: array of int16;
     fThreads: array of TdspThread;
     procedure Execute; override;
   public
     //constructor Create(aNumCores: byte = 3);
-    constructor Create(const aDSPProc: TdspProcedure; var aPCM: array of int16;
+    constructor Create(const aDSPProc: TdspProcedureDM; var aPCM: array of int16;
       const aNumCores: byte = 3; const aData: Pointer = nil);
 
   end;
@@ -78,15 +88,16 @@ begin
 end;
     }
 
-{ TdspThread }
+  { TdspThread }
 
 procedure TdspThread.Execute;
 begin
-  fTproc(fPCMArray, fBeginIndex, fEndIndex, fPdata);
+  //fTproc(@fPCMArray[0], length(fPCMArray), fPdata);
+  fTProc(fPintArray, fArrLength, fPData);
 end;
 
 
-constructor TdspThread.Create(var apcm: array of int16; dspProc: TdspProcedure;
+constructor TdspThread.Create(var apcm: array of int16; dspProc: TdspProcedureDM;
   beginIndex: uint64; endIndex: uint64; aData: pointer);
 begin
   inherited Create(False);  //switch to false
@@ -96,8 +107,22 @@ begin
   fTproc := dspProc;
   fBeginIndex := beginIndex;
   fEndIndex := endIndex;
+  //fBeginIndex := beginIndex;
+  //fEndIndex := endIndex;
   fPData := aData;
   //fPCM := dynarrtest(apcm);// array of int16;
+end;
+
+constructor TdspThread.Create(const initialPoint: pointer;
+  dspProc: TdspProcedureDM; beginPoint: Pointer; endPoint: Pointer; aData: Pointer);
+begin
+  inherited Create(False);
+  NameThreadForDebugging('DSP DM Thread');
+  fBeginPointer := beginPoint;
+  fEndPointer := endPoint;
+  fTproc := dspProc;
+  fPData := aData;
+  //fBlocks := calcBlockRangesP(fBeginPointer);
 end;
 
 { TdspRunner }
@@ -105,7 +130,7 @@ end;
 
 procedure TdspRunner.calcBlocks;
 begin
-  fBlocks := calcBlockRanges(length(fArrInt16), fNumCores);
+  fBlocks := calcBlockRangesP(fArrPointer, Length(fArrInt16), fNumCores);
   //change to length field later
 
 end;
@@ -114,7 +139,11 @@ procedure TdspRunner.Execute;
 var
   blocks: Tblocks;
   x: uint64;
+  blocksP : TblocksP;
 begin
+  //for x := 0 to fNumCores - 1 do
+  //  fThreads[x] := TdspThread.Create(adspProc, fArrPointer, blocks[x].firstSample,
+  //    blocks[x].lastSample, aData);
   //for each Trange in Tblock do execute  dsp thread
   //blocks := calcBlockRanges(Length(aPCM), fNumCores);
 
@@ -135,7 +164,7 @@ begin
 
 end;
  }
-constructor TdspRunner.Create(const aDSPProc: TdspProcedure;
+constructor TdspRunner.Create(const aDSPProc: TdspProcedureDM;
   var aPCM: array of int16; const aNumCores: byte; const aData: Pointer);
 var
   blocks: Tblocks;
@@ -152,7 +181,7 @@ begin
   //can I use @aPCM and put fPCM := aPCM ?
   //what is the memory structure of a dynamic array ?
   //Hmmm....Maybe I should just increase the ref count ? Bwahahahaha! :)
-  //
+
   //fPCM := dynarrtest(aPCM); // cross fingers!
   fArrLength := Length(aPCM);
   fNumCores := aNumCores;
@@ -163,9 +192,9 @@ begin
 
   setLength(fThreads, fNumCores);
 
-  for x := 0 to fNumCores - 1 do
-    fThreads[x] := TdspThread.Create(aPCM, aDSPProc, blocks[x].firstSample,
-      blocks[x].lastSample, aData);
+  //for x := 0 to fNumCores - 1 do
+  //  fThreads[x] := TdspThread.Create(aPCM, aDSPProc, blocks[x].firstSample,
+  //    blocks[x].lastSample, aData);
 
 end;
 

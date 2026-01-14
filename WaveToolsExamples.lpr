@@ -10,7 +10,7 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, wavetoolsexp, whiteNoise, PinkNoiseGen, dspMultiThread
+  Forms, wavetoolsexp, whiteNoise, PinkNoiseGen, dspMultiThread, dspmt
   { you can add units after this };
 
 {$R *.res}
