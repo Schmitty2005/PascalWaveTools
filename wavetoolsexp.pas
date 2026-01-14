@@ -150,6 +150,9 @@ var
   bc : TbitCrushParam;
 
   ms : TmemoryStream;
+
+  pb, pe, ps : Pointer;
+  ps2 : uInt64;
 begin
 
   SetLength(arr, 44100000);
@@ -163,6 +166,11 @@ begin
   bc.crushDepth:=4; bc.sourceDepth:=16;
 
  // ts := TdspRunner.Create(@dspDMSaturate, arr, 3, @bc);  //old dspMutlliThreadUnit
+ {$POINTERMATH ON}
+ pb := @arr[0];
+ pe := @arr[100];
+ ps2 := pe - pb;
+ {$POINTERMATH OFF}
 
  ts := TdspRunner.Create(@arr[0], Length(arr), @dspDMSaturate, 3, @bc) ;
   ts.Start;
