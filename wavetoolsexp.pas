@@ -154,7 +154,7 @@ var
 
   pb, pe, ps: Pointer;
   ps2: uint64;
-  //dsp: TdspThread;
+  dsp: TdspThread;
   sg: single;
   br: TblocksP;
   bc: byte;
@@ -172,7 +172,7 @@ begin
 
   sg := 1.125;
 
-  bc := 8;
+  bc := 3;
 
   ts := TdspRunner.Create(@arr[0], @arr[High(arr)], @dspSaturate, 3, @sg);
   {$POINTERMATH ON}
@@ -194,6 +194,15 @@ begin
   ts.WaitFor;
 
   ms := TMemoryStream.Create;
+
+
+  //test to see why bitcrush may not be working!
+  dsp := TdspThread.Create(@arr[0], @arr[high(arr)], @dspBitCrush, @bc);
+    dsp.Start;
+  dsp.WaitFor;
+
+ // dspBitCrush(@arr[0], @arr[high(arr)], @bc);
+
 
   ms.Write(arr[0], Length(arr) * 2);
   ms.SaveToFile('MTtest.pcm');

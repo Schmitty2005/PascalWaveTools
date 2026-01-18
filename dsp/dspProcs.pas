@@ -45,6 +45,7 @@ var
   bcdepth: pbyte absolute aData;
   crush: byte;
   sample: Pint16;
+  crushed : Int16;
   max: uint64;
   Count: uint64;
 begin
@@ -54,8 +55,11 @@ begin
   max := aEndPoint - aStartPoint;
   for Count := 0 to max do
   begin
-    sample^ := sample^ shr crush;
-    sample^ := sample^ shl crush;
+    crushed := sample^;
+    {shl and shr dont seem to set bits to 0 when used with dereferenced pointers?}
+    crushed := crushed shr crush;
+    crushed := crushed shl crush;
+    sample^ := crushed;
     Inc(sample);
   end;
   {$pointermath off}
