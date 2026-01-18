@@ -7,9 +7,10 @@ interface
 uses
   {$IFDEF LINUX} cthreads, {$ENDIF}
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, {uadsrTypes,}
-  {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,} {dspDMAsaturate, dspDMATypes,}
+  {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,}{dspDMAsaturate, dspDMATypes,}
   {dspTypes,} SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup;// dspDMAsaturate;
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup;
+  // dspDMAsaturate;
 
 type
 
@@ -91,22 +92,22 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
   //dspDMAPhaseReverse.dspDMAPhaseReverse(@fWave[0], length(fWave));
-  //
+
   //ms := TMemoryStream.Create;
   //ms.Write(fWave[0], length(fWave) * 2);
   //ms.SaveToFile('PhaseReversedSample.pcm');
   //ms.Free;
-  //
+
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
 //var
-  //bc: TbitCrushParam;
+//bc: TbitCrushParam;
 begin
   //bc.crushDepth := 4;
   //bc.sourceDepth := 16;
   //dspbitcrush.bitCrush(fWave, 0, length(fWave), @bc);
-  //
+
   //ms := TMemoryStream.Create;
   //ms.Write(fWave[0], length(fWave) * 2);
   //ms.SaveToFile('BitCrushedSample.pcm');
@@ -143,7 +144,7 @@ end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 var
-  arr: array of int16;
+  arr, tba: array of int16;
   ts: TdspRunner;
   sm: int16;
   x: uint64;
@@ -154,10 +155,13 @@ var
   pb, pe, ps: Pointer;
   ps2: uint64;
   //dsp: TdspThread;
-  sg : single;
+  sg: single;
+  br: TblocksP;
+  bc: byte;
 begin
 
   SetLength(arr, 4410000);
+
 
   // create sine wave for testing!
   for x := 0 to high(arr) do
@@ -165,22 +169,12 @@ begin
     arr[x] := trunc(sin(2 * PI * 800 / 44100 * x) * 27000);
   end;
 
-  //bc.crushDepth := 4;
-  //bc.sourceDepth := 16;
 
   sg := 1.125;
 
- // dsp := TdspThread.Create(@dspDMAsaturate.dspDMSaturate, @arr[0], @arr[(high(arr) div 2)], @sg);
+  bc := 8;
 
- // dsp.Start;
-
-  //dsp.WaitFor;
-
-  // ts := TdspRunner.Create(@dspDMSaturate, arr, 3, sg);  //old dspMutlliThreadUnit
-
-  //ts :=TdspRunner.Create(@arr[0], length(arr), @dspDMSaturate, 3, @sg);
-
- ts := TdspRunner.Create(@arr[0], @arr[High(arr)], @dspSaturate, 3, @sg);
+  ts := TdspRunner.Create(@arr[0], @arr[High(arr)], @dspSaturate, 3, @sg);
   {$POINTERMATH ON}
   pb := @arr[0];
   pe := @arr[100];
@@ -188,15 +182,16 @@ begin
   //test of pointer math....can be removed later
   {$POINTERMATH OFF}
 
-  //ts := TdspRunner.Create(@arr[0], Length(arr), @dspDMSaturate, 3, @bc) ;
-   ts.Start;
+  ts.Start;
 
-   ts.WaitFor;
-  {
-  if not ts.CheckTerminated then
-   sleep(10); //thread was created from extern error ?  WTF ?
-   }
-  //ts.;
+  ts.WaitFor;
+
+
+
+  ts.Free;
+  ts := TdspRunner.Create(@arr[0], @arr[high(arr)], @dspBitCrush, 3, @bc);
+  ts.Start;
+  ts.WaitFor;
 
   ms := TMemoryStream.Create;
 
@@ -213,7 +208,7 @@ var
   ar: array of int16;
 begin
   setLength(ar, 44100);
-  pb := calcBlockRangesP(@ar, length(ar), 3);
+  pb := calcBlockRangesP2(@ar, @ar[high(ar)], 3);
 end;
 
 end.

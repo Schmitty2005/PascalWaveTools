@@ -91,7 +91,7 @@ begin
   fDspProcDM := aDSPProc;
   fData := aData;
   fLengthArr := aTotalLength;
-  fBlocks := calcBlockRangesP(fStartPointer, aTotalLength, aNumCores);
+  //fBlocks := calcBlockRangesP(fStartPointer, aTotalLength, aNumCores);
   setLength(fThreadArr, fNumCores);
 end;
 

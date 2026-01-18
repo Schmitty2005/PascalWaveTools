@@ -130,7 +130,7 @@ end;
 
 procedure TdspRunner.calcBlocks;
 begin
-  fBlocks := calcBlockRangesP(fArrPointer, Length(fArrInt16), fNumCores);
+  //fBlocks := calcBlockRangesP(fArrPointer, Length(fArrInt16), fNumCores);
   //change to length field later
 
 end;
@@ -141,7 +141,7 @@ var
   x: uint64;
   blocksP: TblocksP;
 begin
-  BlocksP := calcBlockRangesP(fArrPointer, fArrLength, fNumCores);
+  //BlocksP := calcBlockRangesP(fArrPointer, fArrLength, fNumCores);
   for x := 0 to fNumCores - 1 do
     fThreads[x] := TdspThread.Create(fArrPointer, fDspProc, blocksP[x].firstPointer,
       blocksP[x].lastPointer, fdspData);

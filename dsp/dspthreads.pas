@@ -95,7 +95,7 @@ begin
   fDSPProc := aDSPProc;
   fData := aData;
   fCPUCores := aCpuCores;
-  fPointerBlocks := calcBlockRangesP(fStartPoint, (fEndPoint - fStartPoint), fCPUCores);
+  fPointerBlocks := calcBlockRangesP2(fStartPoint, fEndPoint, fCPUCores);
   SetLength(fDSPThreads, fCPUCores);
   //setup threads
   for Count := 0 to fCPUCores - 1 do

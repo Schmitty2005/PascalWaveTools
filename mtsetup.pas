@@ -32,8 +32,16 @@ function calcBlockRanges(const numSamples: uint64; const numCores: byte): Tblock
 ///  This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
 /// is evenly divided into a number of blocks based on the number of CPU cores/threads that are requested
 ///</summary>
-function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
+//function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
+//const numCores: byte): TblocksP;
+
+//function calcBlockRangesP(const startPointer: Pint16{Pointer};
+//  {Switch to EndPointer instead}const numSamples: uint64;
+//  const numCores: byte): TblocksP;
+
+function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
   const numCores: byte): TblocksP;
+
 
 implementation
 
@@ -59,7 +67,8 @@ begin
   until x > numCores - 1;
 end;
 
-function calcBlockRangesP(const startPointer: Pint16{Pointer}; {Switch to EndPointer instead}const numSamples: uint64;
+function calcBlockRangesP(const startPointer: Pint16{Pointer};
+  {Switch to EndPointer instead}const numSamples: uint64;
   const numCores: byte): TblocksP;
 { #todo -oB : Possibly not calculated correctly !  Needs verification
  }
@@ -84,6 +93,33 @@ begin
     Result[x].lastPointer := (Result[x].firstPointer + s) - 1;
     Inc(x);
   until x > numCores - 1;
+  {$POINTERMATH OFF}
+end;
+
+function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
+  const numCores: byte): TblocksP;
+
+var
+  x, s: uint64;
+begin
+  {$POINTERMATH ON}
+  x := 1;
+  Result := nil;
+  setlength(Result, numCores);
+
+  s := trunc((endPointer - startPointer) / numCores);
+
+  Result[0].firstPointer := startPointer;
+  Result[0].lastPointer := startPointer + s;
+
+  Result[numCores - 1].firstPointer := endPointer - s +1;
+  Result[numCores - 1].lastPointer := endPointer;
+
+  repeat
+    Result[x].firstPointer := (x * s) + 1 + startPointer;
+    Result[x].lastPointer := (Result[x].firstPointer + s) - 1;
+    Inc(x);
+  until x = numCores - 1;
   {$POINTERMATH OFF}
 end;
 
