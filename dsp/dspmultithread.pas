@@ -1,9 +1,9 @@
 unit dspMultiThread;
-//
-//
+
+
 //  DO NOT USE
 //  OLD Failed UNIT
-//
+
 {$mode ObjFPC}{$H+}
 
 interface
@@ -93,7 +93,7 @@ end;
 procedure TdspThread.Execute;
 begin
   //fTproc(@fPCMArray[0], length(fPCMArray), fPdata);
-  fTProc(fPintArray, fArrLength, fPData);
+  fTProc(fPintArray, (fArrLength div 2), fPData);//div 2 added 1-17-2025
 end;
 
 
@@ -139,11 +139,12 @@ procedure TdspRunner.Execute;
 var
   blocks: Tblocks;
   x: uint64;
-  blocksP : TblocksP;
+  blocksP: TblocksP;
 begin
-  //for x := 0 to fNumCores - 1 do
-  //  fThreads[x] := TdspThread.Create(adspProc, fArrPointer, blocks[x].firstSample,
-  //    blocks[x].lastSample, aData);
+  BlocksP := calcBlockRangesP(fArrPointer, fArrLength, fNumCores);
+  for x := 0 to fNumCores - 1 do
+    fThreads[x] := TdspThread.Create(fArrPointer, fDspProc, blocksP[x].firstPointer,
+      blocksP[x].lastPointer, fdspData);
   //for each Trange in Tblock do execute  dsp thread
   //blocks := calcBlockRanges(Length(aPCM), fNumCores);
 

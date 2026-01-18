@@ -30,6 +30,7 @@ var
 begin
   for x := 0 to aLength do
   begin
+    //Log the value of 'X' here for debug
     s := (location + x)^ / 32767;
     (location +x)^ := trunc(tanh(s * gp^) * 32767);
   end;

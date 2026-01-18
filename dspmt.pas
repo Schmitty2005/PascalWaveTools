@@ -23,8 +23,6 @@ type
   public
     constructor Create(aDSPProc: TdspProcedureDM; aStartPointer: Pointer;
       aEndPointer: Pointer; aData: Pointer = nil);
-
-
   end;
 
   { TdspRunner }
@@ -74,7 +72,10 @@ begin
 
   for x := 0 to fNumCores do
   begin
-
+     fThreadArr[x]:=TdspThread.create(fDspProcDM, fBlocks[x].firstPointer,
+     fBlocks[x].lastPointer,@fData);
+     {  Check to make sure proper first and last pointers are correct and passed
+        correctly!  }
     //set up threads to execute immedietly!
     //and wait for them to finish
 

@@ -12,8 +12,8 @@ type
   end;
 
   TrangeP = record
-    firstPointer: Pointer;
-    lastPointer: Pointer;
+    firstPointer: PInt16;// Pointer;
+    lastPointer: Pint16;//Pointer;
   end;
 
   ///<summary>  Tblock is a dynamic array of the Trange type
@@ -59,8 +59,10 @@ begin
   until x > numCores - 1;
 end;
 
-function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
+function calcBlockRangesP(const startPointer: Pint16{Pointer}; {Switch to EndPointer instead}const numSamples: uint64;
   const numCores: byte): TblocksP;
+{ #todo -oB : Possibly not calculated correctly !  Needs verification
+ }
 var
   x, s: uint64;
 begin

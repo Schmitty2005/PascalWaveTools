@@ -4,7 +4,7 @@ unit dspProcs;
 
 interface
 
-uses cmem, cthreads, Classes, SysUtils, Math;
+uses Classes, SysUtils, Math;
 
 type
   TdspProc = procedure(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);

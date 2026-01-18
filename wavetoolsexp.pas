@@ -6,10 +6,10 @@ interface
 
 uses
   {$IFDEF LINUX} cthreads, {$ENDIF}
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, uadsrTypes,
-  dspbitcrush, dspDMAFilter, dspDMAPhaseReverse, dspDMAsaturate, dspDMATypes,
-  dspTypes, SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, dspMt, mtSetup;// dspDMAsaturate;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, {uadsrTypes,}
+  {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,} {dspDMAsaturate, dspDMATypes,}
+  {dspTypes,} SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup;// dspDMAsaturate;
 
 type
 
@@ -53,11 +53,11 @@ implementation
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  dspDMAFilter.dspDMAFilter(@fWave[0], Length(fwave));
-  ms := TMemoryStream.Create;
-  ms.Write(fWave[0], length(fWave) * 2);
-  ms.SaveToFile('FilteredSample.pcm');
-  ms.Free;
+  //dspDMAFilter.dspDMAFilter(@fWave[0], Length(fwave));
+  //ms := TMemoryStream.Create;
+  //ms.Write(fWave[0], length(fWave) * 2);
+  //ms.SaveToFile('FilteredSample.pcm');
+  //ms.Free;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -90,27 +90,27 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-  dspDMAPhaseReverse.dspDMAPhaseReverse(@fWave[0], length(fWave));
-
-  ms := TMemoryStream.Create;
-  ms.Write(fWave[0], length(fWave) * 2);
-  ms.SaveToFile('PhaseReversedSample.pcm');
-  ms.Free;
-
+  //dspDMAPhaseReverse.dspDMAPhaseReverse(@fWave[0], length(fWave));
+  //
+  //ms := TMemoryStream.Create;
+  //ms.Write(fWave[0], length(fWave) * 2);
+  //ms.SaveToFile('PhaseReversedSample.pcm');
+  //ms.Free;
+  //
 end;
 
 procedure TForm1.Button5Click(Sender: TObject);
-var
-  bc: TbitCrushParam;
+//var
+  //bc: TbitCrushParam;
 begin
-  bc.crushDepth := 4;
-  bc.sourceDepth := 16;
-  dspbitcrush.bitCrush(fWave, 0, length(fWave), @bc);
-
-  ms := TMemoryStream.Create;
-  ms.Write(fWave[0], length(fWave) * 2);
-  ms.SaveToFile('BitCrushedSample.pcm');
-  ms.Free;
+  //bc.crushDepth := 4;
+  //bc.sourceDepth := 16;
+  //dspbitcrush.bitCrush(fWave, 0, length(fWave), @bc);
+  //
+  //ms := TMemoryStream.Create;
+  //ms.Write(fWave[0], length(fWave) * 2);
+  //ms.SaveToFile('BitCrushedSample.pcm');
+  //ms.Free;
 
 end;
 
@@ -143,57 +143,74 @@ end;
 
 procedure TForm1.Button8Click(Sender: TObject);
 var
-  arr : array of int16;
-  ts : TdspRunner;
-  sm : int16;
-  x : uInt64;
-  bc : TbitCrushParam;
+  arr: array of int16;
+  ts: TdspRunner;
+  sm: int16;
+  x: uint64;
+  //bc: TbitCrushParam;
 
-  ms : TmemoryStream;
+  ms: TmemoryStream;
 
-  pb, pe, ps : Pointer;
-  ps2 : uInt64;
+  pb, pe, ps: Pointer;
+  ps2: uint64;
+  //dsp: TdspThread;
+  sg : single;
 begin
 
-  SetLength(arr, 44100000);
+  SetLength(arr, 4410000);
 
   // create sine wave for testing!
   for x := 0 to high(arr) do
   begin
-    arr[x] := trunc(sin (2 * PI * 800 / 44100 * x) * 27000);
+    arr[x] := trunc(sin(2 * PI * 800 / 44100 * x) * 27000);
   end;
 
-  bc.crushDepth:=4; bc.sourceDepth:=16;
+  //bc.crushDepth := 4;
+  //bc.sourceDepth := 16;
 
- // ts := TdspRunner.Create(@dspDMSaturate, arr, 3, @bc);  //old dspMutlliThreadUnit
- {$POINTERMATH ON}
- pb := @arr[0];
- pe := @arr[100];
- ps2 := pe - pb;
- {$POINTERMATH OFF}
+  sg := 1.125;
 
- ts := TdspRunner.Create(@arr[0], Length(arr), @dspDMSaturate, 3, @bc) ;
-  ts.Start;
+ // dsp := TdspThread.Create(@dspDMAsaturate.dspDMSaturate, @arr[0], @arr[(high(arr) div 2)], @sg);
+
+ // dsp.Start;
+
+  //dsp.WaitFor;
+
+  // ts := TdspRunner.Create(@dspDMSaturate, arr, 3, sg);  //old dspMutlliThreadUnit
+
+  //ts :=TdspRunner.Create(@arr[0], length(arr), @dspDMSaturate, 3, @sg);
+
+ ts := TdspRunner.Create(@arr[0], @arr[High(arr)], @dspSaturate, 3, @sg);
+  {$POINTERMATH ON}
+  pb := @arr[0];
+  pe := @arr[100];
+  ps2 := pe - pb;
+  //test of pointer math....can be removed later
+  {$POINTERMATH OFF}
+
+  //ts := TdspRunner.Create(@arr[0], Length(arr), @dspDMSaturate, 3, @bc) ;
+   ts.Start;
+
+   ts.WaitFor;
   {
   if not ts.CheckTerminated then
    sleep(10); //thread was created from extern error ?  WTF ?
    }
-   //ts.;
+  //ts.;
 
-  ms:= TMemoryStream.create;
+  ms := TMemoryStream.Create;
 
-  ms.Write(arr[0], Length(arr) * 2 ) ;
+  ms.Write(arr[0], Length(arr) * 2);
   ms.SaveToFile('MTtest.pcm');
 
-  ms.free;
+  ms.Free;
 
 end;
 
 procedure TForm1.Button9Click(Sender: TObject);
 var
-  pb : TblocksP;
-  ar : array of Int16;
-
+  pb: TblocksP;
+  ar: array of int16;
 begin
   setLength(ar, 44100);
   pb := calcBlockRangesP(@ar, length(ar), 3);
