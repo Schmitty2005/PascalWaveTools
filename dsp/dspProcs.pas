@@ -1,4 +1,6 @@
+{$IFDEF FPC}
 {$mode objfpc}
+{$ENDIF}
 //Program dspTwo;
 unit dspProcs;
 
@@ -7,6 +9,9 @@ interface
 uses Classes, SysUtils, Math;
 
 type
+{$IFDEF DCC}
+ Pint16 = ^Int16;
+{$ENDIF}
   TdspProc = procedure(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
@@ -76,9 +81,9 @@ Begin
   setLength(arr,44100);
   fillWord(arr[0], 44099, 16278);
   writeln(arr[0]);
-  
+
   satGain := 6.25;
-    
+
   dspSaturate (@arr[0], @arr[44099], @satGain);
 
   writeln(arr[0]);

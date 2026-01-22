@@ -1,51 +1,59 @@
 unit mtSetup;
-
+{$IFDEF FPC}
 {$Mode delphi}
+{$ENDIF}
+
 interface
 
 type
-  ///<summary> Trange is a record type that holds the first sample and last sample position.  
-  ///</summary>
+
+{$IFDEF DCC}
+  Pint16 = ^Int16;
+{$ENDIF}
+
+  /// <summary> Trange is a record type that holds the first sample and last sample position.
+  /// </summary>
   Trange = record
     firstSample: uint64;
     lastSample: uint64;
   end;
 
   TrangeP = record
-    firstPointer: PInt16;// Pointer;
-    lastPointer: Pint16;//Pointer;
+    firstPointer: Pint16; // Pointer;
+    lastPointer: Pint16; // Pointer;
   end;
 
-  ///<summary>  Tblock is a dynamic array of the Trange type
-  ///</summary>
+  /// <summary>  Tblock is a dynamic array of the Trange type
+  /// </summary>
   Tblocks = array of Trange;
 
   TblocksP = array of TrangeP;
 
-///<summary> Outputs Tblocks (array of Trange) the size of the numCores (number of CPU cores)
-///  This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
-/// is evenly divided into a number of blocks based on the number of CPU cores/threads that are requested
-///</summary>
-function calcBlockRanges(const numSamples: uint64; const numCores: byte): Tblocks;
+  /// <summary> Outputs Tblocks (array of Trange) the size of the numCores (number of CPU cores)
+  /// This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
+  /// is evenly divided into a number of blocks based on the number of CPU cores/threads that are requested
+  /// </summary>
+function calcBlockRanges(const numSamples: uint64;
+  const numCores: byte): Tblocks;
 
-///<summary> Same as calcBlockRanges function, but used for pointers and outputs TblocksP (array of TrangeP) the size of the numCores (number of CPU cores)
-///  This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
+/// <summary> Same as calcBlockRanges function, but used for pointers and outputs TblocksP (array of TrangeP) the size of the numCores (number of CPU cores)
+/// This is used to divide and conquer a wave sample across multiple CPU's / Threads.  The Wave length
 /// is evenly divided into a number of blocks based on the number of CPU cores/threads that are requested
-///</summary>
-//function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
-//const numCores: byte): TblocksP;
+/// </summary>
+// function calcBlockRangesP(const startPointer: Pointer; const numSamples: uint64;
+// const numCores: byte): TblocksP;
 
-//function calcBlockRangesP(const startPointer: Pint16{Pointer};
-//  {Switch to EndPointer instead}const numSamples: uint64;
-//  const numCores: byte): TblocksP;
+// function calcBlockRangesP(const startPointer: Pint16{Pointer};
+// {Switch to EndPointer instead}const numSamples: uint64;
+// const numCores: byte): TblocksP;
 
 function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
   const numCores: byte): TblocksP;
 
-
 implementation
 
-function calcBlockRanges(const numSamples: uint64; const numCores: byte): Tblocks;
+function calcBlockRanges(const numSamples: uint64;
+  const numCores: byte): Tblocks;
 var
   x, s: uint64;
 begin
@@ -67,15 +75,15 @@ begin
   until x > numCores - 1;
 end;
 
-function calcBlockRangesP(const startPointer: Pint16{Pointer};
-  {Switch to EndPointer instead}const numSamples: uint64;
+function calcBlockRangesP(const startPointer: Pint16 { Pointer };
+  { Switch to EndPointer instead } const numSamples: uint64;
   const numCores: byte): TblocksP;
 { #todo -oB : Possibly not calculated correctly !  Needs verification
- }
+}
 var
   x, s: uint64;
 begin
-  {$POINTERMATH ON}
+{$POINTERMATH ON}
   x := 1;
   Result := nil;
   setlength(Result, numCores);
@@ -93,7 +101,7 @@ begin
     Result[x].lastPointer := (Result[x].firstPointer + s) - 1;
     Inc(x);
   until x > numCores - 1;
-  {$POINTERMATH OFF}
+{$POINTERMATH OFF}
 end;
 
 function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
@@ -102,7 +110,7 @@ function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
 var
   x, s: uint64;
 begin
-  {$POINTERMATH ON}
+{$POINTERMATH ON}
   x := 1;
   Result := nil;
   setlength(Result, numCores);
@@ -112,7 +120,7 @@ begin
   Result[0].firstPointer := startPointer;
   Result[0].lastPointer := startPointer + s;
 
-  Result[numCores - 1].firstPointer := endPointer - s +1;
+  Result[numCores - 1].firstPointer := endPointer - s + 1;
   Result[numCores - 1].lastPointer := endPointer;
 
   repeat
@@ -120,22 +128,22 @@ begin
     Result[x].lastPointer := (Result[x].firstPointer + s) - 1;
     Inc(x);
   until x = numCores - 1;
-  {$POINTERMATH OFF}
+{$POINTERMATH OFF}
 end;
 
 end.
-{example usage}{
-var
+{ example usage }{
+  var
   x :uInt64;
   z : Tblocks;
-const
+  const
   cpu = 4;
-Begin
+  Begin
   z:= calcBlockRanges(192000, cpu);
   x:=0;
   repeat
-    writeln ( x , ':', z[x].firstSample, ' ' , 
-    z[x].lastSample);
-    inc(x);
+  writeln ( x , ':', z[x].firstSample, ' ' ,
+  z[x].lastSample);
+  inc(x);
   until x = cpu;
-  }  
+}

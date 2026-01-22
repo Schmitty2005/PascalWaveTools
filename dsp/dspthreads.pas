@@ -2,8 +2,9 @@ unit dspthreads;
 {$IFDEF FPC}
 {$mode ObjFPC}{$H+}
 {$ENDIF}
+
 {
-Newest and up to date version of multi thread classes for dsp
+  Newest and up to date version of multi thread classes for dsp
 }
 interface
 
@@ -11,15 +12,17 @@ uses
   Classes, SysUtils, mtSetup;
 
 type
-  TdspProc = procedure(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
+  TdspProc = procedure(aStartPoint: Pint16; aEndPoint: Pint16;
+    aData: Pointer = nil);
 
   { TdspThread }
 
   TdspThread = class(TThread)
   private
     fDSPProc: TdspProc;
-    fStartPoint: PInt16;
-    fEndPoint: PInt16;
+    fStartPoint: Pint16;
+    fEndPoint: Pint16;
     fData: Pointer;
   protected
     procedure execute; override;
@@ -33,14 +36,14 @@ type
   TdspRunner = class(TThread)
   private
     fDSPProc: TdspProc;
-    fStartPoint: PInt16;
-    fEndPoint: PInt16;
+    fStartPoint: Pint16;
+    fEndPoint: Pint16;
     fData: Pointer;
     fCPUCores: byte;
     fDSPThreads: array of TdspThread;
     fPointerBlocks: TblocksP;
   protected
-    procedure Execute; override;
+    procedure execute; override;
   public
     constructor Create(aFirstPointer: Pint16; aLastPointer: Pint16;
       aDSPProc: TdspProc; aCpuCores: byte = 3; aData: Pointer = nil);
@@ -63,23 +66,23 @@ begin
   fEndPoint := aEndPoint;
   fDSPProc := aDSPProc;
   fData := aData;
-  //FreeOnTerminate:= True;
+  // FreeOnTerminate:= True;
 end;
 
 { TdspRunner }
 
-procedure TdspRunner.Execute;
+procedure TdspRunner.execute;
 var
   Count: byte;
 begin
-  //run all of the threads and waitFor;
+  // run all of the threads and waitFor;
   for Count := 0 to fCPUCores - 1 do
     fDSPThreads[Count].Start;
 
   for Count := 0 to fCPUCores - 1 do
     fDSPThreads[Count].WaitFor;
 
-  //Maybe use free on terminate property for TdspThread class instead ?
+  // Maybe use free on terminate property for TdspThread class instead ?
   for Count := 0 to fCPUCores - 1 do
     fDSPThreads[Count].Free;
 end;
@@ -97,7 +100,7 @@ begin
   fCPUCores := aCpuCores;
   fPointerBlocks := calcBlockRangesP2(fStartPoint, fEndPoint, fCPUCores);
   SetLength(fDSPThreads, fCPUCores);
-  //setup threads
+  // setup threads
   for Count := 0 to fCPUCores - 1 do
     fDSPThreads[Count] := TdspThread.Create(fPointerBlocks[Count].firstPointer,
       fPointerBlocks[Count].lastPointer, fDSPProc, fData);
