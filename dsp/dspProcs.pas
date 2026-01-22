@@ -59,6 +59,7 @@ begin
   sample := aStartPoint;
   max := aEndPoint - aStartPoint;
   for Count := 0 to max do
+ {$R-}
   begin
     crushed := sample^;
     {shl and shr dont seem to set bits to 0 when used with dereferenced pointers?}
@@ -67,6 +68,7 @@ begin
     sample^ := crushed;
     Inc(sample);
   end;
+  {$R+}
   {$pointermath off}
 end;
 

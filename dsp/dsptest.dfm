@@ -20,4 +20,13 @@ object Form15: TForm15
     TabOrder = 0
     OnClick = Button1Click
   end
+  object Button2: TButton
+    Left = 541
+    Top = 416
+    Width = 75
+    Height = 25
+    Caption = 'Close'
+    TabOrder = 1
+    OnClick = Button2Click
+  end
 end
