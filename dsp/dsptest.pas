@@ -28,19 +28,19 @@ implementation
 
 procedure TForm15.Button1Click(Sender: TObject);
 var
-  ms : TMemoryStream;
+  ms: TMemoryStream;
   dsp: TdspRunner;
   ar: array of int16;
   x: uint32;
   s: int16;
-  bc : byte;
+  bc: byte;
 begin
-  //make simple sine wave
+  // make simple sine wave
   setLength(ar, 44100);
   for x := 0 to 44099 do
     ar[x] := round(sin(2 * PI * 800 * x / 44100) * 27000);
 
-   bc := 3;
+  bc := 3;
   dsp := TdspRunner.Create(@ar[0], @ar[44099], @dspBitcrush, 3, @bc);
 
   dsp.Start;
@@ -50,12 +50,11 @@ begin
   ms.Write(ar[0], high(ar));
   ms.SaveToFile('test.pcm');
 
-
-  end;
+end;
 
 procedure TForm15.Button2Click(Sender: TObject);
 begin
-exit;
+  close;
 end;
 
 end.

@@ -1,7 +1,7 @@
 object Form15: TForm15
   Left = 0
   Top = 0
-  Caption = 'Form15'
+  Caption = 'DSP Testing Ground'
   ClientHeight = 441
   ClientWidth = 624
   Color = clBtnFace
@@ -12,17 +12,17 @@ object Form15: TForm15
   Font.Style = []
   TextHeight = 15
   object Button1: TButton
-    Left = 536
+    Left = 488
     Top = 16
-    Width = 75
+    Width = 123
     Height = 25
-    Caption = 'Button1'
+    Caption = 'Run DSP BitCrush'
     TabOrder = 0
     OnClick = Button1Click
   end
   object Button2: TButton
     Left = 541
-    Top = 416
+    Top = 408
     Width = 75
     Height = 25
     Caption = 'Close'
