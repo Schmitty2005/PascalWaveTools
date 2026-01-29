@@ -1,6 +1,7 @@
 unit maxfinder;
-
+{$IFDEF FPC}
 {$mode ObjFPC}{$H+}
+{$ENDIF}
 
 interface
 
@@ -53,6 +54,7 @@ type
 
 implementation
 
+{ Tgain }
 procedure Tgain.setInt(const aValue: int16);
 begin
   fInt := aValue;
@@ -64,6 +66,8 @@ begin
   fFlt := abs(aValue);
   fInt := trunc(fFlt * high(int16));
 end;
+
+{ TmaxFinder }
 
 procedure TmaxFinder.Execute;
 var
@@ -91,6 +95,7 @@ begin
   inherited Create(True);
 end;
 
+{ TfindMaxRunner }
 
 procedure TfindMaxRunner.Execute;
 begin
