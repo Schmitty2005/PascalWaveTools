@@ -27,6 +27,11 @@ procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = n
 procedure dspBitCrush(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
 procedure dspLimitThresh(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+{ #todo -oB : Test procedure dspLimitThresh
+
+ }
+
+procedure dspSaturate2(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
 implementation
 
@@ -96,6 +101,31 @@ begin
       (aStartPoint + position)^ := trunc(flt * high(int16));
     end;
   end;
+end;
+
+procedure dspSaturate2(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+var
+  gain: Psingle absolute aData;
+  sample: Pint16;
+  Count: uint64;
+  max: uint64;
+  calc: single;
+begin
+  {$pointermath on}
+  max := aEndPoint - aStartPoint;
+  sample := aStartPoint;
+  ;
+  for Count := 0 to max do
+  begin
+    calc := sample^ / High(int16);
+    //calc := tanh(calc * gain^);
+    gain := gain / 5 ;
+    calc := sample^ / (gain + abs(sample^));
+    //Gain should likely be between 0.1 and 10 to function properly
+    sample^ := trunc(calc * high(int16));
+    Inc(sample);
+  end;
+  {$pointermath off}
 end;
 
 
