@@ -163,86 +163,49 @@ begin
 end;
 
 procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+{ #todo -oB : Verify this dsp function works!
+  //check for posSat and negSat being nil and simple pass sample instead
+}
 type
   PasymSet = ^TasymSettimgs;
 var
   pset: PasymSet absolute aData;
-  posThresh: int16;
-  negThres: int16;
   sample: Pint16;
   Count: uint64;
   max: uint64;
-  calc: single;
+  posDSP: TsatFunc;
+  negDSP: TsatFunc;
 begin
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
 
+  posDSP := pset^.posSatFunction;
+  negDSP := pset^.negSatFunction;
+
   for Count := 0 to max do
   begin
-  {
-  calc := sample^ / High(int16);
-    //calc := tanh(calc * gain^);
-    gain := gain / 5;
-    calc := sample^ / (gain + abs(sample^));
-    //Gain should likely be between 0.1 and 10 to function properly
-    sample^ := trunc(calc * high(int16));
-    Inc(sample);
-    }
+    case sign((sample + Count)^) of
+      1:
+      begin
+        if (sample + Count)^ > pset^.posLimit then;
+        (sample + Count)^ := trunc(
+          (posDSP((sample + Count)^, pset^.posGain) * high(int16)));
+      end;
+
+      -1:
+      begin
+        if (sample + Count)^ > pset^.negLimit then;
+        (sample + Count)^ := trunc(negDSP((sample + Count)^, pset^.negGain) *
+          (abs(low(int16))));
+      end;
+
+      //0: {Dont do anything to zero! }exit;
+
+    end;
   end;
   {$pointermath off}
 
 end;
 
 
-
-{
-var
-  satGain : single;
-  arr : array of int16;
-  bitCrush : byte;
-
-Begin
-  setLength(arr,44100);
-  fillWord(arr[0], 44099, 16278);
-  writeln(arr[0]);
-
-  satGain := 6.25;
-
-  dspSaturate (@arr[0], @arr[44099], @satGain);
-
-  writeln(arr[0]);
-
-  bitcrush :=8;
-
-  dspBitCrush (@arr[0], @arr[44099], @bitcrush);
-
-  writeln(arr[0]);
-}
 end.
-(*
-type
-
-
-
-
-function noSat (aSample : single; aGain :single) : single;
-begin
-  result:=aSample;
-end;
-
-function Sat1 (aSample : single; aGain : single) : single;
-begin
-  result:=aSample;
-end;
-
-
-Begin
-
-//check for posSat and negSat being nil and simple pass sample instead
-
-
-
-
-
-
-*)
