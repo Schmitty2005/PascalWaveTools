@@ -9,16 +9,24 @@ interface
 uses Classes, SysUtils, Math;
 
 type
-{$IFDEF DCC}
+  {$IFDEF DCC}
  Pint16 = ^Int16;
-{$ENDIF}
+  {$ENDIF}
   TdspProc = procedure(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
+  PlimitThreshSet = ^TlimitThreshSet;
+
+  TlimitThreshSet = record
+    Threshold: int16;
+    Gain: single;
+  end;
+
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
 procedure dspBitCrush(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
-
+procedure dspLimitThresh(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
 implementation
 
@@ -50,7 +58,7 @@ var
   bcdepth: pbyte absolute aData;
   crush: byte;
   sample: Pint16;
-  crushed : Int16;
+  crushed: int16;
   max: uint64;
   Count: uint64;
 begin
@@ -59,7 +67,7 @@ begin
   sample := aStartPoint;
   max := aEndPoint - aStartPoint;
   for Count := 0 to max do
- {$R-}
+    {$R-}
   begin
     crushed := sample^;
     {shl and shr dont seem to set bits to 0 when used with dereferenced pointers?}
@@ -71,6 +79,25 @@ begin
   {$R+}
   {$pointermath off}
 end;
+
+procedure dspLimitThresh(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+var
+  pset: PlimitThreshSet absolute aData;
+  position: uint64;
+  max: uint64;
+  flt: single;
+begin
+  max := aEndPoint - aStartPoint;
+  for position := 0 to max do
+  begin
+    if abs((aStartPoint + position)^) > pset^.threshold then
+    begin
+      flt := (tanh((aStartPoint + position)^ / high(int16) * pset^.gain));
+      (aStartPoint + position)^ := trunc(flt * high(int16));
+    end;
+  end;
+end;
+
 
 
 {
@@ -97,3 +124,18 @@ Begin
   writeln(arr[0]);
 }
 end.
+(*
+{$mode objfpc}
+Program dspThreshLimit;
+
+uses math;
+
+type
+
+
+
+
+
+
+
+*)
