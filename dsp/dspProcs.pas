@@ -21,6 +21,17 @@ type
     Gain: single;
   end;
 
+  TsatFunc = function(aSample: single; aGain: single): single;
+
+  TasymSettimgs = record
+    posSatFunction: TsatFunc;
+    negSatFunction: TsatFunc;
+    posLimit: int16;
+    negLimit: int16;
+    posGain: single;
+    negGain: single;
+  end;
+
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
@@ -32,6 +43,14 @@ procedure dspLimitThresh(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer 
  }
 
 procedure dspSaturate2(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
+
+//Simple saturation functions for asymetrical distortion dsp
+function noSat(aSample: single; aGain: single): single;
+
+function Sat1(aSample: single; aGain: single): single;
+
+function Sat2(aSample: single; aGain: single): single;
 
 implementation
 
@@ -119,13 +138,59 @@ begin
   begin
     calc := sample^ / High(int16);
     //calc := tanh(calc * gain^);
-    gain := gain / 5 ;
-    calc := sample^ / (gain + abs(sample^));
+    gain^ := gain^ / 5;
+    calc := sample^ / (gain^ + abs(sample^));
     //Gain should likely be between 0.1 and 10 to function properly
     sample^ := trunc(calc * high(int16));
     Inc(sample);
   end;
   {$pointermath off}
+end;
+
+function noSat(aSample: single; aGain: single): single;
+begin
+  Result := aSample;
+end;
+
+function Sat1(aSample: single; aGain: single): single;
+begin
+  Result := tanh(aSample * aGain);
+end;
+
+function Sat2(aSample: single; aGain: single): single;
+begin
+  Result := aSample / ((aGain / 5) + abs(aSample));
+end;
+
+procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+type
+  PasymSet = ^TasymSettimgs;
+var
+  pset: PasymSet absolute aData;
+  posThresh: int16;
+  negThres: int16;
+  sample: Pint16;
+  Count: uint64;
+  max: uint64;
+  calc: single;
+begin
+  max := aEndPoint - aStartPoint;
+  sample := aStartPoint;
+
+  for Count := 0 to max do
+  begin
+  {
+  calc := sample^ / High(int16);
+    //calc := tanh(calc * gain^);
+    gain := gain / 5;
+    calc := sample^ / (gain + abs(sample^));
+    //Gain should likely be between 0.1 and 10 to function properly
+    sample^ := trunc(calc * high(int16));
+    Inc(sample);
+    }
+  end;
+  {$pointermath off}
+
 end;
 
 
@@ -155,13 +220,25 @@ Begin
 }
 end.
 (*
-{$mode objfpc}
-Program dspThreshLimit;
-
-uses math;
-
 type
 
+
+
+
+function noSat (aSample : single; aGain :single) : single;
+begin
+  result:=aSample;
+end;
+
+function Sat1 (aSample : single; aGain : single) : single;
+begin
+  result:=aSample;
+end;
+
+
+Begin
+
+//check for posSat and negSat being nil and simple pass sample instead
 
 
 
