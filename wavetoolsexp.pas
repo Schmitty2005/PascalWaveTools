@@ -6,7 +6,8 @@ interface
 
 uses
   {$IFDEF LINUX} cthreads, {$ENDIF}
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, {uadsrTypes,}
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ExtCtrls, {uadsrTypes,}
   {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,}{dspDMAsaturate, dspDMATypes,}
   {dspTypes,} SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
   uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup;
@@ -18,6 +19,7 @@ type
 
   TForm1 = class(TForm)
     Button1: TButton;
+    Button10: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -26,6 +28,7 @@ type
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
+    procedure Button10Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -82,6 +85,45 @@ begin
   ms.SaveToFile('GeneratedSample.pcm');
   ms.Free;
   // Copy
+end;
+
+procedure TForm1.Button10Click(Sender: TObject);
+var
+  ar: array of int16;
+  ms: TMemoryStream;
+  st: TasymSettimgs;
+  x: uint64;
+  sm: int16;
+begin
+  setLength(ar, 44100);
+  //set up saturation
+  st.negGain := 5;
+  st.posGain := 1.2;
+  st.negSatFunction := @Sat1;
+  st.posSatFunction := @Sat2;
+  st.negLimit := -27000;
+  st.posLimit := 12000;
+
+  //create sine wave array
+  for x := 0 to 44099 do
+  begin
+    ar[x] := trunc(sin(2 * PI * 800 / 44100 * x) * 27000);
+    ar[x] := trunc(sat2((ar[x]/High(int16)), 1.7) * high(int16));
+  end;
+
+  ms := TMemoryStream.Create;
+  ms.Write(ar[0], length(ar) * 2);
+  ms.SaveToFile('asyPRESat.pcm');
+  ms.Free;
+
+  //run process
+  dspAsymSat(@ar[0], @ar[44099], @st);
+
+  //setup mem stream;
+  ms := TMemoryStream.Create;
+  ms.Write(ar[0], length(ar) * 2);
+  ms.SaveToFile('asySat.pcm');
+  ms.Free;
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
@@ -198,10 +240,10 @@ begin
 
   //test to see why bitcrush may not be working!
   dsp := TdspThread.Create(@arr[0], @arr[high(arr)], @dspBitCrush, @bc);
-    dsp.Start;
+  dsp.Start;
   dsp.WaitFor;
 
- // dspBitCrush(@arr[0], @arr[high(arr)], @bc);
+  // dspBitCrush(@arr[0], @arr[high(arr)], @bc);
 
 
   ms.Write(arr[0], Length(arr) * 2);

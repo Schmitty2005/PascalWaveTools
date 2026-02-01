@@ -52,6 +52,8 @@ function Sat1(aSample: single; aGain: single): single;
 
 function Sat2(aSample: single; aGain: single): single;
 
+procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
 implementation
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
@@ -175,6 +177,7 @@ var
   max: uint64;
   posDSP: TsatFunc;
   negDSP: TsatFunc;
+  ss : single;
 begin
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
@@ -184,18 +187,19 @@ begin
 
   for Count := 0 to max do
   begin
+    ss := (sample + count)^ / High(int16);
     case sign((sample + Count)^) of
       1:
       begin
-        if (sample + Count)^ > pset^.posLimit then;
+        if (sample + Count)^ > pset^.posLimit then
         (sample + Count)^ := trunc(
-          (posDSP((sample + Count)^, pset^.posGain) * high(int16)));
+          (posDSP(ss, pset^.posGain) * high(int16)));
       end;
 
       -1:
       begin
         if (sample + Count)^ > pset^.negLimit then;
-        (sample + Count)^ := trunc(negDSP((sample + Count)^, pset^.negGain) *
+        (sample + Count)^ := trunc(negDSP(ss, pset^.negGain) *
           (abs(low(int16))));
       end;
 
