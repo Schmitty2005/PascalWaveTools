@@ -10,7 +10,8 @@ uses
   ExtCtrls, {uadsrTypes,}
   {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,}{dspDMAsaturate, dspDMATypes,}
   {dspTypes,} SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
-  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup;
+  uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup,
+  gaintable;
   // dspDMAsaturate;
 
 type
@@ -20,6 +21,7 @@ type
   TForm1 = class(TForm)
     Button1: TButton;
     Button10: TButton;
+    Button11: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -29,6 +31,7 @@ type
     Button8: TButton;
     Button9: TButton;
     procedure Button10Click(Sender: TObject);
+    procedure Button11Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -124,6 +127,24 @@ begin
   ms.Write(ar[0], length(ar) * 2);
   ms.SaveToFile('asySat.pcm');
   ms.Free;
+end;
+
+procedure TForm1.Button11Click(Sender: TObject);
+var
+  st : TasymSettimgs;
+  gt : TgainTable;
+begin
+  st.negGain := 1;
+  st.posGain := 1.2;
+  st.negSatFunction := @Sat1;
+  st.posSatFunction := @Sat2;
+  st.negLimit := -27000;
+  st.posLimit := 12000;
+
+  gt := TgainTable.Create(@sat1, @sat2, st);
+
+  gt.free;
+
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
