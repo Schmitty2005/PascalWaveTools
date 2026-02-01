@@ -11,7 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, wavetoolsexp, whiteNoise, PinkNoiseGen, dspMultiThread, dspmt, 
-dspthreads, maxfinder
+dspthreads, maxfinder, gaintable
   { you can add units after this };
 
 {$R *.res}

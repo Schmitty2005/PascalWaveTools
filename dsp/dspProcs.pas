@@ -177,7 +177,7 @@ var
   max: uint64;
   posDSP: TsatFunc;
   negDSP: TsatFunc;
-  ss : single;
+  ss: single;
 begin
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
@@ -187,15 +187,13 @@ begin
 
   for Count := 0 to max do
   begin
-    ss := (sample + count)^ / High(int16);
+    ss := (sample + Count)^ / High(int16);
     case sign((sample + Count)^) of
       1:
       begin
         if (sample + Count)^ > pset^.posLimit then
-        (sample + Count)^ := trunc(
-          (posDSP(ss, pset^.posGain) * high(int16)));
+          (sample + Count)^ := trunc((posDSP(ss, pset^.posGain) * high(int16)));
       end;
-
       -1:
       begin
         if (sample + Count)^ > pset^.negLimit then;
@@ -203,7 +201,7 @@ begin
           (abs(low(int16))));
       end;
 
-      //0: {Dont do anything to zero! }exit;
+      //0: {No need to modify zero}
 
     end;
   end;

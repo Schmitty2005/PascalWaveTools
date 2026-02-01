@@ -97,7 +97,7 @@ var
 begin
   setLength(ar, 44100);
   //set up saturation
-  st.negGain := 5;
+  st.negGain := 1;
   st.posGain := 1.2;
   st.negSatFunction := @Sat1;
   st.posSatFunction := @Sat2;
@@ -108,7 +108,7 @@ begin
   for x := 0 to 44099 do
   begin
     ar[x] := trunc(sin(2 * PI * 800 / 44100 * x) * 27000);
-    ar[x] := trunc(sat2((ar[x]/High(int16)), 1.7) * high(int16));
+    //ar[x] := trunc(sat2((ar[x]/High(int16)), 1.7) * high(int16));
   end;
 
   ms := TMemoryStream.Create;
