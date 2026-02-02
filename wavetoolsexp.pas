@@ -22,6 +22,7 @@ type
     Button1: TButton;
     Button10: TButton;
     Button11: TButton;
+    Button12: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -32,6 +33,7 @@ type
     Button9: TButton;
     procedure Button10Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
+    procedure Button12Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -145,6 +147,22 @@ begin
 
   gt.free;
 
+end;
+
+procedure TForm1.Button12Click(Sender: TObject);
+var
+  st : TasymSettimgs;
+  gt : TgainTable;
+
+begin
+  st.negGain := 1;
+  st.posGain := 1.2;
+  st.negSatFunction := @Sat1;
+  st.posSatFunction := @Sat2;
+  st.negLimit := -27000;
+  st.posLimit := 12000;
+
+  dspFastSat();
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);

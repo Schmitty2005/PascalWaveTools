@@ -6,7 +6,7 @@ unit dspProcs;
 
 interface
 
-uses Classes, SysUtils, Math;
+uses Classes, SysUtils, Math;//, gaintable;
 
 type
   {$IFDEF DCC}
@@ -54,7 +54,11 @@ function Sat2(aSample: single; aGain: single): single;
 
 procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
+procedure dspFastSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
 implementation
+
+uses gaintable;
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 var
@@ -200,13 +204,37 @@ begin
         (sample + Count)^ := trunc(negDSP(ss, pset^.negGain) *
           (abs(low(int16))));
       end;
-
+       {dspProcs.pas(195,5) Warning: Case statement has no else case near CASE
+                                     in procedure dspAsymSat  }
       //0: {No need to modify zero}
 
     end;
   end;
   {$pointermath off}
 
+end;
+
+procedure dspFastSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer);
+type
+  PasymSettings = ^TasymSettimgs;
+var
+  ps: PasymSettings absolute aData;
+  c: uint64;
+  max: uint64;
+  s: int16;
+  cs: uint16 absolute s;
+  gt: TgainTable;
+begin
+  gt := TgainTable.Create(ps^.posSatFunction, ps^.negSatFunction, ps^);
+
+  max := aEndPoint - aStartPoint;
+
+  for c := 0 to max do
+  begin
+    s := (aStartPoint + c)^;
+    (aStartPoint + c)^ := gt[cs];
+  end;
+  {Process data using GainTable instead of Math Functions}
 end;
 
 
