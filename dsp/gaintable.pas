@@ -22,8 +22,7 @@ type
     //procedure setValue(i: integer; AValue: int16);
   public
     property Value[i: integer]: int16 read getValue; default;
-    constructor Create(aPosSat: TsatFunc; aNegSat: TsatFunc;
-      aSettings: TasymSettimgs);
+    constructor Create(const aSettings: TasymSettimgs);
   end;
 
 
@@ -41,8 +40,7 @@ end;
 //  fGainTable[i] := Avalue;
 //end;
 
-constructor TgainTable.Create(aPosSat: TsatFunc; aNegSat: TsatFunc;
-  aSettings: TasymSettimgs);
+constructor TgainTable.Create(const aSettings: TasymSettimgs);
 { #todo -oB : No Need to have PosSat and NegSat functions,
               as they are included in TasymSettings }
 var
@@ -54,9 +52,10 @@ begin
   for i := low(int16) to high(int16) do
     fGainTable[u] := i;
 
-  fPOSsat := aPosSat;
-  fNegSat := aNegSat;
   fsatSettings := aSettings;
+  fPOSsat := fsatSettings.posSatFunction;
+  fNegSat := fsatSettings.negSatFunction;
+
   //pass fGainTable to dspSat to fill table with values
   dspAsymSat(@fGainTable[0], @fGainTable[high(fGainTable)], @fsatSettings);
 end;

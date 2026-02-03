@@ -225,7 +225,7 @@ var
   cs: uint16 absolute s;
   gt: TgainTable;
 begin
-  gt := TgainTable.Create(ps^.posSatFunction, ps^.negSatFunction, ps^);
+  gt := TgainTable.Create(ps^);
 
   max := aEndPoint - aStartPoint;
 
