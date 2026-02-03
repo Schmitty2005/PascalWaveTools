@@ -169,9 +169,6 @@ begin
 end;
 
 procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
-{ #todo -oB : Verify this dsp function works!
-  //check for posSat and negSat being nil and simple pass sample instead
-}
 type
   PasymSet = ^TasymSettimgs;
 var
@@ -229,12 +226,15 @@ begin
 
   max := aEndPoint - aStartPoint;
 
+  {Process data using GainTable instead of Math Functions}
   for c := 0 to max do
   begin
     s := (aStartPoint + c)^;
     (aStartPoint + c)^ := gt[cs];
   end;
-  {Process data using GainTable instead of Math Functions}
+
+  gt.Free;
+
 end;
 
 

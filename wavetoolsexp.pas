@@ -153,8 +153,9 @@ procedure TForm1.Button12Click(Sender: TObject);
 var
   st: TasymSettimgs;
   gt: TgainTable;
-  ar : Array of int16;
-  x : uInt32;
+  ar: array of int16;
+  x: uint32;
+  ms: TmemoryStream;
 begin
   st.negGain := 1;
   st.posGain := 1.2;
@@ -163,14 +164,18 @@ begin
   st.negLimit := -27000;
   st.posLimit := 12000;
 
-  setLength (ar, 44100);
+  setLength(ar, 44100);
   for x := 0 to 44099 do
   begin
     ar[x] := trunc(sin(2 * PI * 800 / 44100 * x) * 27000);
     //ar[x] := trunc(sat2((ar[x]/High(int16)), 1.7) * high(int16));
   end;
 
-  //dspFastSat();
+  dspFastSat(@ar[0], @ar[44099], @st);
+
+  ms := TMemoryStream.Create;
+  ms.Write(ar[0], (length(ar) * 2));
+  ms.SaveToFile('asfast.pcm');
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
