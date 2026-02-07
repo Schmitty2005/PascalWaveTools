@@ -56,6 +56,8 @@ procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = ni
 
 procedure dspFastSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 
+procedure dspGainAdjust(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+
 implementation
 
 uses gaintable;
@@ -235,6 +237,20 @@ begin
 
   gt.Free;
 
+end;
+
+procedure dspGainAdjust(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
+const
+  cDiv = 32768;
+var
+  g: Pint16 absolute aData;
+  p: Pint16;
+  m, c: uint64;
+begin
+  m := aEndPoint - aStartPoint;
+  p := aStartPoint;
+  for c := 0 to m do
+    (p +c)^ := trunc((p + c)^ * (g^ / cDiv));
 end;
 
 
