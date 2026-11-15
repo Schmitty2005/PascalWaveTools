@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <name>wavetools-dsp</name>
+  <!-- version inherited from aggregator -->
+  <author>Brian</author>
+  <license>MIT</license>
+
+  <build>
+    <packaging>library</packaging>
+    <outputDirectory>target</outputDirectory>
+  </build>
+
+  <test>
+    <testSource>TestRunner.pas</testSource>
+    <frameworkOptions>
+      <option>--all --format=plain</option>
+    </frameworkOptions>
+  </test>
+</project>

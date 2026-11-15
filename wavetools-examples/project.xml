@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <name>wavetools-examples</name>
+  <!-- version inherited from aggregator -->
+  <author>Brian</author>
+  <license>MIT</license>
+
+  <build>
+    <mainSource>Main.pas</mainSource>
+    <executableName>wavetools-examples</executableName>
+    <outputDirectory>target</outputDirectory>
+  </build>
+
+  <test>
+    <testSource>TestRunner.pas</testSource>
+    <frameworkOptions>
+      <option>--all --format=plain</option>
+    </frameworkOptions>
+  </test>
+</project>

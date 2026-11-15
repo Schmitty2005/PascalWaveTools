@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <name>wavetools</name>
+  <version>0.5.0</version>
+  <author>Brian</author>
+  <license>MIT</license>
+
+  <build>
+    <packaging>pom</packaging>
+  </build>
+
+  <modules>
+    <module>wavetools-dsp</module>
+    <module>wavetools-fader</module>
+    <module>wavetools-noise</module>
+    <module>wavetools-lfo</module>
+    <module>wavetools-convert</module>
+    <module>wavetools-adsrEnvelope</module>
+    <module>wavetools-multithread</module>
+    <module>wavetools-examples</module>
+    <module>wavetools-synth</module>
+    <module>wavetools-file</module>
+    <module>wavetools-oscillators</module>
+  </modules>
+</project>
