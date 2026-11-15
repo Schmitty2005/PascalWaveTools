@@ -5,6 +5,10 @@
   <author>Brian</author>
   <license>MIT</license>
 
+   <moduleDependencies>
+    <module>../wavetools-multithread</module>
+  </moduleDependencies>
+
   <build>
     <packaging>library</packaging>
     <outputDirectory>target</outputDirectory>

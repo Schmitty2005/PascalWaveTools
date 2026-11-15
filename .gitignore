@@ -1,9 +1,9 @@
 *.lps
 *.pcm
-/backup
-/lib
+*/backup
+*/lib
 *.wav
-
+*.~*
 /__history
 /Win32
 *.local
@@ -15,3 +15,4 @@
 /dsp/Win32
 /convert/__history
 /convert/Win32
+*/target

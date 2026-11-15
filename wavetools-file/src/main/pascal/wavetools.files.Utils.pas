@@ -1,4 +1,4 @@
-unit wavetools.file.Utils;
+unit wavetools.files.Utils;
 
 {$mode objfpc}{$H+}
 

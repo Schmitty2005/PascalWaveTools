@@ -11,7 +11,7 @@ uses
   {dspbitcrush, dspDMAFilter, dspDMAPhaseReverse,}{dspDMAsaturate, dspDMATypes,}
   {dspTypes,} SampleRateConverter, samplerateclasses, lfoTypes, lfoSine, sinelfo,
   uWaveFader, waveGen, whiteNoise, PinkNoiseGen, {dspMt} dspProcs, dspThreads, mtSetup,
-  gaintable;
+  gaintable, gaussien;
   // dspDMAsaturate;
 
 type
@@ -23,6 +23,7 @@ type
     Button10: TButton;
     Button11: TButton;
     Button12: TButton;
+    Button13: TButton;
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
@@ -34,6 +35,7 @@ type
     procedure Button10Click(Sender: TObject);
     procedure Button11Click(Sender: TObject);
     procedure Button12Click(Sender: TObject);
+    procedure Button13Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
@@ -176,6 +178,28 @@ begin
   ms := TMemoryStream.Create;
   ms.Write(ar[0], (length(ar) * 2));
   ms.SaveToFile('asfast.pcm');
+end;
+
+procedure TForm1.Button13Click(Sender: TObject);
+var
+  ar : array of int16;
+  ms : TmemoryStream;
+  gp : TGaussianNoiseParams;
+begin
+  setLength (ar, 44100);
+  ms := TmemoryStream.Create;
+
+  gp.Amplitude:=500; //15
+  gp.Mean:=0;
+  gp.StdDev:=10;   // 1000
+
+  GenerateGaussianNoise(@ar[0],  @ar[high(ar)], @gp );
+
+  ms.Write(ar[0], length(ar) * 2);
+
+  ms.SaveToFile('gaussian.pcm');
+  ms.free;
+
 end;
 
 procedure TForm1.Button3Click(Sender: TObject);
