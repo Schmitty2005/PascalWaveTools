@@ -61,7 +61,7 @@ begin
   Result := nil;
   setlength(Result, numCores);
 
-  s := trunc(numSamples / numCores);
+  s := {$IFDEF BLAISE}uInt64({$ENDIF}trunc(numSamples / numCores){$IFDEF BLAISE}){$ENDIF};
 
   Result[0].firstSample := 0;
   Result[0].lastSample := s;
@@ -72,7 +72,7 @@ begin
     Result[x].firstSample := (x * s) + 1;
     Result[x].lastSample := (Result[x].firstSample + s) - 1;
     Inc(x);
-  until x > numCores - 1;
+  until x > {$IFDEF BLAISE}uInt64(numCores - 1){$ELSE}numCores - 1{$ENDIF};
 end;
 
 function calcBlockRangesP(const startPointer: Pint16 { Pointer };
@@ -88,7 +88,7 @@ begin
   Result := nil;
   setlength(Result, numCores);
 
-  s := trunc(numSamples / numCores);
+  s := {$IFDEF BLAISE}uInt64(trunc(numSamples / numCores)){$ELSE}trunc(numSamples / numCores){$ENDIF};
 
   Result[0].firstPointer := startPointer;
   Result[0].lastPointer := startPointer + s;
@@ -100,7 +100,11 @@ begin
     Result[x].firstPointer := (x * s) + 1 + startPointer;
     Result[x].lastPointer := (Result[x].firstPointer + s) - 1;
     Inc(x);
+    {$IFDEF BLAISE}
+  until x > uInt64(numCores - 1);
+  {$ELSE}
   until x > numCores - 1;
+  {$ENDIF}
 {$POINTERMATH OFF}
 end;
 
@@ -108,14 +112,29 @@ function calcBlockRangesP2(const startPointer: Pint16; const endPointer: Pint16;
   const numCores: byte): TblocksP;
 
 var
-  x, s: uint64;
+  x, s: int64;  //uInt64;
 begin
 {$POINTERMATH ON}
   x := 1;
   Result := nil;
   setlength(Result, numCores);
 
-  s := trunc((endPointer - startPointer) / numCores);
+  s := trunc((endPointer - startPointer) / numCores); //NO BLAISE COMPATIBILITY!
+
+  {  Blaise sample for issue : 
+  program pm;
+  
+  var
+    s, e : ^Int16;
+    x : Int64;
+    a : array [0..254] of Int64;
+  Begin
+    e := @a[254];
+    s := @a[0];
+
+    x := trunc(e - s);  
+  end.
+  }
 
   Result[0].firstPointer := startPointer;
   Result[0].lastPointer := startPointer + s;

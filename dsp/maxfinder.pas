@@ -5,7 +5,7 @@ unit maxfinder;
 
 interface
 
-uses Classes, mtSetup;
+uses Classes, mtSetup{$IFDEF BLAISE}, ClassicPascalTypes{$ENDIF};
 
 const
   cMaxThreads = 255;

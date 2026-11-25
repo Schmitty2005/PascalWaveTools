@@ -5,14 +5,14 @@ unit maxfinder;
 
 interface
 
-uses Classes, mtSetup;
+uses Classes, mtSetup {$IFDEF BLAISE}, ClassicPascalTypes{$ENDIF};
 
 const
   cMaxThreads = 255;
 
 type
 
-  Tgain = object
+  Tgain = class //object //object not accepted in Blaies!
   private
     fInt: int16;
     fFlt: single;
@@ -73,7 +73,7 @@ procedure TmaxFinder.Execute;
 var
   MaxValue: int16;
   memPos: Pint16;
-  Count, postn: uint64;
+  Count, postn: int64;//uint64;
 begin
   Count := fEnd - fStart;
   memPos := fStart;

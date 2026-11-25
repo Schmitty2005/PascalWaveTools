@@ -6,7 +6,7 @@ unit gaintable;
 interface
 
 uses
-  Classes, Math, dspProcs;
+  Classes, Math  ,dspProcs {$IFDEF BLAISE}, ClassicPascalTypes{$ENDIF};
 
 type
 
@@ -37,11 +37,12 @@ end;
 constructor TgainTable.Create(const aSettings: TasymSettimgs);
 var
   i: int16;
-  u: uint16 absolute i;
+  u: uint16;// absolute i;
 begin
+  
   setLength(fGainTable, high(uint16));
   for i := low(int16) to high(int16) do
-    fGainTable[u] := i;
+    fGainTable[uInt16(i)] := i;
 
   fsatSettings := aSettings;
   fPOSsat := fsatSettings.posSatFunction;

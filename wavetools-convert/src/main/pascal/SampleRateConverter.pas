@@ -6,7 +6,7 @@ unit SampleRateConverter;
 
 interface
 
-uses SysUtils;
+uses SysUtils {$IFDEF BLAISE}, ClassicPascalTypes{$ENDIF};
 
 type
   TInt16Array = array of Int16;
@@ -69,7 +69,7 @@ begin
     // Calculate source position (in frames)
     SrcPos := i * Ratio;
     SrcIdx := Trunc(SrcPos);
-    fraction := frac(SrcPos);
+    fraction := frac(SrcPos); //No Frac in Blaise
 
     // Process each channel
     for ch := 0 to Channels - 1 do

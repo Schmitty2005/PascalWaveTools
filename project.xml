@@ -21,5 +21,6 @@
     <module>wavetools-synth</module>
     <module>wavetools-file</module>
     <module>wavetools-oscillators</module>
+    <module>wavetools-functions</module>
   </modules>
 </project>

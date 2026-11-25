@@ -33,7 +33,7 @@ unit gaussien;
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils {$IFDEF BLAISE}, Legacey.random, ClassicPascalTypes{$ENDIF};
 
 type
   // Parameter type for Gaussian noise generation
@@ -50,6 +50,8 @@ procedure GenerateGaussianNoise(aStartPoint: PInt16; aEndPoint: PInt16;
 
 implementation
 
+{$IFDEF BLAISE}Uses Math;{$ENDIF}
+
 // Generates Gaussian noise using Box-Muller transform
 procedure GenerateGaussianNoise(aStartPoint: PInt16; aEndPoint: PInt16;
   aData: Pointer = nil);
@@ -62,7 +64,7 @@ var
   UseSecond: boolean;
   SavedZ: double;
 begin
-  randomize;
+  randomize();//() is for blaise
   if aStartPoint = nil then Exit;
   if aEndPoint = nil then Exit;
   if PtrUInt(aEndPoint) < PtrUInt(aStartPoint) then Exit;
@@ -98,11 +100,11 @@ begin
     begin
       // Generate two uniform random numbers in (0, 1]
       repeat
-        U1 := Random;
+        U1 := Random();
       until U1 > 0.0;
 
       repeat
-        U2 := Random;
+        U2 := Random();
       until U2 > 0.0;
 
       // Box-Muller transform

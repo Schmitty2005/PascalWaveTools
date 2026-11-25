@@ -14,16 +14,30 @@ uses classes, Math;
 Uses System.classes, System.Math;
 {$ENDIF}
 
+{$IFDEF BLAISE}
+uses classes, Math, ClassicPascalTypes;
+{$ENDIF}
+
 type
   IWaveFader = interface
-    ['{F7FF823F-AC70-4E5F-B14D-29537B80DF23}']
+  {$IFNDEF BLAISE}
+    ['{F7FF823F-AC70-4E5F-B14D-29537B80DF23}'] {$ENDIF}
     procedure FadeWave(pcm: array of int16; const millisecDur: uint64);
   end;
 
-  TWaveFader = class(TinterfacedObject, IWaveFader)
-  public type
+  {$IFDEF BLAISE}
     Tchannels = (cMono = 1, cStereo);
     TFadeType = (ftIn, ftOut, ftBoth);
+
+    TInterfacedObject = class
+    end; 
+  {$ENDIF}
+
+  TWaveFader = class(TinterfacedObject, IWaveFader)
+  {$IFNDEF BLAISE}
+  public type
+    Tchannels = (cMono = 1, cStereo);
+    TFadeType = (ftIn, ftOut, ftBoth); {$ENDIF}
   private
     fSampleRate: uint32;
     fmsDuration: uint64;
@@ -58,7 +72,7 @@ procedure TWaveFader.FadeWave(pcm: array of int16; const millisecDur: uint64);
 var
   mul: uint64;
   Count: uint64;
-  max: uint64;
+  max: int64;//uint64;
   ramp: single;
 {$IFDEF DCC}
   (* Delphi cannot have global functions / procedures with generics ...so they will go here... WTF... *)

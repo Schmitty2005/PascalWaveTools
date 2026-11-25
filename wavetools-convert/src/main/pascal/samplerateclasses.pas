@@ -14,7 +14,8 @@ type
   TpcmArray = array of int16;
 
   IsampleRateConvert = interface
-    ['{851284F9-BCBA-4ED8-A480-1FC44CF68A4A}']
+  {$IFNDEF BLAISE}
+    ['{851284F9-BCBA-4ED8-A480-1FC44CF68A4A}'] {$ENDIF}
     procedure rateConvert(const aInputPCM: TInt16Array; var aOutputPCM: TInt16Array);
   end;
 

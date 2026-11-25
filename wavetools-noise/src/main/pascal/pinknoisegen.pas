@@ -29,6 +29,7 @@ unit PinkNoiseGen;
 {$ENDIF}
 
 interface
+{$IFDEF BLAISE}Uses ClassicPascalTypes;{$ENDIF}
 
 type
   TNoise = array of SmallInt;
@@ -46,6 +47,7 @@ implementation
 
 {uses
   Math;}
+  {$IFDEF BLAISE}Uses Legacey.Random;{$ENDIF}
 
 type
   TPinkNoiseGenerator = record
@@ -57,7 +59,7 @@ var
   white: Double;
 begin
   // Generate white noise in range [-1, 1]
-  white := (Random * 2.0) - 1.0;
+  white := (Random() * 2.0) - 1.0;
 
   // Paul Kellet's refined pink noise algorithm
   gen.b0 := 0.99886 * gen.b0 + white * 0.0555179;
@@ -98,7 +100,7 @@ begin
   gen.b6 := 0;
 
   // Initialize random seed
-  Randomize;
+  Randomize();
 
   // Generate pink noise samples
   for i := 0 to numSamples - 1 do

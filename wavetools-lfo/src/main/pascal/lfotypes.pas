@@ -5,6 +5,8 @@ unit lfoTypes;
 
 interface
 
+{$IFDEF BLAISE}Uses ClassicPascalTypes;{$ENDIF}
+
 const
   cDefSampRate = 44100;
 
@@ -19,6 +21,9 @@ type
     lfoPCM: TlfoPCM;
     lfoFloat: TlfoFloat;
   end;
+  {$IFDEF BLAISE}
+  TinterfacedObject = class  end;
+  {$ENDIF}
 
   TlfoProcedure = procedure(var aPCM: TlfoPCM; aFreq: double;
     aSampleRate: uint32 = cDefSampRate);
@@ -32,7 +37,7 @@ type
 
   { TlfoBase }
 
-  TlfoBase = class abstract(TinterfacedObject, IgetLfoWave)
+  TlfoBase = class {abstract}(TinterfacedObject, IgetLfoWave)
   protected
     fProc: TlfoProcedure;
     fFreq: double;

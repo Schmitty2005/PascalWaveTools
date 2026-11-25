@@ -1,12 +1,11 @@
 {$IFDEF FPC}
 {$mode objfpc}
 {$ENDIF}
-//Program dspTwo;
 unit dspProcs;
 
 interface
 
-uses Classes, SysUtils, Math;//, gaintable;
+uses Classes, SysUtils, Math {, gaintable}{$IFDEF BLAISE}, ClassicPascalTypes {$ENDIF};
 
 type
   {$IFDEF DCC}
@@ -64,12 +63,14 @@ uses gaintable;
 
 procedure dspSaturate(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 var
-  gain: Psingle absolute aData;
+  //gain: Psingle absolute aData; //Bliase does not have absolute
+  gain : Psingle;
   sample: Pint16;
-  Count: uint64;
-  max: uint64;
+  Count: int64;
+  max: int64;
   calc: single;
 begin
+  gain := aData; // added to replace 'absolute' in var declaration 
   {$pointermath on}
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
@@ -87,14 +88,16 @@ end;
 
 procedure dspBitCrush(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 var
-  bcdepth: pbyte absolute aData;
+  //bcdepth: pbyte absolute aData;
+  bcdepth: pbyte;// absolute aData;
   crush: byte;
   sample: Pint16;
   crushed: int16;
-  max: uint64;
-  Count: uint64;
+  max: int64;
+  Count: int64;
 begin
   {$pointermath on}
+  bcdepth := aData;
   crush := 16 - bcDepth^;
   sample := aStartPoint;
   max := aEndPoint - aStartPoint;
@@ -114,11 +117,13 @@ end;
 
 procedure dspLimitThresh(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 var
-  pset: PlimitThreshSet absolute aData;
-  position: uint64;
-  max: uint64;
+  //pset: PlimitThreshSet absolute aData;
+  pset: PlimitThreshSet;
+  position: int64;
+  max: int64;
   flt: single;
 begin
+  pset := aData;
   max := aEndPoint - aStartPoint;
   for position := 0 to max do
   begin
@@ -132,12 +137,14 @@ end;
 
 procedure dspSaturate2(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = nil);
 var
-  gain: Psingle absolute aData;
+  //gain: Psingle absolute aData;
+  gain: Psingle;
   sample: Pint16;
-  Count: uint64;
-  max: uint64;
+  Count: int64;
+  max: int64;
   calc: single;
 begin
+  gain := aData;
   {$pointermath on}
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
@@ -174,14 +181,16 @@ procedure dspAsymSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer = ni
 type
   PasymSet = ^TasymSettimgs;
 var
-  pset: PasymSet absolute aData;
+  //pset: PasymSet absolute aData;
+  pset: PasymSet;
   sample: Pint16;
-  Count: uint64;
-  max: uint64;
+  Count: int64;
+  max: int64;
   posDSP: TsatFunc;
   negDSP: TsatFunc;
   ss: single;
 begin
+  pSet := aData;
   max := aEndPoint - aStartPoint;
   sample := aStartPoint;
 
@@ -217,13 +226,17 @@ procedure dspFastSat(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer);
 type
   PasymSettings = ^TasymSettimgs;
 var
-  ps: PasymSettings absolute aData;
-  c: uint64;
-  max: uint64;
+  //ps: PasymSettings bsolute aData;
+  ps: PasymSettings;
+  c: int64;
+  max: int64;
   s: int16;
-  cs: uint16 absolute s;
+  //cs: uint16 absolute s;
+  cs: uint16;//absolute s;
   gt: TgainTable;
 begin
+  ps := aData;
+  cs := s; //Maybe an issue
   gt := TgainTable.Create(ps^);
 
   max := aEndPoint - aStartPoint;
@@ -235,7 +248,7 @@ begin
     (aStartPoint + c)^ := gt[cs];
   end;
 
-  gt.Free;
+  gt.Free();
 
 end;
 
@@ -243,10 +256,12 @@ procedure dspGainAdjust(aStartPoint: Pint16; aEndPoint: Pint16; aData: Pointer =
 const
   cDiv = 32768;
 var
-  g: Pint16 absolute aData;
+  //g: Pint16 absolute aData;
+  g: Pint16;// absolute aData;
   p: Pint16;
-  m, c: uint64;
+  m, c: int64;
 begin
+g := aData;
   m := aEndPoint - aStartPoint;
   p := aStartPoint;
   for c := 0 to m do

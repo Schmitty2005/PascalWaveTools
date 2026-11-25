@@ -7,6 +7,11 @@ interface
 
 type
 
+{$IFDEF BLAISE}
+  TInterfacedObject = class
+  end;
+{$ENDIF}
+
   PdspProcedure = ^TdspProcedure;
 
   TdspProcedure = procedure(var aPcm: array of int16;
@@ -16,11 +21,12 @@ type
   const aDspData: Pointer = nil);
 
   IdspProcess = interface
-    ['{66EB5D6B-8528-43B2-8E3B-799C402703C3}']
+  {$IFNDEF BLAISE}
+    ['{66EB5D6B-8528-43B2-8E3B-799C402703C3}']  {$ENDIF}
     procedure process(var aPcm: array of int16; const aData: Pointer = nil);
   end;
 
-  TdspBase = class abstract (TinterfacedObject, IdspProcess)
+  TdspBase = class {$IFNDEF BLAISE}abstract{$ENDIF} (TinterfacedObject, IdspProcess)
   protected
     fSampleRate: uint32;
     fData: Pointer;

@@ -6,7 +6,7 @@ unit lfoSine;
 interface
 
 uses
-  lfoTypes;
+  lfoTypes{$IFDEF BLAISE}, ClassicPascalTypes, Math{$ENDIF};
 
 type
 

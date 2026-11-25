@@ -4,7 +4,7 @@ unit sinelfo;
 
 interface
 
-uses lfoTypes;
+uses lfoTypes{$IFDEF BLAISE}, Math, ClassicPascalTypes{$ENDIF};
 
 procedure sineWaveLFO(var aPcm: TlfoPCM; aFreq: double; aSampleRate: uint64 = 44100);
 

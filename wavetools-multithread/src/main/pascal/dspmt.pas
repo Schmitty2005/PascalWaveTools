@@ -50,7 +50,7 @@ implementation
 procedure TdspThread.Execute;
 begin
   // do dspProcDM call here
-  fDSPproc(fStartIndex, fEndIndex - fStartIndex, fData);
+  fDSPproc(fStartIndex, uInt64(fEndIndex - fStartIndex), fData);
 end;
 
 constructor TdspThread.Create(aDSPProc: TdspProcedureDM; aStartPointer: Pointer;
