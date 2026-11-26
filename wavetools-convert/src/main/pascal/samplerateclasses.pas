@@ -13,6 +13,8 @@ uses
 type
   TpcmArray = array of int16;
 
+{$IFDEF BLAISE}TInterfacedObject = class end;{$ENDIF}
+
   IsampleRateConvert = interface
   {$IFNDEF BLAISE}
     ['{851284F9-BCBA-4ED8-A480-1FC44CF68A4A}'] {$ENDIF}

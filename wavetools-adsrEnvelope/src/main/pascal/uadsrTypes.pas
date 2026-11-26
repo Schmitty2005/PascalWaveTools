@@ -5,6 +5,8 @@ unit uadsrTypes;
 
 interface
 
+{$IFDEF BLAISE}Uses ClassicPascalTypes;{$ENDIF}
+
 ///<Summary>Holds all the  settings need to make an ADSR envelope on a sample
 ///</Summary>
 ///<param name="attack"> length in milli-seconds of attack envelope</param>

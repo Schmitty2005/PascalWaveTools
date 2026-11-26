@@ -27,6 +27,34 @@ procedure ConvertSampleRate(const InputData: array of int16;
 
 implementation
 
+function Frac(X: Float64): Float64;overload;
+begin
+  // NaN passes through
+  if X <> X then
+  begin
+    Result := X;
+    Exit;
+  end;
+
+  // At |X| >= 2^52 every Float64 is already an integer, and
+  // Trunc would risk overflowing Int64 for huge or infinite values.
+  if (X >= 4503599627370496.0) or (X <= -4503599627370496.0) then
+  begin
+    Result := 0.0;
+    Exit;
+  end;
+  Result := X - Trunc(X)
+end;
+
+
+function Frac(X: Float32): Float32;overload;
+begin
+  // Float32 -> Float64 is exact, and so is the subtraction,
+  // so the narrowing back is lossless.
+  Result := Float32(Frac(Float64(X)));
+end;
+
+
 procedure ConvertSampleRate(const InputData: array of int16;
   var OutputData: TInt16Array; const InputRate, OutputRate: integer; const Channels: integer = 1);
 var

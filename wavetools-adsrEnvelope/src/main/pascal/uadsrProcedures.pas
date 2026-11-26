@@ -20,6 +20,8 @@ procedure setSampleRate(aSampleRate: uint64);
 
 implementation
 
+{$IFDEF BLAISE}Uses ClassicPascalTypes;{$ENDIF}
+
 const
   cDefaultSampleRate = 44100;
 
@@ -85,14 +87,19 @@ begin
   sr := aSampleRate;
 end;
 
-
-procedure adsrEnvelope(var aPCM: array of int16; aAdsrSettings: TadsrSettings);
-
+{$IFDEF BLAISE}
   function MsToSec(var aMs: uint32): single; inline;
   begin
     Result := aMs / 1000;
   end;
-
+{$ENDIF}
+procedure adsrEnvelope(var aPCM: array of int16; aAdsrSettings: TadsrSettings);
+{$IFNDEF BLAISE}  //Innder procedures may not work well in blaise yet!
+  function MsToSec(var aMs: uint32): single; inline;
+  begin
+    Result := aMs / 1000;
+  end;
+{$ENDIF}
 var
   at, dc, st, rl: double;
 begin
@@ -106,7 +113,7 @@ begin
   ApplyADSR(aPCM, sr, at, dc, st, rl);
 
 end;
-
-begin
+Initialization 
+{begin}
   sr := cDefaultSampleRate; //Set default sample rate.  Untested , but should work!
 end.

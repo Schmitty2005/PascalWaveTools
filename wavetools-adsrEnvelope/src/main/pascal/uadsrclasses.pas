@@ -11,9 +11,12 @@ uses
 type
 
   IadsrApply = interface
-    ['{5BB951D2-D1D6-4C4D-B22C-67DE989495D9}']
+  {$IFNDEF BLAISE}
+    ['{5BB951D2-D1D6-4C4D-B22C-67DE989495D9}'] {$ENDIF}
     procedure applyADSR(var aPCM: array of int16);
   end;
+
+  {$IFDEF BLAISE}TInterfacedObject = class end;{$ENDIF}
 
   { TadsrEnvelope }
 
